@@ -21,7 +21,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/newuser', function () {
         return view('newuser');
     });
-    Route::get('/feedback', function () {
+    Route::get('feedback', function () {
         return view('feedback');
     });
 
@@ -33,5 +33,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/dashboard',[
         'uses'=>'UserController@getDashboard',
         'as'=>'dashboard'
+    ]);
+
+    Route::post('/savefeedback',[
+        'uses'=>'FeedbackController@postSaveFeedback',
+        'as'=>'savefeedback'
     ]);
 });
