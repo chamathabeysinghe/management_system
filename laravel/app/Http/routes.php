@@ -21,6 +21,9 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/newuser', function () {
         return view('newuser');
     });
+    Route::get('/project', function () {
+        return view('/project_management/project_dashboard');
+    });
     Route::get('feedback', function () {
         return view('feedback');
     });
