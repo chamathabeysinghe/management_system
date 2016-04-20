@@ -4,6 +4,11 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{URL::to('css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{URL::to('css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
 @include('includes.header')

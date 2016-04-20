@@ -21,9 +21,14 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/newuser', function () {
         return view('newuser');
     });
-    Route::get('/project', function () {
-        return view('/project_management/project_dashboard');
+    Route::get('/projectinit', function () {
+        return view('/project_management/project_init');
     });
+//    Route::get('/project', function () {
+//        return view('/project_management/project_dashboard');
+//    });
+
+
     Route::get('feedback', function () {
         return view('feedback');
     });
@@ -41,5 +46,20 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
         'as'=>'savefeedback'
+    ]);
+
+    Route::post('/initiateproject',[
+       'uses'=>'ProjectController@postInitiateProject',
+        'as'=>'initiateproject'
+    ]);
+
+    Route::get('/project',[
+        'uses'=>'ProjectController@getDashboard',
+        'as'=>'project'
+    ]);
+
+    Route::get('/initiate-post/{project_id}',[
+        'uses'=>'ProjectController@getProjectInitiatePage',
+        'as'=>'project.initiate',
     ]);
 });
