@@ -16,7 +16,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#}">Logout</a></li>
+                    <li><a href="#}">{{Auth::check()? \Illuminate\Support\Facades\Auth::User()->full_name:''}}</a></li>
 {{--                    <li><a href="{{route('logout')}}">Logout</a></li>--}}
                 </ul>
             </div><!-- /.navbar-collapse -->

@@ -11,3 +11,13 @@
         </div>
     </div>
 @endif
+
+@if(Session::has('message'))
+    <div>
+        <div class="col-md-4 col-md-offset-4">
+
+            <div class="alert alert-danger" role="alert" style="margin: 20px; text-align: center">Some fields are incorrect</div>
+
+        </div>
+    </div>
+@endif

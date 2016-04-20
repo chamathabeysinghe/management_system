@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -54,5 +55,18 @@ class UserController extends  Controller
         $user->password=bcrypt($request['password']);
         $user->save();
         return redirect()->route('dashboard');
+    }
+
+    public function postUserLogin(Request $request){
+        $pass=Auth::attempt(['email'=>$request['email'],'password'=>$request['password']]);
+        echo $request['email'];
+        echo $request['password'];
+
+        if($pass){
+            return redirect()->route('project');
+        }
+        else{
+            return redirect()->back()->with(['message'=>'User name or password is incorrect']);
+        }
     }
 }

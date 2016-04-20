@@ -20,9 +20,7 @@
                             <a href="#" class="btn btn-primary" role="button">View Project</a>
                             <a href="{{route('project.initiate',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Initiate Project</a>
                         </p>
-
                     </div>
-
                 </div>
             @endforeach
 

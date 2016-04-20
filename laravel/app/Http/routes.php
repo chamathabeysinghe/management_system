@@ -15,8 +15,8 @@
 
 Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
-        return view('welcome');
-    });
+        return view('login');
+    })->name('home');
 
     Route::get('/newuser', function () {
         return view('newuser');
@@ -35,12 +35,18 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::post('/newuser',[
         'uses'=>'UserController@postNewUser',
-        'as'=>'newuser'
+        'as'=>'newuser',
+
+    ]);
+    Route::post('/login',[
+        'uses'=>'UserController@postUserLogin',
+        'as'=>'login'
     ]);
 
     Route::get('/dashboard',[
         'uses'=>'UserController@getDashboard',
         'as'=>'dashboard'
+
     ]);
 
     Route::post('/savefeedback',[
@@ -50,16 +56,19 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::post('/initiateproject',[
        'uses'=>'ProjectController@postInitiateProject',
-        'as'=>'initiateproject'
+        'as'=>'initiateproject',
+
     ]);
 
     Route::get('/project',[
         'uses'=>'ProjectController@getDashboard',
-        'as'=>'project'
+        'as'=>'project',
+        'middleware'=>'auth'
     ]);
 
     Route::get('/initiate-post/{project_id}',[
         'uses'=>'ProjectController@getProjectInitiatePage',
         'as'=>'project.initiate',
+        'middleware'=>'auth'
     ]);
 });
