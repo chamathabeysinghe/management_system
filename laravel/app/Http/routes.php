@@ -18,57 +18,77 @@ Route::group(['middleware'=>['web']],function(){
         return view('login');
     })->name('home');
 
+    //get new user view
     Route::get('/newuser', function () {
         return view('newuser');
     });
-    Route::get('/projectinit', function () {
-        return view('/project_management/project_init');
-    });
-//    Route::get('/project', function () {
-//        return view('/project_management/project_dashboard');
-//    });
 
+    //create a new user
+    Route::post('/newuser',[
+        'uses'=>'UserController@postNewUser',
+        'as'=>'newuser',
+    ]);
 
+    //get the feedback view
     Route::get('feedback', function () {
         return view('feedback');
     });
 
-    Route::post('/newuser',[
-        'uses'=>'UserController@postNewUser',
-        'as'=>'newuser',
 
-    ]);
+    //get the project initiate view
+    Route::get('/projectinit', function () {
+        return view('/project_management/project_init');
+    });
+
+    //log a user in
     Route::post('/login',[
         'uses'=>'UserController@postUserLogin',
         'as'=>'login'
     ]);
 
-    Route::get('/dashboard',[
-        'uses'=>'UserController@getDashboard',
-        'as'=>'dashboard'
 
-    ]);
-
+    //save a feedback
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
         'as'=>'savefeedback'
     ]);
 
+    //initiate the project
     Route::post('/initiateproject',[
        'uses'=>'ProjectController@postInitiateProject',
         'as'=>'initiateproject',
 
     ]);
 
+    //get the project dashboard
     Route::get('/project',[
         'uses'=>'ProjectController@getDashboard',
         'as'=>'project',
         'middleware'=>'auth'
     ]);
 
+    //get project initiate window
     Route::get('/initiate-post/{project_id}',[
         'uses'=>'ProjectController@getProjectInitiatePage',
         'as'=>'project.initiate',
         'middleware'=>'auth'
+    ]);
+
+    //get project information form
+    Route::get('/projectinfo/{project_id}',[
+        'uses'=>'ProjectController@getProjectInfo',
+        'as'=>'project.info',
+        'middleware'=>'auth'
+    ]);
+
+    //get new technician page
+    Route::get('/newtechnician',function(){
+        return view('newtechnician');
+    });
+
+    //add a new technician
+    Route::post('/newtechnician',[
+        'uses'=>'TechnicianController@postAddTechnician',
+        'as'=>'addtechnician'
     ]);
 });

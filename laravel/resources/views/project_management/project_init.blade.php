@@ -5,13 +5,14 @@
 @section('content')
 
     <div class="row">
-        <form class="col s12" action="{{Route('initiateproject')}}" method="post">
+        <form class="col s12" action="{{Route('initiateproject',['project_id'=>$project->id])}}" method="post">
             <div class="section" >
                 <h5>Project Details</h5>
                 <div class="divider" style="margin-bottom: 10px"></div>
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <input id="date" name="date" type="date" class="validate" value="{{$project->date}}">
+
                         <label class="active" for="date">Project date</label>
                     </div>
                     <div class="input-field col s12 m6">
@@ -32,33 +33,31 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="section">
                 <h5>Technician Allocaation</h5> <div class="divider"></div>
                  <div class="row">
                      <div class="col s12 m6">
-                         <p>
-                             <input type="checkbox" id="test1" />
-                             <label for="test1">Red</label>
-                         </p>
 
-                         <p>
-                             <input type="checkbox" id="test2" />
-                             <label for="test2">Red</label>
-                         </p>
-                     </div>
-                     <div class="col s12 m6 hide-on-small-only">
-                         <p>
-                             <input type="checkbox" id="test3" />
-                             <label for="test3">Red</label>
-                         </p>
+                         @foreach($technicians as $technician)
 
-                         <p>
-                             <input type="checkbox" id="test4" />
-                             <label for="test4">Red</label>
-                         </p>
+                             <p>
+                                 <input type="checkbox" name="selection[]" value="{{$technician->id}}" id="{{$technician->id}}" />
+                                 <label for="{{$technician->id}}">{{$technician->name}}</label>
+                             </p>
+
+                         @endforeach
                      </div>
+                     {{--<div class="col s12 m6 hide-on-small-only">--}}
+                         {{--<p>--}}
+                             {{--<input type="checkbox" id="test3" />--}}
+                             {{--<label for="test3">Red</label>--}}
+                         {{--</p>--}}
+
+                         {{--<p>--}}
+                             {{--<input type="checkbox" id="test4" />--}}
+                             {{--<label for="test4">Red</label>--}}
+                         {{--</p>--}}
+                     {{--</div>--}}
                  </div>
 
 
@@ -70,6 +69,7 @@
             <input type="hidden" name="_token" value="{{Session::token()}}">
 
         </form>
+
     </div>
 
 @endsection

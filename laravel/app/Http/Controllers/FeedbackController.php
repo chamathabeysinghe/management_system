@@ -9,13 +9,22 @@
 namespace App\Http\Controllers;
 
 
+use App\Feedback;
+use App\Project;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
     public function postSaveFeedback(Request $request){
-        $contact=$request['contact'];
-        echo $contact;
+        $comments=$request['comments'];
+        echo $comments;
+        $feedback=new Feedback();
+        $feedback->comments=$comments;
+
+        $project =new Project();
+        $project->client_name='TESTERSSSS';
+        $project->save();
+        $project->feedback()->save($feedback);
     }
 
 }

@@ -17,7 +17,7 @@
                         <div><label>Project Incharge     :</label>CHAT</div>
                         <div><label>Project Duration     :</label>4 Days</div>
                         <p>
-                            <a href="#" class="btn btn-primary" role="button">View Project</a>
+                            <a href="{{route('project.info',['project_id'=>$project->id])}}" class="btn btn-primary" role="button">View Project</a>
                             <a href="{{route('project.initiate',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Initiate Project</a>
                         </p>
                     </div>
