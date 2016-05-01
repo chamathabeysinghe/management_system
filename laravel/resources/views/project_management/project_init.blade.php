@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="section">
-                <h5>Technician Allocaation</h5> <div class="divider"></div>
+                <h5>Technician Allocation</h5> <div class="divider"></div>
                  <div class="row">
                      <div class="col s12 m6">
 
@@ -47,22 +47,36 @@
 
                          @endforeach
                      </div>
-                     {{--<div class="col s12 m6 hide-on-small-only">--}}
-                         {{--<p>--}}
-                             {{--<input type="checkbox" id="test3" />--}}
-                             {{--<label for="test3">Red</label>--}}
-                         {{--</p>--}}
 
-                         {{--<p>--}}
-                             {{--<input type="checkbox" id="test4" />--}}
-                             {{--<label for="test4">Red</label>--}}
-                         {{--</p>--}}
-                     {{--</div>--}}
                  </div>
-
-
-
             </div>
+
+
+
+            <div class="section">
+                <h5>Item Allocation</h5> <div class="divider"></div>
+                <div class="row">
+                    <div class="col s12 m6">
+
+                        @foreach($technicians as $technician){{--should be for items--}}
+
+                            <div class="row">
+
+                                <label for="serial" class="col m4">Item</label>
+
+
+                                <input id="serial" class="col m4" name="serial" type="text" class="validate" value="" placeholder="Serial Number">
+                                <input id="cost" class="col m4" name="cost" type="text" class="validate" value="" placeholder="Unit cost">
+
+                            </div>
+
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+
+
             <button class="btn waves-effect waves-light" type="submit" >Initiate Project
                 <i class="material-icons right">send</i>
             </button>

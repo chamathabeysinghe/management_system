@@ -13,4 +13,7 @@ class Project extends Model
     public function technicianAllocations(){
         return $this->hasMany('App\TechnicianAllocation');
     }
+    public function items(){
+        return $this->hasMany('App\Item');
+    }
 }

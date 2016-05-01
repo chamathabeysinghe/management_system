@@ -65,15 +65,17 @@
                 <div class="col s12 m6">
                     <ul class="collection">
 
+                        @foreach($itemList as $item)
+                            <li class="collection-item avatar">
+                                {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
+                                <span class="title">{{$item->item_name}}</span>
+                                <p>First Line <br>
+                                    Second Line
+                                </p>
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                        @endforeach
 
-                        <li class="collection-item avatar">
-                            {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                            <span class="title">Title</span>
-                            <p>First Line <br>
-                                Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                        </li>
                     </ul>
                 </div>
             </div>

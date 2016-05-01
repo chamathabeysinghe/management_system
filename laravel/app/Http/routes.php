@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('login');
@@ -95,4 +93,9 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'TechnicianController@postAddTechnician',
         'as'=>'addtechnician'
     ]);
+
+    //get table of gross profit forecast
+    Route::get('/gp_forecast',function(){
+        return view("project_management/gp_forecast");
+    });
 });
