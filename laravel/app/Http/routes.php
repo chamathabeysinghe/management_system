@@ -80,7 +80,11 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project.info',
         'middleware'=>'auth'
     ]);
-
+    //search projects
+    Route::post('/search',[
+        'uses'=>'ProjectController@postProjectSearch',
+        'as'=>'project_search'
+    ]);
     //get new technician page
     Route::get('/newtechnician',function(){
         return view('newtechnician');

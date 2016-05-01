@@ -12,7 +12,10 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\Technician;
 use App\TechnicianAllocation;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 
 class ProjectController extends Controller
@@ -57,5 +60,32 @@ class ProjectController extends Controller
             array_push($technicianList,Technician::where('id',$allocation->technician_id)->first());
         }
         return view('/project_management/projectinfo',['project'=>$project,'technicians'=>$technicianList]);
+    }
+
+    public function postProjectSearch(Request $request){
+        $keyword=$request['keyWords'];
+        $projects=Project::all();
+        $resultProjects=new Collection();
+        foreach($projects as $project){
+
+            if(Str::equals(Str::lower($project->id),Str::lower($keyword))){
+               $resultProjects->add($project);
+            }
+        }
+        foreach($projects as $project){
+            if($resultProjects->contains($project)){
+                continue;
+            }
+            if(Str::contains(Str::lower($project->client_name),Str::lower($keyword))){
+                $resultProjects->add($project);
+            }
+//            else if(Str::contains(Str::lower($project->client_email),Str::lower($keyword))){
+//                $resultProjects->add($project);
+//            }
+            else if(Str::contains(Str::lower($project->date),Str::lower($keyword))){
+                $resultProjects->add($project);
+            }
+        }
+        return View::make('/project_management/search_results')->with('resultProjects',$resultProjects);
     }
 }
