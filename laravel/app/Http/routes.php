@@ -74,6 +74,7 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
+
     //get project information form
     Route::get('/projectinfo/{project_id}',[
         'uses'=>'ProjectController@getProjectInfo',
@@ -110,4 +111,9 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
+
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
+
 });
