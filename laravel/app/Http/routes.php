@@ -71,4 +71,8 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project.initiate',
         'middleware'=>'auth'
     ]);
+
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
 });
