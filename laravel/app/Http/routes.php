@@ -48,9 +48,10 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
     //get the feedback view
-    Route::get('feedback', function () {
-        return view('feedback');
-    });
+    Route::get('feedback', [
+        'uses'=>'FeedbackController@getFeedbackView',
+        'as'=>'feedback'
+    ]);
 
 
     //initiate the project

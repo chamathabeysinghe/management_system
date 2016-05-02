@@ -18,6 +18,7 @@ class CreateFeedbacksTable extends Migration
             $table->string('comments');
             $table->integer('project_id');
         });
+
     }
 
     /**

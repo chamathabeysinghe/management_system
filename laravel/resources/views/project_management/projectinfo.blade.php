@@ -124,7 +124,7 @@
             <div class="divider"></div>
             <div class="row">
                 <div class="col s12 m6">
-                    <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
+                    <a href="{{route('feedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
                 </div>
             </div>
         </div>
