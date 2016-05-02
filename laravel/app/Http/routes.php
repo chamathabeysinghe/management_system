@@ -27,10 +27,6 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'newuser',
     ]);
 
-    //get the feedback view
-    Route::get('feedback', function () {
-        return view('feedback');
-    });
 
 
     //get the project initiate view
@@ -50,6 +46,12 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'FeedbackController@postSaveFeedback',
         'as'=>'savefeedback'
     ]);
+
+    //get the feedback view
+    Route::get('feedback', function () {
+        return view('feedback');
+    });
+
 
     //initiate the project
     Route::post('/initiateproject',[
@@ -94,8 +96,18 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'addtechnician'
     ]);
 
-    //get table of gross profit forecast
+    //get table of gross profit forecast for example only
     Route::get('/gp_forecast',function(){
         return view("project_management/gp_forecast");
     });
+
+    Route::get('/creategp',[
+        'uses'=>'GPForecastController@postCreateGPForecast',
+        'as'=>'creategp'
+    ]);
+    //direct to Projects gross profit forecast
+    Route::get('/gp',[
+        'uses'=>'GPForecastController@getGPForecast',
+        'as'=>'gpforecast'
+    ]);
 });

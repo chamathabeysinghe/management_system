@@ -16,4 +16,7 @@ class Project extends Model
     public function items(){
         return $this->hasMany('App\Item');
     }
+    public function gpforecast(){
+        return $this->hasOne('App\GPForecast');
+    }
 }

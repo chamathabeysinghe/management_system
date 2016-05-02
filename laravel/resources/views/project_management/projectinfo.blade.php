@@ -84,20 +84,23 @@
             <h5>Gross Profit</h5>
             <div class="divider"></div>
             <div class="row">
-                <div class="col s12 m6">
-                    <ul class="collection">
+
+                <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View GP</a>
+
+                {{--<div class="col s12 m6">--}}
+                    {{--<ul class="collection">--}}
 
 
-                        <li class="collection-item avatar">
+                        {{--<li class="collection-item avatar">--}}
                             {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                            <span class="title">Title</span>
-                            <p>First Line <br>
-                                Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                        </li>
-                    </ul>
-                </div>
+                            {{--<span class="title">Title</span>--}}
+                            {{--<p>First Line <br>--}}
+                                {{--Second Line--}}
+                            {{--</p>--}}
+                            {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
             </div>
         </div>
         <div class="section">
@@ -115,6 +118,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="section">
+            <h5>Feedback</h5>
+            <div class="divider"></div>
+            <div class="row">
+                <div class="col s12 m6">
+                    <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     {{--<button class="btn waves-effect waves-light" type="submit" >Initiate Project--}}
     {{--<i class="material-icons right">send</i>--}}

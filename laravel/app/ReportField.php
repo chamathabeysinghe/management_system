@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class ReportField extends Model
 {
     //
-    public $item_name;
-    public $quantity;
-    public $unitCost;
-    public $totalCost;
-    public $estimation;
+  //  protected $fillable = array('name', 'quantity', 'unitCost','totalCost','estimation');
+    protected $name;
+    protected $quantity;
+    protected $unitCost;
+    protected $totalCost;
+    protected $estimation;
 }

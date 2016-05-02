@@ -18,8 +18,9 @@ class CreateItemsTable extends Migration
             $table->string('serial_number');
             $table->string('item_name');
             $table->integer('unit_cost');
-            $table->integer('sale_type');
+            $table->integer('sale_type'); //should this be changed used in item allocation and creating GP forecast beaware
             $table->integer('owner_id');
+            //this should contain a unique item code to identify type of item
         });
     }
 
