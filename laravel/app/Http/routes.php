@@ -110,4 +110,9 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
+
+    //direct to Create Project page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    });
 });
