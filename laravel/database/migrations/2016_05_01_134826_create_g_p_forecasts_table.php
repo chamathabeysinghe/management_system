@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeedbacksTable extends Migration
+class CreateGPForecastsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateFeedbacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('feedbacks', function (Blueprint $table) {
+        Schema::create('g_p_forecasts', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('comments');
+            $table->string('fieldList');
             $table->integer('project_id');
         });
     }
@@ -27,6 +27,6 @@ class CreateFeedbacksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('feedbacks');
+        Schema::drop('g_p_forecasts');
     }
 }

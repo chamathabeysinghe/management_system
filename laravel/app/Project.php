@@ -8,6 +8,15 @@ class Project extends Model
 {
     //
     public function feedback(){
-        $this->hasOne('App\Feedback');
+        return $this->hasOne('App\Feedback');
+    }
+    public function technicianAllocations(){
+        return $this->hasMany('App\TechnicianAllocation');
+    }
+    public function items(){
+        return $this->hasMany('App\Item');
+    }
+    public function gpforecast(){
+        return $this->hasOne('App\GPForecast');
     }
 }

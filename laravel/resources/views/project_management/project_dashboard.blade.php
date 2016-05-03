@@ -7,22 +7,51 @@
         <div class="col-lg-8 col-lg-offset-2">
             <header style="color: #747474;"><h3>Project Dashboard</h3></header>
 
-            @foreach($projects as $project)
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Project Title</div>
-                    <div class="panel-body">
-                        <p>{{$project->description}}</p>
-                        <div><label>Project Client       :</label>{{$project->client_name}}</div>
-                        <div><label>Project Starting Date:</label>{{$project->date}}</div>
-                        <div><label>Project Incharge     :</label>CHAT</div>
-                        <div><label>Project Duration     :</label>4 Days</div>
-                        <p>
-                            <a href="#" class="btn btn-primary" role="button">View Project</a>
-                            <a href="{{route('project.initiate',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Initiate Project</a>
-                        </p>
-                    </div>
+
+
+            <nav>
+                <div class="nav-wrapper teal lighten-2">
+                    <form>
+                        <div class="input-field">
+                            <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()">
+                            <label for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
                 </div>
-            @endforeach
+            </nav>
+
+            <div>
+                <input type="text" id="search-input" placeholder="Search" onkeydown="down()" onkeyup="up()">
+            </div>
+
+
+
+            
+            <div id="search-results">
+
+            </div>
+            <div id="all-results">
+                @foreach($projects as $project)
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Project Title</div>
+                        <div class="panel-body">
+                            <p>{{$project->description}}</p>
+                            <div><label>Project Client       :</label>{{$project->client_name}}</div>
+                            <div><label>Project Starting Date:</label>{{$project->date}}</div>
+                            <div><label>Project Incharge     :</label>CHAT</div>
+                            <div><label>Project Duration     :</label>4 Days</div>
+                            <p>
+                                <a href="{{route('project.info',['project_id'=>$project->id])}}" class="btn btn-primary" role="button">View Project</a>
+                                <a href="{{route('project.initiate',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Initiate Project</a>
+                                <a href="{{route('creategp',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Create GP</a>
+
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
 
 
             <div class="panel panel-danger">
@@ -38,9 +67,7 @@
                         <a href="#" class="btn btn-primary" role="button">View Project</a>
                         <a href="#" class="btn btn-danger" role="button">Initiate Project</a>
                     </p>
-
                 </div>
-
             </div>
         </div>
     </section>
@@ -55,5 +82,9 @@
             <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
         </ul>
     </div>
+    <script>
+        var token='{{Session::token()}}';
+        var url='{{route('project_search')}}';
+    </script>
 
 @endsection()
