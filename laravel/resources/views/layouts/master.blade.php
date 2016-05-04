@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{URL::to('css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{{URL::to('css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{URL::to('css/editabletable.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
 </head>
 <body>
@@ -27,5 +28,6 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="{{URL::to('js/search.js')}}"></script>
+<script src="{{URL::to('js/editabletable.js')}}"></script>
 </body>
 </html>
