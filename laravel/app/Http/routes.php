@@ -75,6 +75,17 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
+
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
+    Route::get('/return/manageitem', function () {
+        return view('return_management/managereturnitem');
+    });
+    Route::get('/return/dashboard', function () {
+        return view('return_management/returndashboard');
+    });
+
     //get project information form
     Route::get('/projectinfo/{project_id}',[
         'uses'=>'ProjectController@getProjectInfo',
@@ -111,4 +122,16 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
+
+    
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
+
+
+    //direct to Create Project page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    });
+
 });
