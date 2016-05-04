@@ -22,5 +22,6 @@ class TechnicianController extends Controller
         $technician->save();
         return redirect()->back();
     }
+    
 
 }
