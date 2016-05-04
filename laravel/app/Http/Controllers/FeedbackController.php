@@ -42,6 +42,6 @@ class FeedbackController extends Controller
         return redirect()->route('project.info',['project_id'=>$project_id]);
     }
     public function getFeedbackView(Request $request){
-        return view('feedback',['project_id'=>$request['project_id']]);
+        return view('project_management/feedback',['project_id'=>$request['project_id']]);
     }
 }

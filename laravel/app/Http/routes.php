@@ -99,7 +99,7 @@ Route::group(['middleware'=>['web']],function(){
     ]);
     //get new technician page
     Route::get('/newtechnician',function(){
-        return view('newtechnician');
+        return view('project_management/newtechnician');
     });
 
     //add a new technician
@@ -133,5 +133,11 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/newquotation',function(){
         return view("quotation_management/create_quotation");
     });
+
+    //get technician profile view
+    Route::get('/technicians',[
+        'uses'=>'TechnicianController@postTechnicianView',
+        'as'=>'technicians'
+    ]);
 
 });

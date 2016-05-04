@@ -1,8 +1,3 @@
-//
-//$('#search-input').keydown(function(){
-//    console.log("It works");
-//    //$('#search-input').css("background-color", "pink");
-//});
 
 var timer;
 function down(){
