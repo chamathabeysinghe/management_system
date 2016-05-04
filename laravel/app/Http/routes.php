@@ -123,9 +123,15 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'gpforecast'
     ]);
 
-
+    
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
+    });
+
+
+    //direct to Create Project page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
     });
 
 });
