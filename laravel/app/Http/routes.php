@@ -126,5 +126,5 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
     });
-    
+
 });
