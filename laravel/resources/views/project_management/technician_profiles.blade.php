@@ -32,9 +32,11 @@
                                 <tbody>
                                 @foreach($technician->technicianallocations as $allocation)
                                 <tr>
+                                    @if($allocation->project!=null)
                                     <td>{{$allocation->project->id}}</td>
-                                    {{--<td>{{$allocation->project->date}}</td>--}}
-                                    {{--<td>$0.87</td>--}}
+                                    <td>{{$allocation->project->date}}</td>
+                                    <td>$0.87</td>
+                                    @endif
                                 </tr>
                                @endforeach
                                 </tbody>
