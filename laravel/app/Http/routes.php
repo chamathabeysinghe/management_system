@@ -134,10 +134,17 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/create_quotation");
     });
 
+
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
         'as'=>'technicians'
     ]);
+
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    });
+
 
 });

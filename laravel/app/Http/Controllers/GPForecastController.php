@@ -40,11 +40,15 @@ class GPForecastController extends Controller
 
     }
 
+    //those things should be tested
     public function getGPForecast(Request $request){
-        $gpForecast=GPForecast::all()->first(); //here i read one of array i write to database
+        $gpForecast=GPForecast::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
         $fieldList=unserialize($gpForecast->fieldList );
         foreach($fieldList as $field){
-            //echo $field->name;
+
+            echo unserialize($field)->name;
+
+            echo '<br>';
         }
         return view('project_management/gp_forecast',['fieldList'=>$fieldList]);
     }

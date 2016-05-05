@@ -22,6 +22,7 @@ class TechnicianController extends Controller
         $technician->save();
         return redirect()->back();
     }
+
     public function postTechnicianView(Request $request){
         $technicians=Technician::get();
 

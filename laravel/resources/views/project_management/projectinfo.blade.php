@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="description" name="description" class="materialize-textarea" readonly></textarea>
+                    <textarea id="description" name="description" class="materialize-textarea" readonly>{{$project->description}}</textarea>
                     <label class="active" for="description">Project Description</label>
                 </div>
             </div>
