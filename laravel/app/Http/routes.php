@@ -48,9 +48,10 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
     //get the feedback view
-    Route::get('feedback', function () {
-        return view('feedback');
-    });
+    Route::get('feedback', [
+        'uses'=>'FeedbackController@getFeedbackView',
+        'as'=>'feedback'
+    ]);
 
 
     //initiate the project
@@ -73,6 +74,17 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project.initiate',
         'middleware'=>'auth'
     ]);
+
+
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
+    Route::get('/return/manageitem', function () {
+        return view('return_management/managereturnitem');
+    });
+    Route::get('/return/dashboard', function () {
+        return view('return_management/returndashboard');
+    });
 
     //get project information form
     Route::get('/projectinfo/{project_id}',[
@@ -111,8 +123,15 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'gpforecast'
     ]);
 
+    
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
+
+
     //direct to Create Project page
     Route::get('/newquotation',function(){
         return view("quotation_management/create_quotation");
     });
+
 });
