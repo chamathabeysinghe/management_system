@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="collection">
+    <div class="collection hoverable">
         <a href="#!" class="collection-item active">Create Quotation</a>
     </div>
 
@@ -45,49 +45,44 @@
         </form>
     </div>
 
-    <table class="highlight">
-        <thead>
-        <tr>
-            <th data-field="item Code">Item Code</th>
-            <th data-field="item">Item</th>
-            <th data-field="description">Description</th>
-            <th data-field="unit_price">Unit Price</th>
-            <th data-field="quantity">Quantity</th>
-            <th data-field="total_price">Total Cost</th>
-        </tr>
-        </thead>
+    <div class="row">
+        <div id="table" class="table-editable">
+            <span class="table-add glyphicon glyphicon-plus"></span>
+            <table class="table highlight bordered">
+                <thead>
+                    <tr>
+                        <th data-field="item Code">Item Code</th>
+                        <th data-field="item">Item</th>
+                        <th data-field="description">Description</th>
+                        <th class="right-align" data-field="unit_price">Unit Price</th>
+                        <th class="right-align" data-field="quantity">Quantity</th>
+                        <th class="right-align" data-field="total_price">Total Cost</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!-- This is our clonable table line -->
+                <tr class="hide">
+                    <td contenteditable="true">DESXXXX</td>
+                    <td contenteditable="true">unknown item</td>
+                    <td contenteditable="true">unknown</td>
+                    <td class="right-align" contenteditable="true">$$</td>
+                    <td class="right-align" contenteditable="true">unknown quantity</td>
+                    <td class="right-align" contenteditable="true">$$$$</td>
+                    <td>
+                        <span class="table-remove glyphicon glyphicon-remove"></span>
+                    </td>
+                    <td>
+                        <span class="table-up glyphicon glyphicon-arrow-up"></span>
+                        <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-        <tbody>
-
-        <tr>
-            <td>DES140048P</td>
-            <td>CC TV Camera</td>
-            <td>Made by Ashen</td>
-            <td>$ 3.76</td>
-            <td>10</td>
-            <td>$ 37.60</td>
-        </tr>
-
-        <tr>
-            <td>DES140007P</td>
-            <td>CC TV Holder</td>
-            <td>Made by Chamath</td>
-            <td>$ 0.76</td>
-            <td>10</td>
-            <td>$ 7.60</td>
-        </tr>
-
-        <tr>
-            <td>Total</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>$ 45.20</td>
-        </tr>
-
-        </tbody>
-    </table>
+        <button id="export-btn" class="btn btn-primary">Export Data</button>
+        <p id="export"></p>
+    </div>
 
     <div class="row">
         <button class="btn waves-effect waves-light" type="submit" name="action">Create

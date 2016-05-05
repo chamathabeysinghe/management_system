@@ -134,5 +134,9 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/create_quotation");
     });
 
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    });
 
 });

@@ -51,8 +51,8 @@ class ProjectController extends Controller
         $project=Project::where('id',$project_id)->first();
         $technicians=Technician::get();
         return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians]);
-
     }
+
     public function getProjectInfo($project_id){
         echo "Project View";
         $project=Project::where('id',$project_id)->first();
@@ -61,7 +61,6 @@ class ProjectController extends Controller
         foreach($technicianAllocations as $allocation){
             array_push($technicianList,Technician::where('id',$allocation->technician_id)->first());
         }
-
         $items=Item::where('sale_type',1)->get();
         //echo sizeof($items);
         $itemList=array();
