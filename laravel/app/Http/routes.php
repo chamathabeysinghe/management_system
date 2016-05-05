@@ -123,6 +123,10 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'gpforecast'
     ]);
 
+    Route::post('/updategp',[
+        'uses'=>'GPForecastController@postUpdateGPForecast',
+        'as'=>'updategp'
+    ]);
     
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
