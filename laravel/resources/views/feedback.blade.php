@@ -26,118 +26,133 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" >
 
-                    <form action="{{route('savefeedback')}}" method="post">
-
+                    <form action="{{route('savefeedback',['project_id'=>$project_id])}}" method="post">
 
                         <div  class="inquiry">
                             <h4>How satisfied are you: </h4>
 
                             <div class="input-group" style="margin-bottom: 20px">
-                                <label for="second">With yur experience of the most recent installation?</label>
-                                    <span class="input-group-addon">
+                                <label>With your experience of the most recent installation?</label>
+                                <p>
+                                    <input class="with-gap" name="group1"  value="1" type="radio" id="g1i1"  />
+                                    <label for="g1i1">Very Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group1" value="2" type="radio" id="g1i2"  />
+                                    <label for="g1i2">Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group1" value="3" type="radio" id="g1i3"  />
+                                    <label for="g1i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group1" value="4" type="radio" id="g1i4"  />
+                                    <label for="g1i4">Dissatisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group1" value="5" type="radio" id="g1i5"  />
+                                    <label for="g1i5">Very Dissatisfied</label>
+                                </p>
 
-                                        <input type="radio" value="Very Satisfied" name="installation">Very Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="installation">Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="installation">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="installation">Dissatisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="installation">Very Dissatisfied<br>
-                                    </span>
                             </div>
 
 
                             <div class="input-group" style="margin-bottom: 20px" >
-                                <label for="second">With the timeliness of installation?</label>
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Very Satisfied" name="timeliness">Very Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="timeliness">Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="timeliness">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="timeliness">Dissatisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="timeliness">Very Dissatisfied<br>
-                                    </span>
+                                <label>With the timeliness of installation?</label>
+                                <p>
+                                    <input class="with-gap" name="group2" value="1" type="radio" id="g2i1"  />
+                                    <label for="g2i1">Very Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group2" value="2" type="radio" id="g2i2"  />
+                                    <label for="g2i2">Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group2" value="3" type="radio" id="g2i3"  />
+                                    <label for="g2i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group2" value="4" type="radio" id="g2i4"  />
+                                    <label for="g2i4">Dissatisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group2" value="5" type="radio" id="g2i5"  />
+                                    <label for="g2i5">Very Dissatisfied</label>
+                                </p>
                             </div>
 
 
                             <div class="input-group" style="margin-bottom: 20px" >
-                                <label for="second">With the quality of our installation?</label>
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Very Satisfied" name="quality">Very Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="quality">Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="quality">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="quality">Dissatisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="quality">Very Dissatisfied<br>
-                                    </span>
+                                <label>With the quality of our installation?</label>
+                                <p>
+                                    <input class="with-gap" name="group3" value="1" type="radio" id="g3i1"  />
+                                    <label for="g3i1">Very Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group3" value="2" type="radio" id="g3i2"  />
+                                    <label for="g3i2">Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group3" value="3" type="radio" id="g3i3"  />
+                                    <label for="g3i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group3" value="4" type="radio" id="g3i4"  />
+                                    <label for="g3i4">Dissatisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group3" value="5" type="radio" id="g3i5"  />
+                                    <label for="g3i5">Very Dissatisfied</label>
+                                </p>
                             </div>
 
 
                             <div class="input-group" style="margin-bottom: 20px" >
-                                <label for="second">that installation personnel are sufficiently knowledgeable and professional?</label>
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Very Satisfied" name="personnel">Very Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="personnel">Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="personnel">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="personnel">Dissatisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="personnel">Very Dissatisfied<br>
-                                    </span>
+                                <label>that installation personnel are sufficiently knowledgeable and professional?</label>
+                                <p>
+                                    <input class="with-gap" name="group4" value="1" type="radio" id="g4i1"  />
+                                    <label for="g4i1">Very Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group4" value="2" type="radio" id="g4i2"  />
+                                    <label for="g4i2">Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group4" value="3" type="radio" id="g4i3"  />
+                                    <label for="g4i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group4" value="4" type="radio" id="g4i4"  />
+                                    <label for="g4i4">Dissatisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group4" value="5" type="radio" id="g4i5"  />
+                                    <label for="g4i5">Very Dissatisfied</label>
+                                </p>
                             </div>
 
                             <div class="input-group" style="margin-bottom: 20px" >
-                                <label for="second">With installation service overall?</label>
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Very Satisfied" name="overall">Very Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="overall">Satisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="overall">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="overall">Dissatisfied<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="overall">Very Dissatisfied<br>
-                                    </span>
+                                <label>With installation service overall?</label>
+                                <p>
+                                    <input class="with-gap" name="group5" value="1" type="radio" id="g5i1"  />
+                                    <label for="g5i1">Very Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group5" value="2" type="radio" id="g5i2"  />
+                                    <label for="g5i2">Satisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group5" value="3" type="radio" id="g5i3"  />
+                                    <label for="g5i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group5" value="4" type="radio" id="g5i4"  />
+                                    <label for="g5i4">Dissatisfied</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group5" value="5" type="radio" id="g5i5"  />
+                                    <label for="g5i5">Very Dissatisfied</label>
+                                </p>
                             </div>
 
                         </div>
@@ -148,23 +163,26 @@
                             <h4>Digital Engineering Solutions understands the service needs of my organization</h4>
 
                             <div class="input-group">
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Very Satisfied" name="understanding">Very Agree<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="understanding">Agree<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="understanding">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="understanding">Disagree<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="understanding">Strongly Disagree<br>
-                                    </span>
+                                <p>
+                                    <input class="with-gap" name="group6" value="1" type="radio" id="g6i1"  />
+                                    <label for="g6i1">Very Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group6" value="2" type="radio" id="g6i2"  />
+                                    <label for="g6i2">Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group6" value="3" type="radio" id="g6i3"  />
+                                    <label for="g6i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group6" value="4" type="radio" id="g6i4"  />
+                                    <label for="g6i4">Disagree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group6" value="5" type="radio" id="g6i5"  />
+                                    <label for="g6i5">Very Disagree</label>
+                                </p>
                             </div>
                         </div>
 
@@ -174,23 +192,26 @@
                             <h4>Digital Engineering Solutions understands the service needs of my organization</h4>
 
                             <div class="input-group">
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Very Satisfied" name="understanding">Very Agree<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Satisfied" name="understanding">Agree<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Neutral" name="understanding">Neutral<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Dissatisfied" name="understanding">Disagree<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Very Dissatisfied" name="understanding">Strongly Disagree<br>
-                                    </span>
+                                <p>
+                                    <input class="with-gap" name="group7" value="1" type="radio" id="g7i1"  />
+                                    <label for="g7i1">Very Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group7" value="2" type="radio" id="g7i2"  />
+                                    <label for="g7i2">Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group7" value="3" type="radio" id="g7i3"  />
+                                    <label for="g7i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group7" value="4" type="radio" id="g7i4"  />
+                                    <label for="g7i4">Disagree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group7" value="5" type="radio" id="g7i5"  />
+                                    <label for="g7i5">Very Disagree</label>
+                                </p>
                             </div>
                         </div>
 
@@ -200,23 +221,26 @@
                             <h4>Overall, the value of DES's seervice compared with the price paid is</h4>
 
                             <div class="input-group">
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Excellent" name="value">Excellent<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="Very Good" name="value">Very Good<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Good" name="value">Good<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Fair" name="value">Fair<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="poor" name="value">Poor<br>
-                                    </span>
+                                <p>
+                                    <input class="with-gap" name="group8" value="1" type="radio" id="g8i1"  />
+                                    <label for="g8i1">Very Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group8" value="2" type="radio" id="g8i2"  />
+                                    <label for="g8i2">Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group8" value="3" type="radio" id="g8i3"  />
+                                    <label for="g8i3">Neutral</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group8" value="4" type="radio" id="g8i4"  />
+                                    <label for="g8i4">Disagree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group8" value="5" type="radio" id="g8i5"  />
+                                    <label for="g8i5">Very Disagree</label>
+                                </p>
                             </div>
                         </div>
 
@@ -226,17 +250,18 @@
                             <h4>Would you recommend our service?</h4>
 
                             <div class="input-group">
-                                    <span class="input-group-addon">
-
-                                        <input type="radio" value="Yes" name="recommendation">Yes<br>
-                                    </span>
-                                    <span class="input-group-addon">
-
-                                         <input type="radio" value="No" name="recommendation">No<br>
-                                    </span>
-                                    <span class="input-group-addon">
-                                         <input type="radio" value="Not sure" name="recommendation">Not sure<br>
-                                    </span>
+                                <p>
+                                    <input class="with-gap" name="group9" value="1" type="radio" id="g9i1"  />
+                                    <label for="g9i1">Very Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group9" value="2" type="radio" id="g9i2"  />
+                                    <label for="g9i2">Agree</label>
+                                </p>
+                                <p>
+                                    <input class="with-gap" name="group9" value="3" type="radio" id="g9i3"  />
+                                    <label for="g9i3">Neutral</label>
+                                </p>
 
                             </div>
                         </div>
