@@ -163,7 +163,18 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'addBill'
     ]);
 
-
+    Route::get('/financialreport',[
+        'uses'=>'FinancialReportController@getFinancialReportView',
+        'as'=>'financialreport'
+    ]);
+    Route::get('/createfinancialreport',[
+        'uses'=>'FinancialReportController@postCreateFinancialReport',
+        'as'=>'createfinancialreport'
+    ]);
+    Route::post('/updatefinancialreport',[
+        'uses'=>'FinancialReportController@postUpdateFinancialReport',
+        'as'=>'updatefinancialreport'
+    ]);
     //bill database eke save karanna hadanna
     //ee bills and items daala financial report eka hadanna gp eka wage
     //emails yawana wade balanna

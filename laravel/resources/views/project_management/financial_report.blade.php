@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('title')
-    Create Gross Profit Forecast
+    Create Financial Report
 @endsection
 
 @section('content')
     <div class="collection hoverable">
-        <a href="#!" class="collection-item active">Create Quotation</a>
+        <a href="#!" class="collection-item active">Create Financial Report</a>
     </div>
 
     <div class="row">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="row">
-        <div id="gp_table" class="table-editable">
+        <div id="f_table" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
             <table class="table highlight bordered">
                 <thead>
@@ -56,8 +56,7 @@
                     <th class="right-align" data-field="unit_price">Unit Price</th>
                     <th class="right-align" data-field="quantity">Quantity</th>
                     <th class="right-align" data-field="total_price">Total Cost</th>
-                    <th class="right-align" data-field="estimate_price">Estimate</th>
-                    <th class="right-align" data-field="unit_margine">Unit margine</th>
+
                     <th></th>
                     <th></th>
                 </tr>
@@ -70,8 +69,7 @@
                         <td class="right-align" contenteditable="true">{{$record->unitCost}}</td>
                         <td class="right-align" contenteditable="true">{{$record->quantity}}</td>
                         <td class="right-align" contenteditable="true">{{$record->totalCost}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->estimation}}</td>
-                        <td class="right-align" contenteditable="true">$$$$</td>
+
 
                         <td>
                             <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -88,8 +86,7 @@
                     <td class="right-align" contenteditable="true">$$</td>
                     <td class="right-align" contenteditable="true">unknown quantity</td>
                     <td class="right-align" contenteditable="true">$$$$</td>
-                    <td class="right-align" contenteditable="true">$$$$</td>
-                    <td class="right-align" contenteditable="true">$$$$</td>
+
 
                     <td>
                         <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -102,7 +99,7 @@
             </table>
         </div>
 
-        <button id="gp_save" class="btn btn-primary">Export Data</button>
+        <button id="f_save" class="btn btn-primary">Export Data</button>
 
     </div>
 
@@ -122,8 +119,9 @@
     </div>
     <script>
         var token='{{Session::token()}}';
-        var url='{{route('updategp')}}';
+        var url='{{route('updatefinancialreport')}}';
         var project_id='{{$project_id}}}';
+        
     </script>
 
 @endsection

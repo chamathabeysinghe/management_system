@@ -87,22 +87,19 @@
 
                 <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View GP</a>
 
-                {{--<div class="col s12 m6">--}}
-                    {{--<ul class="collection">--}}
-
-
-                        {{--<li class="collection-item avatar">--}}
-                            {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                            {{--<span class="title">Title</span>--}}
-                            {{--<p>First Line <br>--}}
-                                {{--Second Line--}}
-                            {{--</p>--}}
-                            {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
             </div>
         </div>
+
+        <div class="section">
+            <h5>Financial Report</h5>
+            <div class="divider"></div>
+            <div class="row">
+
+                <a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View Financial Report</a>
+
+            </div>
+        </div>
+
         <div class="section">
             <h5>Bills</h5>
             <div class="divider"></div>

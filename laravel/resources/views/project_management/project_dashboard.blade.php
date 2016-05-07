@@ -46,7 +46,7 @@
                                 <a href="{{route('project.info',['project_id'=>$project->id])}}" class="btn btn-primary" role="button">View Project</a>
                                 <a href="{{route('project.initiate',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Initiate Project</a>
                                 <a href="{{route('creategp',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Create GP</a>
-
+                                <a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Create Financial Report</a>
                             </p>
                         </div>
                     </div>

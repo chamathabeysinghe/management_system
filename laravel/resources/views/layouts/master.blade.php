@@ -38,6 +38,6 @@
 
 <script src="{{URL::to('js/editabletable.js')}}"></script>
 <script src="{{URL::to('js/gpeditable.js')}}"></script>
-
+<script src="{{URL::to('js/feditable.js')}}"></script>
 </body>
 </html>
