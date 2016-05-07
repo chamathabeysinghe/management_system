@@ -134,12 +134,12 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'return_search'
     ]);
 
-<<<<<<< HEAD
+
     Route::post('/search',[
         'uses'=>'ItemController@getiteminfo',
         'as'=>'item_search'
     ]);
-=======
+
     Route::post('/updategp',[
         'uses'=>'GPForecastController@postUpdateGPForecast',
         'as'=>'updategp'
@@ -168,5 +168,5 @@ Route::group(['middleware'=>['web']],function(){
     });
 
 
->>>>>>> master
+
 });
