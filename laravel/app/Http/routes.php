@@ -48,9 +48,10 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
     //get the feedback view
-    Route::get('feedback', function () {
-        return view('feedback');
-    });
+    Route::get('feedback', [
+        'uses'=>'FeedbackController@getFeedbackView',
+        'as'=>'feedback'
+    ]);
 
 
     //initiate the project
@@ -73,6 +74,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project.initiate',
         'middleware'=>'auth'
     ]);
+
 
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
@@ -97,7 +99,7 @@ Route::group(['middleware'=>['web']],function(){
     ]);
     //get new technician page
     Route::get('/newtechnician',function(){
-        return view('newtechnician');
+        return view('project_management/newtechnician');
     });
 
     //add a new technician
@@ -132,8 +134,39 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'return_search'
     ]);
 
+<<<<<<< HEAD
     Route::post('/search',[
         'uses'=>'ItemController@getiteminfo',
         'as'=>'item_search'
     ]);
+=======
+    Route::post('/updategp',[
+        'uses'=>'GPForecastController@postUpdateGPForecast',
+        'as'=>'updategp'
+    ]);
+    
+    Route::get('/return/newitem', function () {
+        return view('return_management/NewReturnItem');
+    });
+
+
+    //direct to Create Project page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    });
+
+
+    //get technician profile view
+    Route::get('/technicians',[
+        'uses'=>'TechnicianController@postTechnicianView',
+        'as'=>'technicians'
+    ]);
+
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    });
+
+
+>>>>>>> master
 });

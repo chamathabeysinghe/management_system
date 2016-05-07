@@ -23,4 +23,10 @@ class TechnicianController extends Controller
         return redirect()->back();
     }
 
+    public function postTechnicianView(Request $request){
+        $technicians=Technician::get();
+
+        return view('project_management/technician_profiles',['technicians'=>$technicians]);
+    }
+
 }
