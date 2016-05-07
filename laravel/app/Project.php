@@ -19,4 +19,7 @@ class Project extends Model
     public function gpforecast(){
         return $this->hasOne('App\GPForecast');
     }
+    public function bills(){
+        return $this->hasMany('App\Bill');
+    }
 }
