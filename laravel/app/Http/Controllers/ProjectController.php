@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Bill;
 use App\Item;
 use App\Project;
 use App\Technician;
@@ -54,7 +55,7 @@ class ProjectController extends Controller
     }
 
     public function getProjectInfo($project_id){
-        echo "Project View";
+
         $project=Project::where('id',$project_id)->first();
         $technicianAllocations=TechnicianAllocation::where('project_id',$project_id)->get();
         $technicianList=array();
@@ -68,9 +69,11 @@ class ProjectController extends Controller
             if($item->owner_id==$project_id){
                 array_push($itemList,$item);
             }
-
         }
-        return view('/project_management/projectinfo',['project'=>$project,'technicians'=>$technicianList,'itemList'=>$itemList]);
+
+        $billList=Bill::where('project_id',$project_id)->get();
+
+        return view('/project_management/projectinfo',['project'=>$project,'technicians'=>$technicianList,'itemList'=>$itemList,'billList'=>$billList]);
     }
 
     public function postProjectSearch(Request $request){

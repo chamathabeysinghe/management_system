@@ -150,9 +150,18 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/quotation_summary");
     });
 
-    Route::get('/bill',function(){
-       return view('project_management/add_bill');
-    });
+//    Route::get('/bill',function(){
+//       return view('project_management/add_bill');
+//    })->name('bill');
+
+    Route::get('/bill',[
+        'uses'=>'BillController@getAddBillView',
+        'as'=>'bill'
+    ]);
+    Route::post('/addBill',[
+       'uses'=>'BillController@postAddBill' ,
+        'as'=>'addBill'
+    ]);
 
 
     //bill database eke save karanna hadanna

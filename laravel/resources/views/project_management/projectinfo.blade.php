@@ -109,12 +109,20 @@
             <div class="row">
                 <div class="col s12 m6">
                     <ul class="collection">
-                        <li class="collection-item avatar">
-                            {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                            <span class="title">Category: </span> Value
-                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                        </li>
+                        @foreach($billList as $bill)
+                            <li class="collection-item avatar">
+                                {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
+                                <span class="title">{{$bill->description}} </span> Value
+                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                            </li>
+                        @endforeach
+
                     </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m6">
+                    <a href="{{route('bill',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Bill</a>
                 </div>
             </div>
         </div>
