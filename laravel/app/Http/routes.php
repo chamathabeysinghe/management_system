@@ -149,6 +149,6 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/quotationsummary',function(){
         return view("quotation_management/quotation_summary");
     });
-
+    
 
 });
