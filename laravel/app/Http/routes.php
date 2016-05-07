@@ -150,5 +150,14 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/quotation_summary");
     });
 
+    Route::get('/bill',function(){
+       return view('project_management/add_bill');
+    });
+
+
+    //bill database eke save karanna hadanna
+    //ee bills and items daala financial report eka hadanna gp eka wage
+    //emails yawana wade balanna
+    //finalize karanna
 
 });
