@@ -120,5 +120,20 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
+    // submitnew customer
+    Route::post('/newcustomer',[
+        'uses'=>'CustomerController@addNewCustomer',
+        'as'=>'newcustomer',
+    ]);
 
+
+    Route::post('/searchReturn',[
+        'uses'=>'ReturnController@getReturnInfo',
+        'as'=>'return_search'
+    ]);
+
+    Route::post('/search',[
+        'uses'=>'ItemController@getiteminfo',
+        'as'=>'item_search'
+    ]);
 });

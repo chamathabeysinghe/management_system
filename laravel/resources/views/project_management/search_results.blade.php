@@ -3,8 +3,8 @@
         <div class="panel-heading">Project Title</div>
         <div class="panel-body">
             <p>{{$project->description}}</p>
-            <div><label>Project Client       :</label>{{$project->client_name}}</div>
-            <div><label>Project Starting Date:</label>{{$project->date}}</div>
+            <div><label>Project Client       :</label>{{$project->client_name }}</div>
+            <div><label>Project Starting Date:</label>{{$project->date }}</div>
             <div><label>Project Incharge     :</label>CHAT</div>
             <div><label>Project Duration     :</label>4 Days</div>
             <p>

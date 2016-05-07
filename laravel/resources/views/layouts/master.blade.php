@@ -27,5 +27,7 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="{{URL::to('js/search.js')}}"></script>
+<script src="{{URL::to('js/searchItems.js')}}"></script>
+<script src="{{URL::to('js/searchreturnRecords.js')}}"></script>
 </body>
 </html>
