@@ -36,10 +36,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s10">
+                <div class="input-field col s6">
                     <i class="material-icons prefix">location_on</i>
                     <input clientAddress="Client Address" id="client_address" type="text" class="validate">
                     <label class="active" for="client_address">Client Address</label>
+                </div>
+                <div class="input-field col s5 offset-s1">
+                    <i class="material-icons prefix">contact_phone</i>
+                    <input id="client_tel" type="tel" class="validate">
+                    <label class="active" for="tel">Client Phone</label>
                 </div>
             </div>
         </form>
