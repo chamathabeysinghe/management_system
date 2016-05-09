@@ -3,7 +3,7 @@
 @extends('layouts.master')
 @section('title')
     Feedback Form
-    @endsection
+@endsection
 @section('content')
     <style>
         .inquiry{

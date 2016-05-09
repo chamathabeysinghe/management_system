@@ -29,6 +29,11 @@ class ProjectController extends Controller
         $project->date=$request['date'];
         $project->client_email=$request['email'];
         $project->description=$request['description'];
+        $project->title=$request['title'];
+        $project->location=$request['location'];
+        $project->incharge=$request['incharge'];
+        $project->duration=$request['duration'];
+        $project->project_status=1;
         $project->update();
         if($request['selection']){
             foreach($request['selection'] as $selected){
@@ -47,6 +52,7 @@ class ProjectController extends Controller
         $projects=Project::orderBy('created_at','desc')->get();
         return view('project_management\project_dashboard',['projects'=>$projects]);
     }
+
     public function getProjectInitiatePage($project_id){
         //validate the project
         $project=Project::where('id',$project_id)->first();
@@ -102,4 +108,25 @@ class ProjectController extends Controller
         }
         return View::make('/project_management/search_results')->with('resultProjects',$resultProjects);
     }
+
+    public function postItemAllocation(Request $request){
+        $project_id=$request['project_id'];
+        $project=Project::where('id',$project_id)->first();
+
+        $jfo = json_decode($request['new_data']);
+        foreach($jfo as $newData){
+
+            $item=new Item();
+            $item->item_name=$newData->item;
+            $item->unit_cost=$newData->unitcost;
+            $item->serial_number=$newData->serialnumber;
+            $item->sale_type=1;
+            $item->owner_id=$project_id;
+            $item->save();
+        }
+
+
+
+    }
+
 }

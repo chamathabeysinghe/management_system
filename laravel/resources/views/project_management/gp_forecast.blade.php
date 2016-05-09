@@ -125,5 +125,5 @@
         var url='{{route('updategp')}}';
         var project_id='{{$project_id}}}';
     </script>
-
+    <script src="{{URL::to('js/gpeditable.js')}}"></script>
 @endsection

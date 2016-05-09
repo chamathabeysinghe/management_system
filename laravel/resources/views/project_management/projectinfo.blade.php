@@ -36,7 +36,7 @@
         </div>
 
 
-        <div class="section">
+        <div class="section" >
             <h5>Allocated Technicians</h5>
             <div class="divider"></div>
             <div class="row">
@@ -63,20 +63,69 @@
             <div class="divider"></div>
             <div class="row">
                 <div class="col s12 m6">
-                    <ul class="collection">
+                    <div id="item_table" class="table-editable">
+                        <span class="table-add glyphicon glyphicon-plus"></span>
+                        <table class="table highlight bordered">
+                            <thead>
+                            <tr>
 
-                        @foreach($itemList as $item)
-                            <li class="collection-item avatar">
+                                <th data-field="item">Item</th>
+                                <th class="right-align" data-field="quantity">Serial Number</th>
+                                <th class="right-align" data-field="unit_price">Unit Cost</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+
+                            @foreach($itemList as $item)
+                                <tr data-id="{{$item->id}}">
+
+                                    <td id="name{{$item->id}}" contenteditable="true">{{$item->item_name}}</td>
+                                    <td id="serial{{$item->id}}"class="right-align" contenteditable="true">{{$item->serial_number}}</td>
+                                    <td id="cost{{$item->id}}"class="right-align" contenteditable="true">{{$item->unit_cost}}</td>
+                                    <td>
+                                        <span class="change table-down glyphicon glyphicon-pencil"></span>
+
+                                    </td>
+                                    <td>
+                                        <span class="table-remove glyphicon glyphicon-remove"></span>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
+
+                            <tr class="hide">
+
+                                <td class="name" contenteditable="true"></td>
+                                <td class="serial right-align" contenteditable="true"></td>
+                                <td class="cost right-align" contenteditable="true"></td>
+                                <td>
+                                    <span class="change table-down glyphicon glyphicon-pencil"></span>
+
+                                </td>
+                                <td>
+                                    <span class="table-remove glyphicon glyphicon-remove"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    {{--<ul class="collection">--}}
+                        {{--@foreach($itemList as $item)--}}
+                            {{--<li class="collection-item avatar">--}}
                                 {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                                <span class="title">{{$item->item_name}}</span>
-                                <p>First Line <br>
-                                    Second Line
-                                </p>
-                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                            </li>
-                        @endforeach
+                                {{--<span class="title">{{$item->item_name}}</span>--}}
+                                {{--<p>First Line <br>--}}
+                                    {{--Second Line--}}
+                                {{--</p>--}}
+                                {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
+                            {{--</li>--}}
+                        {{--@endforeach--}}
 
-                    </ul>
+                    {{--</ul>--}}
                 </div>
             </div>
         </div>
@@ -142,6 +191,12 @@
     {{--<input type="hidden" name="_token" value="{{Session::token()}}">--}}
 
     {{--</form>--}}
-
-
+    <script>
+        var project_id='{{$project->id}}';
+        var token='{{Session::token()}}';
+        var url_deallocate='{{route('deallocateitem')}}';
+        var url_update_item='{{route('changeallocateitem')}}'
+        var url_add_single_item='{{route('addsingleitem')}}'
+    </script>
+    <script src="{{URL::to('js/infoitemeditable.js')}}"></script>
 @endsection

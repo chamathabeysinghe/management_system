@@ -113,6 +113,7 @@ Route::group(['middleware'=>['web']],function(){
         return view("project_management/gp_forecast");
     });
 
+    //create the gross profir forecast
     Route::get('/creategp',[
         'uses'=>'GPForecastController@postCreateGPForecast',
         'as'=>'creategp'
@@ -122,7 +123,7 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
-
+    //update the gross profit forecast
     Route::post('/updategp',[
         'uses'=>'GPForecastController@postUpdateGPForecast',
         'as'=>'updategp'
@@ -154,31 +155,59 @@ Route::group(['middleware'=>['web']],function(){
 //       return view('project_management/add_bill');
 //    })->name('bill');
 
+    //get bill view
     Route::get('/bill',[
         'uses'=>'BillController@getAddBillView',
         'as'=>'bill'
     ]);
+
+    //add new bill
     Route::post('/addBill',[
        'uses'=>'BillController@postAddBill' ,
         'as'=>'addBill'
     ]);
 
+    //get financial report view
     Route::get('/financialreport',[
         'uses'=>'FinancialReportController@getFinancialReportView',
         'as'=>'financialreport'
     ]);
+
+    //create new financial report
     Route::get('/createfinancialreport',[
         'uses'=>'FinancialReportController@postCreateFinancialReport',
         'as'=>'createfinancialreport'
     ]);
+
+    //update the financial report data
     Route::post('/updatefinancialreport',[
         'uses'=>'FinancialReportController@postUpdateFinancialReport',
         'as'=>'updatefinancialreport'
     ]);
-    //bill database eke save karanna hadanna
-    //ee bills and items daala financial report eka hadanna gp eka wage
-    //emails yawana wade balanna
-    //finalize karanna
+
+    //search for technician using date
+    Route::post('/searchtechnician',[
+       'uses'=>'TechnicianController@postTechnicianSearch',
+        'as'=>'searchtechnician'
+    ]);
+    //allocate items to project at initiating
+    Route::post('/allocateitems',[
+       'uses'=>'ProjectController@postItemAllocation',
+        'as'=>'allocateitems'
+    ]);
+
+    Route::post('/deallocateitem',[
+        'uses'=>'ItemController@postDeallocateItem',
+        'as'=>'deallocateitem'
+    ]);
+    Route::post('/changeallocateitem',[
+        'uses'=>'ItemController@postChangeItem',
+        'as'=>'changeallocateitem'
+    ]);
+    Route::post('/addsingleitem',[
+        'uses'=>'ItemController@postAllocateSingleItem',
+        'as'=>'addsingleitem'
+    ]);
 
 
 });

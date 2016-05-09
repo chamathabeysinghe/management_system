@@ -92,4 +92,6 @@ class GPForecastController extends Controller
         $gpForecast->fieldList=(serialize($fieldsList));
         $project->gpforecast()->save($gpForecast);
     }
+
+
 }

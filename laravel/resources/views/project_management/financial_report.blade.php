@@ -123,5 +123,6 @@
         var project_id='{{$project_id}}}';
         
     </script>
+    <script src="{{URL::to('js/feditable.js')}}"></script>
 
 @endsection
