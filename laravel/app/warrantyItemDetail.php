@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class warrantyItemDetail extends Model
 {
-    //
+    public function returnItemDetail(){
+        return $this->belongsTo('App\ReturnItemDetail','return_Item_Detail_id');
+    }
 }

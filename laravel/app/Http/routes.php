@@ -127,6 +127,10 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'CustomerController@addNewCustomer',
         'as'=>'newcustomer',
     ]);
+    Route::post('/newreturn',[
+        'uses'=>'ReturnController@addNewReturn',
+        'as'=>'newreturn',
+    ]);
 
 
     Route::post('/searchReturn',[
