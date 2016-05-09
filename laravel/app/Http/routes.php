@@ -134,4 +134,16 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/create_quotation");
     });
 
+    //direct to dealer registration
+    Route::get('/dealer/register',function(){
+        return view("dealer_management/registration");
+    });
+
+    //direct to stocks that dealer bought
+    Route::get('/dealer/stock',function(){
+        return view("dealer_management/new_stock");
+    });
+
+
+
 });
