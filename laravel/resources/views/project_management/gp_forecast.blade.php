@@ -20,7 +20,7 @@
                 <div class="input-field col s3 offset-s1">
                     <i class="material-icons prefix">today</i>
                     <input id="quotation_date" type="date" class="datepicker">
-                    <label class="active" for="quotation_date">Quotation Date</label>
+                    <label class="active" for="quotation_date">Gross profit created Date</label>
                 </div>
             </div>
             <div class="row">
@@ -125,5 +125,5 @@
         var url='{{route('updategp')}}';
         var project_id='{{$project_id}}}';
     </script>
-
+    <script src="{{URL::to('js/gpeditable.js')}}"></script>
 @endsection

@@ -1,13 +1,14 @@
 /**
- * Created by Chamath Abeysinghe on 5/5/2016.
+ * Created by Chamath Abeysinghe on 5/7/2016.
  */
-var $GP_TABLE = $('#gp_table');
-var $GP_SAVE = $('#gp_save');
+
+var $F_TABLE = $('#f_table');
+var $F_SAVE = $('#f_save');
 
 
 $('.table-add').click(function() {
-    var $clone = $GP_TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
-    $GP_TABLE.find('table').append($clone);
+    var $clone = $F_TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
+    $F_TABLE.find('table').append($clone);
 });
 
 $('.table-remove').click(function() {
@@ -29,8 +30,8 @@ $('.table-down').click(function() {
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;
 
-$GP_SAVE.click(function() {
-    var $rows = $GP_TABLE.find('tr:not(:hidden)');
+$F_SAVE.click(function() {
+    var $rows = $F_TABLE.find('tr:not(:hidden)');
     var headers = [];
     var data = [];
 
@@ -57,4 +58,8 @@ $GP_SAVE.click(function() {
     // Output the result
 
     $.post(url, {new_data:JSON.stringify(data) ,project_id:project_id,_token:token });
+
+
+
+
 });

@@ -21,7 +21,7 @@ function down(){
             })
         }
         else{
-            console.log("CLEAR");
+
             $('#search-results').hide();
             $('#all-results').show();
             //$('#search-results').hide();
