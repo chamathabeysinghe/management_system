@@ -124,9 +124,21 @@ class ProjectController extends Controller
             $item->owner_id=$project_id;
             $item->save();
         }
+    }
 
+    public function postRemoveAllocation(Request $request){
+        $project_id=$request['project_id'];
+        $technician_id=$request['technician_id'];
+        $allocation=TechnicianAllocation::where(['project_id'=>$project_id,'technician_id'=>$technician_id])->first();
+        if($allocation!=null){
+            $allocation->delete();
+        }
+    }
 
-
+    public function postCompleteProject(Request $request){
+        $project=Project::where('id',$request['project_id'])->first();
+        $project->project_status=2;
+        $project->update();
     }
 
 }
