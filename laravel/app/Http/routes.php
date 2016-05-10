@@ -225,5 +225,10 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'removebill'
     ]);
 
+    Route::get('/reviewfeedback',[
+        'uses'=>'FeedbackController@getFeedBackReview',
+        'as'=>'reviewfeedback'
+    ]);
+
 
 });

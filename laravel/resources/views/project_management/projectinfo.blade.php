@@ -201,8 +201,11 @@
             <h5>Feedback</h5>
             <div class="divider"></div>
             <div class="row">
-                <div class="col s12 m6">
+                <div class="col s12 m4">
                     <a href="{{route('feedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="{{route('reviewfeedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View Feedback</a>
                 </div>
             </div>
         </div>
