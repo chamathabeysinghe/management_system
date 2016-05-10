@@ -1,24 +1,25 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Chamath Abeysinghe
- * Date: 5/1/2016
- * Time: 7:23 PM
+ * Date: 5/7/2016
+ * Time: 10:07 AM
  */
 
 namespace App\Http\Controllers;
 
-use App\GPForecast;
+use App\Bill;
+use App\FinancialReport;
 use App\Item;
 use App\Project;
 use App\ReportField;
 use Illuminate\Http\Request;
+use Mockery\CountValidator\Exception;
 
-class GPForecastController extends Controller
+
+class FinancialReportController extends Controller
 {
-
-    public function postCreateGPForecast(Request $request){
+    public function postCreateFinancialReport(Request $request){
         $project_id=$request['project_id'];
         $items=Item::where('owner_id',$project_id)->get();
         echo sizeof($items);
@@ -26,7 +27,6 @@ class GPForecastController extends Controller
         foreach($items as $item){
             if($item->sale_type == 1){
                 $name=$item->item_name;
-
                 if(!array_key_exists($name,$fieldsList)){
                     $reportField=new ReportField();
                     $reportField->name=$item->item_name;
@@ -40,28 +40,36 @@ class GPForecastController extends Controller
                     $reportField->quantity=$reportField->quantity+1;
                     $reportField->totalCost=$reportField->totalCost+$reportField->unitCost;
                 }
+            }
+        }
 
+        $bills=Bill::where('project_id',$project_id)->get();
+        foreach($bills as $bill){
+            $name=$bill->bill_type;
+            if(!array_key_exists($name,$fieldsList)){
+                $reportField=new ReportField();
+                $reportField->name=$bill->bill_type;
+                $reportField->totalCost=$bill->value;
+                $fieldsList[$name]=$reportField;
+            }
+            else{
+                $reportField=$fieldsList[$name];
+                $reportField->totalCost=$reportField->totalCost+$bill->value;
             }
         }
         $project=Project::where('id',$project_id)->first();
 
-        $gpForecast=new GPForecast();
+        $financialReport=new FinancialReport();
         //$gpForecast->project_id=$project_id;
-        $gpForecast->fieldList=(serialize($fieldsList));
+        $financialReport->fieldList=(serialize($fieldsList));
         //$gpForecast->save();
 
-        $project->gpforecast()->save($gpForecast);
-        //items block vidihata danna
-        //project ekakata eka gross profit ekak vitarak karanna
-        //project->gp vidihata save karanna
-        //table ekata anuwa wenas karanna gp eka current gp forecast eka update karanna
-        //echarai
-
+        $project->financialReport()->save($financialReport);
     }
-    //those things should be tested
-    public function getGPForecast(Request $request){
-        $gpForecast=GPForecast::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
-        $fieldList=unserialize($gpForecast->fieldList );
+
+    public function getFinancialReportView(Request $request){
+        $financialReport=FinancialReport::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
+        $fieldList=unserialize($financialReport->fieldList );
         $recordsList=array();
         foreach($fieldList as $field){
 
@@ -69,18 +77,17 @@ class GPForecastController extends Controller
             array_push($recordsList,($field));
             //echo '<br>';
         }
-        return view('project_management/gp_forecast',['recordList'=>$recordsList,'project_id'=>$request['project_id']]);
-}
+        return view('project_management/financial_report',['recordList'=>$recordsList,'project_id'=>$request['project_id']]);
+    }
 
-    public function postUpdateGPForecast(Request $request){
+    public function postUpdateFinancialReport(Request $request){
         $project_id=$request['project_id'];
         $project=Project::where('id',$project_id)->first();
 
-        $gpForecast=$project->GPForecast;
+        $financialReport=$project->FinancialReport;
         $fieldsList=array();
         $jfo = json_decode($request['new_data']);
         foreach($jfo as $newData){
-
 
             $reportField=new ReportField();
             $reportField->name=$newData->item;
@@ -89,9 +96,7 @@ class GPForecastController extends Controller
             $reportField->totalCost=$newData->totalcost;
             $fieldsList[$newData->item]=$reportField;
         }
-        $gpForecast->fieldList=(serialize($fieldsList));
-        $project->gpforecast()->save($gpForecast);
+        $financialReport->fieldList=(serialize($fieldsList));
+        $project->financialReport()->save($financialReport);
     }
-
-
 }

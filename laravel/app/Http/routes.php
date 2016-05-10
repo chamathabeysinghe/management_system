@@ -99,7 +99,7 @@ Route::group(['middleware'=>['web']],function(){
     ]);
     //get new technician page
     Route::get('/newtechnician',function(){
-        return view('newtechnician');
+        return view('project_management/newtechnician');
     });
 
     //add a new technician
@@ -113,6 +113,7 @@ Route::group(['middleware'=>['web']],function(){
         return view("project_management/gp_forecast");
     });
 
+    //create the gross profir forecast
     Route::get('/creategp',[
         'uses'=>'GPForecastController@postCreateGPForecast',
         'as'=>'creategp'
@@ -122,7 +123,11 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
-
+    //update the gross profit forecast
+    Route::post('/updategp',[
+        'uses'=>'GPForecastController@postUpdateGPForecast',
+        'as'=>'updategp'
+    ]);
     
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
@@ -134,6 +139,7 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/create_quotation");
     });
 
+
     //direct to dealer registration
     Route::get('/dealer/register',function(){
         return view("dealer_management/registration");
@@ -144,6 +150,74 @@ Route::group(['middleware'=>['web']],function(){
         return view("dealer_management/new_stock");
     });
 
+    //get technician profile view
+    Route::get('/technicians',[
+        'uses'=>'TechnicianController@postTechnicianView',
+        'as'=>'technicians'
+    ]);
+
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    });
+
+//    Route::get('/bill',function(){
+//       return view('project_management/add_bill');
+//    })->name('bill');
+
+    //get bill view
+    Route::get('/bill',[
+        'uses'=>'BillController@getAddBillView',
+        'as'=>'bill'
+    ]);
+
+    //add new bill
+    Route::post('/addBill',[
+       'uses'=>'BillController@postAddBill' ,
+        'as'=>'addBill'
+    ]);
+
+    //get financial report view
+    Route::get('/financialreport',[
+        'uses'=>'FinancialReportController@getFinancialReportView',
+        'as'=>'financialreport'
+    ]);
+
+    //create new financial report
+    Route::get('/createfinancialreport',[
+        'uses'=>'FinancialReportController@postCreateFinancialReport',
+        'as'=>'createfinancialreport'
+    ]);
+
+    //update the financial report data
+    Route::post('/updatefinancialreport',[
+        'uses'=>'FinancialReportController@postUpdateFinancialReport',
+        'as'=>'updatefinancialreport'
+    ]);
+
+    //search for technician using date
+    Route::post('/searchtechnician',[
+       'uses'=>'TechnicianController@postTechnicianSearch',
+        'as'=>'searchtechnician'
+    ]);
+    //allocate items to project at initiating
+    Route::post('/allocateitems',[
+       'uses'=>'ProjectController@postItemAllocation',
+        'as'=>'allocateitems'
+    ]);
+
+    Route::post('/deallocateitem',[
+        'uses'=>'ItemController@postDeallocateItem',
+        'as'=>'deallocateitem'
+    ]);
+    Route::post('/changeallocateitem',[
+        'uses'=>'ItemController@postChangeItem',
+        'as'=>'changeallocateitem'
+    ]);
+    Route::post('/addsingleitem',[
+        'uses'=>'ItemController@postAllocateSingleItem',
+        'as'=>'addsingleitem'
+    ]);
 
 
 });
