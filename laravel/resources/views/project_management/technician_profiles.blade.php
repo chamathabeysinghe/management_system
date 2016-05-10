@@ -62,7 +62,7 @@
                                         <td>{{$allocation->project->id}}</td>
                                         <td>{{$allocation->project->title}}</td>
                                         <td>{{$allocation->project->duration}}</td>
-                                        <td>$0.87</td>
+                                        <td>{{$allocation->commission}}</td>
                                         <td><a href="{{route('project.info',['project_id'=>$allocation->project->id])}}" class="secondary-content"><i class="material-icons">send</i></a></td>
                                     @endif
                                 </tr>

@@ -218,6 +218,18 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ItemController@postAllocateSingleItem',
         'as'=>'addsingleitem'
     ]);
+    Route::post('/removeallocation',[
+       'uses'=>'ProjectController@postRemoveAllocation',
+        'as'=>'removeallocation'
+    ]);
+    Route::post('calculatecommission',[
+        'uses'=>'TechnicianController@postCalculateCommission',
+        'as'=>'calculatecommission'
+    ]);
+    Route::post('/completeproject',[
+        'uses'=>'ProjectController@postCompleteProject',
+        'as'=>'completeproject'
+    ]);
 
 
 });
