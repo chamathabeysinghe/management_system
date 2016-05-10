@@ -220,6 +220,10 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ProjectController@postCompleteProject',
         'as'=>'completeproject'
     ]);
+    Route::post('/removebill',[
+       'uses'=>'BillController@postRemoveBill',
+        'as'=>'removebill'
+    ]);
 
 
 });
