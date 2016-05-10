@@ -31,9 +31,9 @@
 
     <select class="browser-default">
         <option value="" disabled selected>Select Dealer</option>
-        <option value="1">dealer 1</option>
-        <option value="2">dealer 2</option>
-        <option value="3">dealer 3</option>
+        @foreach($dealers as $dealer)
+            <option value="1">{{$dealer->first_name}}</option>
+        @endforeach
     </select>
 
     <div class="container">
@@ -72,8 +72,12 @@
                 </tr>
                 <!-- This is our clonable table line -->
                 <tr class="hide">
-                    <td contenteditable="true">Untitled</td>
-                    <td contenteditable="true">undefined</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
                     <td>
                         <span class="table-remove glyphicon glyphicon-remove"></span>
                     </td>
@@ -85,8 +89,7 @@
             </table>
         </div>
 
-        <button id="export-btn" class="btn btn-primary">Export Data</button>
-        <p id="export"></p>
+
     </div>
     <div class="row">
         <form class="col s12">

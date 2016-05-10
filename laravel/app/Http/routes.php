@@ -146,9 +146,10 @@ Route::group(['middleware'=>['web']],function(){
     });
 
     //direct to stocks that dealer bought
-    Route::get('/dealer/stock',function(){
-        return view("dealer_management/new_stock");
-    });
+    Route::get('/dealer/stock',[
+        'uses'=>'DealerController@getStockView',
+        'as'=>'new_stock'
+    ]);
 
     //get technician profile view
     Route::get('/technicians',[
@@ -231,5 +232,9 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'completeproject'
     ]);
 
+    Route::post('/registerdealer',[
+       'uses'=>'DealerController@registerDealer',
+        'as'=>'registerdealer'
+    ]);
 
 });
