@@ -133,13 +133,6 @@ Route::group(['middleware'=>['web']],function(){
         return view('return_management/NewReturnItem');
     });
 
-
-    //direct to Create Project page
-    Route::get('/newquotation',function(){
-        return view("quotation_management/create_quotation");
-    });
-
-
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
@@ -149,6 +142,10 @@ Route::group(['middleware'=>['web']],function(){
     //direct to Project Summary page
     Route::get('/quotationsummary',function(){
         return view("quotation_management/quotation_summary");
+    });
+
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
     });
 
 //    Route::get('/bill',function(){
@@ -209,5 +206,8 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'addsingleitem'
     ]);
 
-
+    Route::post('/createquotation',[
+        'uses'=>'QuotationController@postCreateQuotation',
+        'as'=>'createquotation'
+    ]);
 });

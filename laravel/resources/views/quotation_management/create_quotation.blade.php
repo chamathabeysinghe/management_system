@@ -10,43 +10,47 @@
     </div>
 
     <div class="row">
-        <form class="col s12">
+        <form class="col s12" action="{{Route('createquotation')}}" method="post">
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">work</i>
-                    <input quotationNum="DESXXXXXXX" id="quotation_number" type="text" class="validate">
+                    <input id="quotation_number" name="quotation_number" type="text" class="validate">
                     <label class="active" for="quotation_number">Quotation Number</label>
                 </div>
                 <div class="input-field col s3 offset-s1">
                     <i class="material-icons prefix">today</i>
-                    <input id="quotation_date" type="date" class="datepicker">
+                    <input id="quotation_date" name="quotation_date" type="date" class="datepicker">
                     <label class="active" for="quotation_date">Quotation Date</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">assignment_ind</i>
-                    <input id="client_name" type="text" class="validate">
+                    <input id="client_name" name="client_name" type="text" class="validate" >
                     <label class="active" for="client_name">Client Name</label>
                 </div>
                 <div class="input-field col s5 offset-s1">
                     <i class="material-icons prefix">email</i>
-                    <input id="client_email" type="email" class="validate">
-                    <label class="active" for="email">Email</label>
+                    <input id="client_email" name="client_email" type="email" class="validate">
+                    <label class="active" for="client_email">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">location_on</i>
-                    <input clientAddress="Client Address" id="client_address" type="text" class="validate">
+                    <input id="client_address" name="client_address" type="text" class="validate">
                     <label class="active" for="client_address">Client Address</label>
                 </div>
                 <div class="input-field col s5 offset-s1">
                     <i class="material-icons prefix">contact_phone</i>
-                    <input id="client_tel" type="tel" class="validate">
+                    <input id="client_tel" name="client_tel" type="tel" class="validate">
                     <label class="active" for="tel">Client Phone</label>
                 </div>
             </div>
+            <input type="hidden" name="_token" value="{{Session::token()}}">
+            <button type="submit" class="btn waves-effect waves-light" type="submit" name="action">Create
+                <i class="material-icons right">done</i>
+            </button>
         </form>
     </div>
 
@@ -85,14 +89,15 @@
             </table>
         </div>
 
-        <button id="export-btn" class="btn btn-primary">Export Data</button>
+        <button  id="export-btn" class="btn btn-primary">Export Data</button>
+
+
+
         <p id="export"></p>
     </div>
 
     <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Create
-            <i class="material-icons right">done</i>
-        </button>
+
         <button class="btn waves-effect waves-light" type="submit" name="action">Download
             <i class="material-icons right">play_for_work</i>
         </button>
