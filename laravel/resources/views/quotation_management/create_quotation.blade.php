@@ -88,7 +88,7 @@
 
 
             <input type="hidden" name="_token" value="{{Session::token()}}">
-            <button type="submit" class="btn waves-effect waves-light" type="submit" name="action">Create
+            <button type="submit" class="btn waves-effect waves-light" type="submit" name="action" >Create
                 <i class="material-icons right">done</i>
             </button>
 

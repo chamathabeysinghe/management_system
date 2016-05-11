@@ -8,7 +8,7 @@ class QuotationController extends Controller
 {
     public function postCreateQuotation(Request $request)
     {
-        $quotation_date =$request['quotation_date'];
+        $quotation_date = $request['quotation_date'];
         $client_name = $request['client_name'];
         $client_email = $request['client_email'];
         $client_address = $request['client_address'];
@@ -26,7 +26,7 @@ class QuotationController extends Controller
 
         $quotation->save();
 
-        return redirect()->back();
+        return redirect()->route('newquotation');
     }
 
     public function downloadQuotation(Request $request)
