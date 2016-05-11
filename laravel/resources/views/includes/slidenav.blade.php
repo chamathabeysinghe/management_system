@@ -42,6 +42,20 @@
                 </li>
             </ul>
         </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header waves-effect waves-teal">Return Management<i class="mdi-navigation-arrow-drop-down"></i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="{{route('returndashboard')}}">Return Dashboard</a></li>
+                            <li><a href="{{route('newreturnitem')}}">New Return</a></li>
+                            <li><a href="{{route('managereturnitem')}}">Manage Return</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse show-on-large" style="text-decoration : none;color: inherit;"><i class="material-icons">menu</i></a>
 

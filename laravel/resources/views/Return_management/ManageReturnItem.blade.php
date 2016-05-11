@@ -26,14 +26,12 @@
         </div>
     </div>
     <div class="container">
-        <form>
             <div id="search_results">
 
             </div>
 
 
 
-        </form>
     </div>
     <script>
         var token='{{Session::token()}}';

@@ -28,8 +28,8 @@ class ItemController extends Controller
         $item = Item::where('serial_number', $itemCode)->first();
         $supplier = Item::find($item['id'])->supplier;
         //echo $itemCode;
-        echo $item;
-        echo $supplier;
+        //echo $item;
+        //echo $supplier;
         return View::make('/return_management/itemsearchresults')->with('item', $item)->with('supplier', $supplier);
     }
 

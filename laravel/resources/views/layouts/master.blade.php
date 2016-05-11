@@ -43,7 +43,7 @@
 <script src="{{URL::to('js/search.js')}}"></script>
 
 <script src="{{URL::to('js/searchItems.js')}}"></script>
-<script src="{{URL::to('js/searchreturnRecords.js')}}"></script>
+<script src="{{URL::to('js/Return.js')}}"></script>
 
 
 <script src="{{URL::to('js/app.js')}}"></script>

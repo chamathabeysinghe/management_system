@@ -27,8 +27,6 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'newuser',
     ]);
 
-
-
     //get the project initiate view
     Route::get('/projectinit', function () {
         return view('/project_management/project_init');
@@ -78,13 +76,15 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
-    });
+    })->name('newreturnitem');
+
     Route::get('/return/manageitem', function () {
         return view('return_management/managereturnitem');
-    });
+    })->name('managereturnitem');
+
     Route::get('/return/dashboard', function () {
         return view('return_management/returndashboard');
-    });
+    })->name('returndashboard');
 
     //get project information form
     Route::get('/projectinfo/{project_id}',[
@@ -146,6 +146,11 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'item_search'
     ]);
 
+    Route::post('/edit_return',[
+        'uses'=>'ReturnController@updateReturn',
+        'as'=>'edit_return'
+    ]);
+
 
     //update the gross profit forecast
 
@@ -153,10 +158,7 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@postUpdateGPForecast',
         'as'=>'updategp'
     ]);
-    
-    Route::get('/return/newitem', function () {
-        return view('return_management/NewReturnItem');
-    });
+
 
 
     //direct to Create Project page

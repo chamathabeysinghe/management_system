@@ -26,7 +26,7 @@ function getItem(){
         }
         else{
             console.log("CLEAR");
-            $('#search_results').hide();
+           // $('#search_results').hide();
             //$('#search-results').hide();
         }
 

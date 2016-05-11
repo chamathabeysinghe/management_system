@@ -63,7 +63,7 @@ class ReturnController extends Controller
                 $returnDatas = Item::find($item['id'])->returnItemDetails;
                 //$returnDatas=Item::with('returnItemDetails.repairItemDetail','returnItemDetails.warrantyItemDetail')->find($item['id']);
                 $returnDatas->load('repairItemDetail', 'warrantyItemDetail');
-                //echo $returnDatas;
+                echo $returnDatas;
 
 
                 $supplier = Item::find($item['id'])->supplier;
@@ -98,6 +98,15 @@ class ReturnController extends Controller
 
     }
 
+    public function updateReturn(Request $request){
+        echo "dfdsgsg";
+        //echo $request['data'];
+        $returnData=$request['data'];
+        //print_r($returnData['id']);
+        print_r($returnData);
+        echo $returnData;
+    }
+
     public function getRepairDetail()
     {
 
@@ -105,8 +114,10 @@ class ReturnController extends Controller
 
     public function addNewReturn(Request $request)
     {
-
-
+       // echo $request;
+        $data= array();
+        parse_str($request['data'], $data);
+        //echo $request['data'];
         $this->validate($request, [
             'customer' => 'required',
             'contact' => 'required',
@@ -116,18 +127,20 @@ class ReturnController extends Controller
         $customer = new Customer();
         $returnDetail = new ReturnItemDetail();
         //echo  $item;
-        echo $request['item_id'];
-        echo "working";
+
+
+        //echo $data['item_id'];
+        //echo "working";
         //echo $item['id'];
         $returnDetail->date = date("Ymd");
-        $returnDetail->remarks = $request['remarks'];
+        $returnDetail->remarks = $data['remarks'];
         $returnDetail->job_type = $request['option'];
-        $customer->customerName = $request['customer'];
-        $customer->contactNo = $request['contact'];
-        $customer->email = $request['email'];
-        $customer->address = $request['address'];
+        $customer->customerName = $data['customer'];
+        $customer->contactNo = $data['contact'];
+        $customer->email = $data['email'];
+        $customer->address = $data['address'];
         //echo $request['option'];
-        $item = Item::where("serial_number", $request['item_id'])->first();
+        $item = Item::where("serial_number", $data['item_id'])->first();
         $returnDetail->save();
         $returnDetail->items()->attach($item['id']);
         $returnDetail->customer()->save($customer);
