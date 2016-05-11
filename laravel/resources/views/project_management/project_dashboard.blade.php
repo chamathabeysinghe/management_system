@@ -144,7 +144,7 @@
     </div>
     <script>
         var token='{{Session::token()}}';
-        var url='{{route('project_search')}}';
+        var url='{{route('projectfinder')}}';
     </script>
 
 @endsection()

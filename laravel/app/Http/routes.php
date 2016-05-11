@@ -87,6 +87,8 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project_search'
     ]);
 
+
+
     //get new technician page
     Route::get('/newtechnician',function(){
         return view('project_management/newtechnician');
@@ -300,4 +302,8 @@ Route::group(['middleware'=>['web']],function(){
         return view('return_management/returndashboard');
     })->name('returndashboard');
 
+    Route::post('/search',[
+        'uses'=>'ProjectController@postProjectSearch',
+        'as'=>'projectfinder'
+    ]);
 });
