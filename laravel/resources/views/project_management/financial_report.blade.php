@@ -68,7 +68,7 @@
                         <td contenteditable="true">{{$record->name}}</td>
                         <td class="right-align" contenteditable="true">{{$record->unitCost}}</td>
                         <td class="right-align" contenteditable="true">{{$record->quantity}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->totalCost}}</td>
+                        <td class="right-align total-cost" contenteditable="true">{{$record->totalCost}}</td>
 
 
                         <td>
@@ -83,9 +83,9 @@
                 <tr class="hide">
 
                     <td contenteditable="true">unknown item</td>
-                    <td class="right-align" contenteditable="true">$$</td>
-                    <td class="right-align" contenteditable="true">unknown quantity</td>
-                    <td class="right-align" contenteditable="true">$$$$</td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align total-cost" contenteditable="true">0</td>
 
 
                     <td>
@@ -94,6 +94,22 @@
                     <td>
                         <span class="table-up glyphicon glyphicon-arrow-up"></span>
                         <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                    </td>
+                </tr>
+
+                <tr class="not-write">
+
+                    <td contenteditable="true">Total</td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" id="final-value" contenteditable="true">$$$$$$$$</td>
+
+
+                    <td>
+                        </span>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             </table>
@@ -121,6 +137,27 @@
         var token='{{Session::token()}}';
         var url='{{route('updatefinancialreport')}}';
         var project_id='{{$project_id}}}';
+        calTotal();
+        $('td').keyup(function() {
+            console.log('hello world');
+            var total=0;
+            $('.total-cost').each(function(){
+                console.log($(this).text());
+                total+=parseFloat($(this).text());
+            })
+            console.log(total);
+            $('#final-value').text(total);
+        });
+
+        function calTotal(){
+            var total=0;
+            $('.total-cost').each(function(){
+                console.log($(this).text());
+                total+=parseFloat($(this).text());
+            })
+            console.log(total);
+            $('#final-value').text(total);
+        }
         
     </script>
     <script src="{{URL::to('js/feditable.js')}}"></script>

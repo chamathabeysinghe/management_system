@@ -30,4 +30,12 @@ class BillController extends Controller
     public function getAddBillView(Request $request){
         return view('project_management/add_bill',['project_id'=>$request['project_id']]);
     }
+
+    public function postRemoveBill(Request $request){
+        $bill=Bill::where('id',$request['bill_id'])->first();
+        if($bill!=null){
+            $bill->delete();
+        }
+    }
+
 }

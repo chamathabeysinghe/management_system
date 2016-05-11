@@ -231,6 +231,15 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ProjectController@postCompleteProject',
         'as'=>'completeproject'
     ]);
+    Route::post('/removebill',[
+       'uses'=>'BillController@postRemoveBill',
+        'as'=>'removebill'
+    ]);
+
+    Route::get('/reviewfeedback',[
+        'uses'=>'FeedbackController@getFeedBackReview',
+        'as'=>'reviewfeedback'
+    ]);
 
     Route::post('/registerdealer',[
        'uses'=>'DealerController@registerDealer',

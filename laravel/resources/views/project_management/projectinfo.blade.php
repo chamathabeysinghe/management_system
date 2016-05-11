@@ -181,7 +181,8 @@
                             <li class="collection-item avatar">
                                 {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
                                 <span class="title">{{$bill->description}} </span> Value
-                                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                                <a href="#" class="secondary-content remove-bill" data-id="{{$bill->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
+                                {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
                             </li>
                         @endforeach
 
@@ -190,7 +191,8 @@
             </div>
             <div class="row">
                 <div class="col s12 m6">
-                    <a href="{{route('bill',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Bill</a>
+                    {{--{{route('bill',['project_id'=>$project->id])}}--}}
+                    <a href="#" id="add-bill" class="btn btn-danger" role="button">Add Bill</a>
                 </div>
             </div>
         </div>
@@ -199,13 +201,50 @@
             <h5>Feedback</h5>
             <div class="divider"></div>
             <div class="row">
-                <div class="col s12 m6">
+                <div class="col s12 m4">
                     <a href="{{route('feedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
+                </div>
+                <div class="col s12 m4">
+                    <a href="{{route('reviewfeedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View Feedback</a>
                 </div>
             </div>
         </div>
 
+    </div>
 
+
+    <div id="add-bill-modal" class="modal modal-fixed-footer" style="height: 30%;">
+        <div class="row">
+            <form class="col s12" action="{{Route('addBill',['project_id'=>$project->id])}}" method="post">
+                <div class="row" >
+
+                    <div class="input-field col s12 m3 offset-m2">
+
+                        <input  name="type" id="type" type="text" class="validate">
+                        <label class="active" for="type">Bill type</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+
+                        <input name="description" id="description" type="text" class="validate">
+                        <label class="active" for="description">Description</label>
+                    </div>
+                    <div class="input-field col s12 m2">
+
+                        <input  name="value" id="value" type="text" class="validate">
+                        <label class="active" for="value">Value</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m4 offset-m4">
+
+                        <button type="submit" id="gp_save" style="margin-top: 15px" class="btn btn-primary"><i class="material-icons left">payment</i>Add Bill</button>
+                        <input type="hidden" name="_token" value="{{Session::token()}}">
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
     </div>
     {{--<button class="btn waves-effect waves-light" type="submit" >Initiate Project--}}
     {{--<i class="material-icons right">send</i>--}}
@@ -221,6 +260,8 @@
         var url_add_single_item='{{route('addsingleitem')}}';
         var url_remove_technician_allocation='{{route('removeallocation')}}';
         var url_calculate_commission='{{route('calculatecommission')}}';
+        var url_remove_bill='{{route('removebill')}}';
+
         $('.remove-technician').click(function(event){
             event.preventDefault();
             var technician_id=$(this).attr("data-id");
@@ -236,6 +277,22 @@
             })
 
         });
+
+        $('.remove-bill').click(function(event){
+            event.preventDefault();
+           console.log('remove a bill');
+            var bill_id=$(this).attr("data-id");
+            $.ajax({
+                method:'POST',
+                url:url_remove_bill,
+                data:{bill_id:bill_id,_token:token}
+            }).done(function(){
+                console.log('Removed the fucker');
+            });
+        });
+
+
+
         $('#calculate-commission').click(function(event){
             event.preventDefault();
             console.log('calculate commission button clicked');
@@ -256,6 +313,12 @@
 
 
             });
+        });
+
+        $('#add-bill').click(function(event){
+            event.preventDefault();
+            $('#add-bill-modal').openModal();
+            console.log('add new bill');
         });
 
     </script>
