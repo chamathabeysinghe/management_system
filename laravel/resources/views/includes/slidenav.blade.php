@@ -43,6 +43,17 @@
                     </div>
                 </li>
 
+                <li>
+                    <a style="text-decoration: none; " class="collapsible-header waves-effect waves-teal">Dealer Management<i class="mdi-navigation-arrow-drop-down"></i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a style="text-decoration: none;" href="{{route('register_dealer')}}">Registration</a></li>
+                            <li><a style="text-decoration: none;"href="{{route('new_stock')}}">Stock</a></li>
+                            
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </li>
     </ul>

@@ -143,7 +143,7 @@ Route::group(['middleware'=>['web']],function(){
     //direct to dealer registration
     Route::get('/dealer/register',function(){
         return view("dealer_management/registration");
-    });
+    })->name('register_dealer');
 
     //direct to stocks that dealer bought
     Route::get('/dealer/stock',[
