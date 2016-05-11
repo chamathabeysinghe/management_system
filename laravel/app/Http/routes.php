@@ -161,6 +161,7 @@ Route::group(['middleware'=>['web']],function(){
 
 
 
+
     //direct to Create Project page
     Route::get('/newquotation',function(){
         return view("quotation_management/create_quotation");
@@ -178,16 +179,12 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'new_stock'
     ]);
 
+
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
         'as'=>'technicians'
     ]);
-
-    //direct to Project Summary page
-    Route::get('/quotationsummary',function(){
-        return view("quotation_management/quotation_summary");
-    });
 
 //    Route::get('/bill',function(){
 //       return view('project_management/add_bill');
@@ -263,6 +260,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'removebill'
     ]);
 
+
     Route::get('/reviewfeedback',[
         'uses'=>'FeedbackController@getFeedBackReview',
         'as'=>'reviewfeedback'
@@ -271,6 +269,32 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/registerdealer',[
        'uses'=>'DealerController@registerDealer',
         'as'=>'registerdealer'
+    ]);
+
+
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    })->name('quotationsummary');
+
+    //direct to New Quotation page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    })->name('newquotation');
+
+    Route::post('/createquotation',[
+        'uses'=>'QuotationController@postCreateQuotation',
+        'as'=>'createquotation'
+    ]);
+
+    //direct to Add Selling Items page
+    Route::get('/newsellingitem',function(){
+        return view("quotation_management/add_sellingitem");
+    })->name('newsellingitem');
+
+    Route::post('/addsellingitem',[
+        'uses'=>'SellingItemController@postAddSellingItems',
+        'as'=>'addsellingitem'
     ]);
 
 
