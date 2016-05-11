@@ -139,15 +139,6 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'technicians'
     ]);
 
-    //direct to Project Summary page
-    Route::get('/quotationsummary',function(){
-        return view("quotation_management/quotation_summary");
-    });
-
-    Route::get('/newquotation',function(){
-        return view("quotation_management/create_quotation");
-    });
-
 //    Route::get('/bill',function(){
 //       return view('project_management/add_bill');
 //    })->name('bill');
@@ -206,8 +197,29 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'addsingleitem'
     ]);
 
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    })->name('quotationsummary');
+
+    //direct to New Quotation page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    })->name('newquotation');
+
     Route::post('/createquotation',[
         'uses'=>'QuotationController@postCreateQuotation',
         'as'=>'createquotation'
     ]);
+
+    //direct to Add Selling Items page
+    Route::get('/newsellingitem',function(){
+        return view("quotation_management/add_sellingitem");
+    })->name('newsellingitem');
+
+    Route::post('/addsellingitem',[
+        'uses'=>'SellingItemController@postAddSellingItems',
+        'as'=>'addsellingitem'
+    ]);
+
 });
