@@ -39,9 +39,9 @@
 
 
 <script src="{{URL::to('js/search.js')}}"></script>
-<<<<<<< HEAD
+
 <script src="{{URL::to('js/editabletable.js')}}"></script>
-=======
+
 
 <script src="{{URL::to('js/app.js')}}"></script>
 
@@ -54,6 +54,6 @@
 
 </script>
 
->>>>>>> master
+
 </body>
 </html>

@@ -33,24 +33,24 @@
         {{--<li class="bold"><a href="#!" class="waves-effect waves-teal">Second Sidebar Link</a></li>--}}
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a style="text-decoration: none; " class="collapsible-header waves-effect waves-teal">Project Management<i class="mdi-navigation-arrow-drop-down"></i></a>
 
-                    <a class="collapsible-header waves-effect waves-teal">Quotation Management<i class="mdi-navigation-arrow-drop-down"></i></a>
+                <li>
+                    <a style="text-decoration: none;" class="collapsible-header waves-effect waves-teal">Quotation Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="{{route('newquotation')}}">New Quotation</a></li>
-                            <li><a href="{{route('newsellingitem')}}">New Selling Item</a></li>
-                            <li><a href="{{route('quotationsummary')}}">Quotation Summary</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('newquotation')}}">New Quotation</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('newsellingitem')}}">New Selling Item</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('quotationsummary')}}">Quotation Summary</a></li>
                         </ul>
                     </div>
                 </li>
+
                 <li>
                     <a class="collapsible-header waves-effect waves-teal">Project Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('project')}}">Projects</a></li>
-                            <li><a style="text-decoration: none;"href="{{route('technicians')}}">Technicians</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('technicians')}}">Technicians</a></li>
                         </ul>
                     </div>
                 </li>
@@ -61,7 +61,6 @@
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('register_dealer')}}">Registration</a></li>
                             <li><a style="text-decoration: none;"href="{{route('new_stock')}}">Stock</a></li>
-                            
                         </ul>
                     </div>
                 </li>
