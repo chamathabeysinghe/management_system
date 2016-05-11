@@ -8,23 +8,70 @@
     <section class="row" xmlns="http://www.w3.org/1999/html">
         <div class="col-lg-8 col-lg-offset-2">
             <header style="color: #747474;"><h3>Project Dashboard</h3></header>
+            <ul class="collapsible  col s12" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header">
+                        <div class="input-field" style="width: 95%">
+                            <i class="material-icons prefix">search</i>
+                            <input id="search-input" type="search" style="border: none" required onkeydown="down()" onkeyup="up()" >
 
-            {{--<div>--}}
+                        </div>
+                    </div>
+                    <div class="collapsible-body">
+                        <p>
+                           Search by:
+                        </p>
+                        <div class="row">
+                            <div class="col s3">
+                                <input type="checkbox" class="filled-in" id="id" name="id" checked="checked" />
+                                <label for="id">Project ID</label>
+                            </div>
+                            <div class="col s3">
+                                <input type="checkbox" class="filled-in" id="title" name="title" checked="checked" />
+                                <label for="title">Project Title</label>
+                            </div>
+                            <div class="col s3">
+                                <input type="checkbox" class="filled-in" id="client" name="client" checked="checked" />
+                                <label for="client">Project Client</label>
+                            </div>
+                            <div class="col s3">
+                                <input type="checkbox" class="filled-in" id="date" name="date" checked="checked" />
+                                <label for="date">Project Date</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </li>
+            </ul>
+
+            <div class="input-field col s12">
+                <i class="material-icons prefix">search</i>
+                <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" >
+
+            </div>
+            {{--<div class="input-field col s6">--}}
+                {{--<i class="material-icons prefix">account_circle</i>--}}
+                {{--<input id="icon_prefix" type="text" class="validate">--}}
+                {{--<label for="icon_prefix">First Name</label>--}}
+            {{--</div>--}}
+            {{--<div class="input-field col s6">--}}
+                {{--<i class="material-icons prefix">account_circle</i>--}}
                 {{--<input type="text" id="search-input" placeholder="Search" onkeydown="down()" onkeyup="up()">--}}
             {{--</div>--}}
 
 
-            <nav>
-                <div class="nav-wrapper teal lighten-2">
-                    <form>
-                        <div class="input-field">
-                            <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" style="height: 65px;">
-                            <label for="search"><i class="material-icons">search</i></label>
-                            <i class="material-icons">close</i>
-                        </div>
-                    </form>
-                </div>
-            </nav>
+            {{--<nav>--}}
+                {{--<div class="nav-wrapper teal lighten-2">--}}
+                    {{--<form>--}}
+                        {{--<div class="input-field">--}}
+                            {{--<input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" style="height: 65px;">--}}
+                            {{--<label for="search"><i class="material-icons">search</i></label>--}}
+                            {{--<i class="material-icons">close</i>--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                {{--</div>--}}
+            {{--</nav>--}}
 
 
 
