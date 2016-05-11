@@ -9,18 +9,6 @@
         <a href="#!" class="collection-item active">Quotation Summary</a>
     </div>
 
-    <nav>
-        <div class="nav-wrapper teal lighten-2 hoverable">
-            <form>
-                <div class="input-field">
-                    <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()">
-                    <label for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                </div>
-            </form>
-        </div>
-    </nav>
-
     <div>
         <input type="text" id="search-input" placeholder="Search" onkeydown="down()" onkeyup="up()">
     </div>
