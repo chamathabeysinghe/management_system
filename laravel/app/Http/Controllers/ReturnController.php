@@ -14,6 +14,24 @@ use Illuminate\Support\Facades\View;
 
 class ReturnController extends Controller
 {
+    public function getAReturnInfo($id)
+    {
+        $returnData = ReturnItemDetail::find($id);
+        $returnData->load('repairItemDetail', 'warrantyItemDetail', 'customer','items');
+        $customer =$returnData->customer;
+        $item=$returnData->items;
+        $item=$item->first();
+        $supplier=$item->Supplier;
+
+
+
+        //echo $returnData;
+//        echo $customer;
+//        echo $item;
+//        echo $supplier;
+        return View::make('/return_management/returnsearchresults')->with('data', $returnData)->with('item', $item)->with('customer', $customer)->with('supplier', $supplier);
+
+    }
     public function getReturnInfo(Request $request)
     {
         // echo "item View";
@@ -90,7 +108,7 @@ class ReturnController extends Controller
 //        echo $allData;
 //        echo "----------------------------------------------------------------";
 //        echo $returnDatas;
-        return View::make('/return_management/returnsearchresults')->with('returnDatas', $returnDatas)->with('items', $item)->with('customers', $customer)->with('supplier', $supplier);
+        return View::make('/return_management/managereturnview')->with('returnDatas', $returnDatas)->with('items', $item)->with('customers', $customer)->with('supplier', $supplier);
     }
 
     public function getWarrantyDetail()

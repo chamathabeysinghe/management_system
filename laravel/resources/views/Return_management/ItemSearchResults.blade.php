@@ -12,6 +12,7 @@
             <form id="form">
                 <fieldset class="form-group">
                     <label for="item_id">Item serial :</label>
+                    <i class="material-icons prefix">mode_edit</i>
                     <input class="form-control" id="item_id" name="item_id" type="text" value="{{$item->serial_number}}" readonly>
                     <input type="hidden" name="item_id" value="{{$item->serial_number}}" />
                 </fieldset>

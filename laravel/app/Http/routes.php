@@ -82,6 +82,13 @@ Route::group(['middleware'=>['web']],function(){
         return view('return_management/managereturnitem');
     })->name('managereturnitem');
 
+    Route::get('/return/manageareturnitem/{id}',[
+            'uses'=>'ReturnController@getAReturnInfo',
+            'as'=>'manageareturnitem']
+
+   );
+
+
     Route::get('/return/dashboard', function () {
         return view('return_management/returndashboard');
     })->name('returndashboard');
