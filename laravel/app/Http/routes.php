@@ -140,6 +140,17 @@ Route::group(['middleware'=>['web']],function(){
     });
 
 
+    //direct to dealer registration
+    Route::get('/dealer/register',function(){
+        return view("dealer_management/registration");
+    })->name('register_dealer');
+
+    //direct to stocks that dealer bought
+    Route::get('/dealer/stock',[
+        'uses'=>'DealerController@getStockView',
+        'as'=>'new_stock'
+    ]);
+
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
@@ -208,6 +219,31 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ItemController@postAllocateSingleItem',
         'as'=>'addsingleitem'
     ]);
+    Route::post('/removeallocation',[
+       'uses'=>'ProjectController@postRemoveAllocation',
+        'as'=>'removeallocation'
+    ]);
+    Route::post('calculatecommission',[
+        'uses'=>'TechnicianController@postCalculateCommission',
+        'as'=>'calculatecommission'
+    ]);
+    Route::post('/completeproject',[
+        'uses'=>'ProjectController@postCompleteProject',
+        'as'=>'completeproject'
+    ]);
+    Route::post('/removebill',[
+       'uses'=>'BillController@postRemoveBill',
+        'as'=>'removebill'
+    ]);
 
+    Route::get('/reviewfeedback',[
+        'uses'=>'FeedbackController@getFeedBackReview',
+        'as'=>'reviewfeedback'
+    ]);
+
+    Route::post('/registerdealer',[
+       'uses'=>'DealerController@registerDealer',
+        'as'=>'registerdealer'
+    ]);
 
 });
