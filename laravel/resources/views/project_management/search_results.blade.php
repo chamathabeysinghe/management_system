@@ -42,6 +42,7 @@
                             <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>|
                             <a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|
                             <a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>
+                            <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
                         @endif
                         @if($project->project_status==0)
                             <a href="{{route('project.initiate',['project_id'=>$project->id])}}" >Initiate Project</a>

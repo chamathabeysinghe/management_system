@@ -69,6 +69,10 @@ class FinancialReportController extends Controller
 
     public function getFinancialReportView(Request $request){
         $financialReport=FinancialReport::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
+        if($financialReport==null){
+            $this->postCreateFinancialReport($request);
+            $financialReport=FinancialReport::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
+        }
         $fieldList=unserialize($financialReport->fieldList );
         $recordsList=array();
         foreach($fieldList as $field){
@@ -97,6 +101,8 @@ class FinancialReportController extends Controller
             $fieldsList[$newData->item]=$reportField;
         }
         $financialReport->fieldList=(serialize($fieldsList));
+        $financialReport->profit= $request['total_val'];
         $project->financialReport()->save($financialReport);
+
     }
 }

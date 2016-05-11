@@ -44,4 +44,10 @@ class FeedbackController extends Controller
     public function getFeedbackView(Request $request){
         return view('project_management/feedback',['project_id'=>$request['project_id']]);
     }
+
+    public function getFeedBackReview(Request $request){
+        $feedback=Project::where('id',$request['project_id'])->first()->feedback;
+
+        return view('project_management/feedback_review',['project_id'=>$request['project_id'],'feedback'=>$feedback]);
+    }
 }

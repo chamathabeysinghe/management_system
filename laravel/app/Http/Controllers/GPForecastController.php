@@ -21,7 +21,6 @@ class GPForecastController extends Controller
     public function postCreateGPForecast(Request $request){
         $project_id=$request['project_id'];
         $items=Item::where('owner_id',$project_id)->get();
-        echo sizeof($items);
         $fieldsList=array();
         foreach($items as $item){
             if($item->sale_type == 1){
@@ -51,6 +50,7 @@ class GPForecastController extends Controller
         //$gpForecast->save();
 
         $project->gpforecast()->save($gpForecast);
+
         //items block vidihata danna
         //project ekakata eka gross profit ekak vitarak karanna
         //project->gp vidihata save karanna
@@ -61,6 +61,12 @@ class GPForecastController extends Controller
     //those things should be tested
     public function getGPForecast(Request $request){
         $gpForecast=GPForecast::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
+        if($gpForecast==null){
+            $this->postCreateGPForecast($request);
+            $gpForecast=GPForecast::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
+        }
+
+
         $fieldList=unserialize($gpForecast->fieldList );
         $recordsList=array();
         foreach($fieldList as $field){
@@ -90,6 +96,7 @@ class GPForecastController extends Controller
             $fieldsList[$newData->item]=$reportField;
         }
         $gpForecast->fieldList=(serialize($fieldsList));
+        $gpForecast->profit=$request['total_val'];
         $project->gpforecast()->save($gpForecast);
     }
 

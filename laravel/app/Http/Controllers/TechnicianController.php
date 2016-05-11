@@ -19,6 +19,19 @@ use Illuminate\Support\Str;
 
 class TechnicianController extends Controller
 {
+    public function postCalculateCommission(Request $request){
+        $project=Project::where('id',$request['project_id'])->first();
+        $gross_profit=$project->gpforecast;
+
+        if($gross_profit!=null){
+
+            foreach($project->technicianAllocations as $allocation){
+                echo $allocation->technician_id;
+                $allocation->commission=$gross_profit->profit*.1;
+                $allocation->update();
+            }
+        }
+    }
     public function postAddTechnician(Request $request){
         $technician=new Technician();
         $technician->name=$request['name'];
@@ -91,6 +104,8 @@ class TechnicianController extends Controller
         // Check that user date is between start & end
         return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
     }
+
+
 
 
 
