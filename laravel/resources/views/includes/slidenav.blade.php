@@ -32,6 +32,16 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li>
+                    <a class="collapsible-header waves-effect waves-teal">Quotation Management<i class="mdi-navigation-arrow-drop-down"></i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li><a href="{{route('newquotation')}}">New Quotation</a></li>
+                            <li><a href="{{route('newsellingitem')}}">New Selling Item</a></li>
+                            <li><a href="{{route('quotationsummary')}}">Quotation Summary</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a class="collapsible-header waves-effect waves-teal">Project Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
