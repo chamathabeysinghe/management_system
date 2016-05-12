@@ -1,7 +1,13 @@
-
 var timer;
+
 function down(){
     console.log('down');
+    var fiterString='';
+    $('input[name="fileter"]:checked').each(function() {
+
+        fiterString+=this.value+' ';
+    });
+    console.log(fiterString);
     timer=setTimeout(function(){
 
         var keywords=$('#search-input').val();
@@ -10,7 +16,7 @@ function down(){
             $.ajax({
                 method:'POST',
                 url:url,
-                data:{keyWords:keywords,_token:token}
+                data:{keyWords:keywords,filter:fiterString,_token:token}
             }).done(function(markup){
 
                 $('#search-results').html(markup);
@@ -28,6 +34,7 @@ function down(){
         }
     },10);
 }
+
 function up(){
     clearTimeout(timer);
 }

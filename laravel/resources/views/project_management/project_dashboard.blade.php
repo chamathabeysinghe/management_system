@@ -23,19 +23,19 @@
                         </p>
                         <div class="row">
                             <div class="col s3">
-                                <input type="checkbox" class="filled-in" id="id" name="id" checked="checked" />
+                                <input type="checkbox" name="fileter" value='id' class="filled-in" id="id" name="id" checked="checked" />
                                 <label for="id">Project ID</label>
                             </div>
                             <div class="col s3">
-                                <input type="checkbox" class="filled-in" id="title" name="title" checked="checked" />
+                                <input type="checkbox" name="fileter" value="title" class="filled-in" id="title" name="title" checked="checked" />
                                 <label for="title">Project Title</label>
                             </div>
                             <div class="col s3">
-                                <input type="checkbox" class="filled-in" id="client" name="client" checked="checked" />
+                                <input type="checkbox" name="fileter" value="client" class="filled-in" id="client" name="client" checked="checked" />
                                 <label for="client">Project Client</label>
                             </div>
                             <div class="col s3">
-                                <input type="checkbox" class="filled-in" id="date" name="date" checked="checked" />
+                                <input type="checkbox" name="fileter" value="date" class="filled-in" id="date" name="date" checked="checked" />
                                 <label for="date">Project Date</label>
                             </div>
                         </div>
