@@ -105,4 +105,6 @@
         </form>
     </div>
 
+    <script src="{{URL::to('js/editabletable.js')}}"></script>
+
 @endsection
