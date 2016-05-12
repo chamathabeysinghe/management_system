@@ -31,7 +31,7 @@ class QuotationController extends Controller
 
     public function getQuotationSummary()
     {
-        $quotations = Quotation::orderBy('quotation_date', 'desc')->get();
+        $quotations = Quotation::orderBy('id', 'desc')->get();
         return view("quotation_management/quotation_summary", ['quotations'=> $quotations]);
     }
 
