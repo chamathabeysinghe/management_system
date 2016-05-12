@@ -54,4 +54,6 @@ $BTN.click(function() {
 
     // Output the result
     $EXPORT.text(JSON.stringify(data));
+    var client_name=$('#client_name').text();
+    $.post(url, {new_data:JSON.stringify(data) ,client_name:client_name,_token:token });
 });

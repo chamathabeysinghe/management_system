@@ -10,7 +10,7 @@
     </div>
 
     <div class="row">
-        <form class="col s12" action="{{Route('createquotation')}}" method="post">
+        <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">work</i>
@@ -88,23 +88,26 @@
 
 
             <input type="hidden" name="_token" value="{{Session::token()}}">
-            <button type="submit" class="btn waves-effect waves-light" type="submit" name="action" >Create
+            <button class="btn waves-effect waves-light" type="submit" name="action" >Create
                 <i class="material-icons right">done</i>
             </button>
 
-            <button class="btn waves-effect waves-light" type="submit" name="action">Download
+            <button class="btn waves-effect waves-light"  name="action">Download
                 <i class="material-icons right">play_for_work</i>
             </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Print
+            <button class="btn waves-effect waves-light" name="action">Print
                 <i class="material-icons right">print</i>
             </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Email
+            <button class="btn waves-effect waves-light" name="action">Email
                 <i class="material-icons right">email</i>
             </button>
 
         </form>
     </div>
-
+    <script>
+        var token='{{Session::token()}}';
+        var url='{{route('createquotation')}}';
+    </script>
     <script src="{{URL::to('js/editabletable.js')}}"></script>
 
 @endsection
