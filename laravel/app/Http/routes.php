@@ -27,8 +27,6 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'newuser',
     ]);
 
-
-
     //get the project initiate view
     Route::get('/projectinit', function () {
         return view('/project_management/project_init');
@@ -78,13 +76,15 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
-    });
+    })->name('newreturnitem');
+
     Route::get('/return/manageitem', function () {
         return view('return_management/managereturnitem');
-    });
+    })->name('managereturnitem');
+
     Route::get('/return/dashboard', function () {
         return view('return_management/returndashboard');
-    });
+    })->name('returndashboard');
 
     //get project information form
     Route::get('/projectinfo/{project_id}',[
@@ -123,15 +123,43 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
+
+    // submitnew customer
+    Route::post('/newcustomer',[
+        'uses'=>'CustomerController@addNewCustomer',
+        'as'=>'newcustomer',
+    ]);
+    Route::post('/newreturn',[
+        'uses'=>'ReturnController@addNewReturn',
+        'as'=>'newreturn',
+    ]);
+
+
+    Route::post('/searchReturn',[
+        'uses'=>'ReturnController@getReturnInfo',
+        'as'=>'return_search'
+    ]);
+
+
+    Route::post('/search',[
+        'uses'=>'ItemController@getiteminfo',
+        'as'=>'item_search'
+    ]);
+
+    Route::post('/edit_return',[
+        'uses'=>'ReturnController@updateReturn',
+        'as'=>'edit_return'
+    ]);
+
+
     //update the gross profit forecast
+
     Route::post('/updategp',[
         'uses'=>'GPForecastController@postUpdateGPForecast',
         'as'=>'updategp'
     ]);
-    
-    Route::get('/return/newitem', function () {
-        return view('return_management/NewReturnItem');
-    });
+
+
 
 
     //direct to Create Project page
@@ -151,20 +179,17 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'new_stock'
     ]);
 
+
     Route::get('/dealer/view',function(){
         return view("dealer_management/dealers_view");
     })->name('view_dealer');
+
 
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
         'as'=>'technicians'
     ]);
-
-    //direct to Project Summary page
-    Route::get('/quotationsummary',function(){
-        return view("quotation_management/quotation_summary");
-    });
 
 //    Route::get('/bill',function(){
 //       return view('project_management/add_bill');
@@ -240,6 +265,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'removebill'
     ]);
 
+
     Route::get('/reviewfeedback',[
         'uses'=>'FeedbackController@getFeedBackReview',
         'as'=>'reviewfeedback'
@@ -249,5 +275,32 @@ Route::group(['middleware'=>['web']],function(){
        'uses'=>'DealerController@registerDealer',
         'as'=>'registerdealer'
     ]);
+
+
+    //direct to Project Summary page
+    Route::get('/quotationsummary',function(){
+        return view("quotation_management/quotation_summary");
+    })->name('quotationsummary');
+
+    //direct to New Quotation page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    })->name('newquotation');
+
+    Route::post('/createquotation',[
+        'uses'=>'QuotationController@postCreateQuotation',
+        'as'=>'createquotation'
+    ]);
+
+    //direct to Add Selling Items page
+    Route::get('/newsellingitem',function(){
+        return view("quotation_management/add_sellingitem");
+    })->name('newsellingitem');
+
+    Route::post('/addsellingitem',[
+        'uses'=>'SellingItemController@postAddSellingItems',
+        'as'=>'addsellingitem'
+    ]);
+
 
 });
