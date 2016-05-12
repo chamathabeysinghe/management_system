@@ -49,6 +49,7 @@
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('register_dealer')}}">Registration</a></li>
                             <li><a style="text-decoration: none;"href="{{route('new_stock')}}">Stock</a></li>
+                            <li><a style="text-decoration: none;"href="{{route('view_dealer')}}">Search</a></li>
                             
                         </ul>
                     </div>

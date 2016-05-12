@@ -3,11 +3,20 @@ namespace App\Http\Controllers;
 
 use App\Dealer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DealerController extends Controller
 {
     public function registerDealer(Request $request)
     {
+
+        $this -> validate($request, [
+            'register_no' => 'required|unique:dealers',
+            'last_name' => 'required|max:120',
+            'telephone_no' => 'required'
+
+        ]);
+
         $register_no = $request['register_no'];
         $date = $request['date'];
         $first_name = $request['first_name'];
@@ -15,11 +24,11 @@ class DealerController extends Controller
         $telephone_no = $request['telephone_no'];
         $email = $request['email'];
         $address = $request['address'];
-        $condition =$request['conditions'];//$request['conditons'];
+        $condition =$request['conditions'];
 
         $dealer = new Dealer();
 
-        $dealer->RegNumber = $register_no;
+        $dealer->register_no = $register_no;
         $dealer->date = $date;
         $dealer->first_name = $first_name;
         $dealer->last_name = $last_name;
@@ -29,8 +38,12 @@ class DealerController extends Controller
         $dealer->conditions = $condition;
 
         $dealer->save();
-
         return redirect()->back();
+
+
+
+
+
 
     }
 

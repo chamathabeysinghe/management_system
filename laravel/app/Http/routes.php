@@ -151,6 +151,10 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'new_stock'
     ]);
 
+    Route::get('/dealer/view',function(){
+        return view("dealer_management/dealers_view");
+    })->name('view_dealer');
+
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
