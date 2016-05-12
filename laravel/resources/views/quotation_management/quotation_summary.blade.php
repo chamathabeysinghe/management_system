@@ -31,30 +31,31 @@
                     </form>
                 </div>
             </nav>
-
-            <div id="search-results">
-
-            </div>
-
-            {{--@foreach($quotations as $quotation)
-                <span style=" font-size:15px;font-weight: bold;color: #747474">Quotation Date:</span>
-            @endforeach--}}
-
-
-
         </div>
-
     </section>
 
     <section class="row posts">
         <div class="col-md-6 col-md-offset-3">
-            <header><h3>What other people say...</h3></header>
             @foreach($quotations as $quotation)
-                <article class = "post">
-                    <p>
-                        {{ $quotation->client_name }}
-                    </p>
-                </article>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">{{ $quotation->client_name }}</span>
+                                <p>
+                                    Quotation Date  : {{ $quotation->quotation_date }} <br>
+                                    Quotation Number: {{ $quotation->id }} <br>
+                                    Client Name     : {{ $quotation->client_name }} <br>
+                                    Amount          : {{ $quotation->quotation_amount }} <br>
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Create Project</a> <br>
+                                <a href="#">Create Estimate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </div>
     </section>
