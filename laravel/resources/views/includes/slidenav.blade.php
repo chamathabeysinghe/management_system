@@ -40,7 +40,7 @@
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('newquotation')}}">New Quotation</a></li>
                             <li><a style="text-decoration: none;" href="{{route('newsellingitem')}}">New Selling Item</a></li>
-                            <li><a style="text-decoration: none;" href="{{route('quotationsummary')}}">Quotation Summary</a></li>
+                            <a style="text-decoration: none;" href="{{route('getquotationsummary')}}">Quotation Summary</a></li>
                         </ul>
                     </div>
                 </li>

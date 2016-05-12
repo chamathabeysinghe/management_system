@@ -36,6 +36,9 @@
 
             </div>
 
+            {{--@foreach($quotations as $quotation)
+                <span style=" font-size:15px;font-weight: bold;color: #747474">Quotation Date:</span>
+            @endforeach--}}
 
 
 
@@ -43,6 +46,18 @@
 
     </section>
 
+    <section class="row posts">
+        <div class="col-md-6 col-md-offset-3">
+            <header><h3>What other people say...</h3></header>
+            @foreach($quotations as $quotation)
+                <article class = "post">
+                    <p>
+                        {{ $quotation->client_name }}
+                    </p>
+                </article>
+            @endforeach
+        </div>
+    </section>
 
 
 @endsection

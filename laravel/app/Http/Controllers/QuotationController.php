@@ -29,19 +29,10 @@ class QuotationController extends Controller
         return redirect()->route('newquotation');
     }
 
-    public function downloadQuotation(Request $request)
+    public function getQuotationSummary()
     {
-
-    }
-
-    public function emailQuotation(Request $request)
-    {
-
-    }
-
-    public function printQuotation(Request $request)
-    {
-
+        $quotations = Quotation::all();
+        return view("quotation_management/quotation_summary", ['quotations'=> $quotations]);
     }
 
 }
