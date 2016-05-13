@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReportField extends Model
+class QuotationRecord extends Model
 {
     //
     //  protected $fillable = array('name', 'quantity', 'unitCost','totalCost','estimation');

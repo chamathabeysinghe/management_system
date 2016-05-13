@@ -237,10 +237,12 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'registerdealer'
     ]);
 
-    //direct to New Quotation page
-    Route::get('/newquotation',function(){
-        return view("quotation_management/create_quotation");
-    })->name('newquotation');
+    //direct to Quotation Summary page
+    Route::get('/newquotation',[
+        'uses' => 'QuotationController@getQuotationID',
+        'as' => 'newquotation'
+    ]);
+
 
     Route::post('/createquotation',[
         'uses'=>'QuotationController@postCreateQuotation',
