@@ -1,6 +1,6 @@
 @if($returnDatas  !=null and  $customers != null and $items!=null and  $supplier!=null )
 
-    @foreach($returnDatas as $data)
+    @foreach($returnDatas->reverse() as $data)
         {{--{{--}}
         {{--$_SESSION['data'] = $data;--}}
          {{--$_SESSION['customer'] = $customers;--}}

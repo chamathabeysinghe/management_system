@@ -15,14 +15,17 @@
             <fieldset class="form-group col-lg-6">
                 <label for="Customer">Customer :</label>
                 <input class="form-control" id="customer" type="text" value="{{$customer->customerName}}" readonly>
+                <input class="form-control" id="customer" type="hidden" value="{{$customer->customerName}}" readonly>
             </fieldset>
             <fieldset class="form-group col-lg-6">
                 <label for="contact">Contact no :</label>
                 <input class="form-control" id="contact" type="text" value="{{$customer->contactNo}}" readonly>
+                <input class="form-control" id="contact" type="hidden" value="{{$customer->contactNo}}" readonly>
             </fieldset>
             <fieldset class="form-group">
                 <label for="item">Item :</label>
                 <input class="form-control" id="item" type="text" value="{{$item->item_name}}" readonly>
+                <input class="form-control" id="item" type="hidden" value="{{$item->item_name}}" readonly>
             </fieldset>
 
             {{--<fieldset class="form-group">--}}
@@ -44,6 +47,7 @@
 
                     $(function () {
                         var $state = $('select');
+                        var job_type= $state.val();
                         var $repair = $('#repair_div');
                         var $warranty = $('#warranty_div');
                         $state.live("change", function () {
@@ -87,7 +91,7 @@
                 </script>
             <fieldset class="form-group">
                 <label >Job type :</label>
-                <select  id="job_type">
+                <select  id="job_type"name="job_type">
                     <option value="" disabled selected>Choose job type</option>
                     <option value="warranty">Warranty</option>
                     <option value="repair">Repair</option>
@@ -132,6 +136,15 @@
                     <label for="cost">Repair Cost :</label>
                     <input class="form-control" id="cost" type="text" name="repairCost"
                            value=@if($data->job_type == "repair"and $data->repairItemDetail !=null)"{{$data->repairItemDetail->repairCost}}"@endif >
+                </fieldset>
+
+            </div>
+            <div class="col-lg-12">
+                <h5>Replacement :</h5>
+                <fieldset class="form-group">
+                    <label for="replacement">Item Serial :</label>
+                    <input  id="replacement" type="text" name="replacement"
+                           value=@if( $data->replacement !=null)"{{$data->replacement->serial_number}}"@endif>
                 </fieldset>
 
             </div>
@@ -230,8 +243,9 @@
 
     </div>
 @endsection
-<script>
+<script type="text/javascript">
     var token = '{{Session::token()}}';
-    var url2 = '{{route('edit_return')}}';
+    var url3 = '{{route('editreturn')}}';
+    var return_id='{{$data->id}}';
 
 </script>

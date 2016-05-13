@@ -17,7 +17,7 @@ class ReturnController extends Controller
     public function getAReturnInfo($id)
     {
         $returnData = ReturnItemDetail::find($id);
-        $returnData->load('repairItemDetail', 'warrantyItemDetail', 'customer','items');
+        $returnData->load('repairItemDetail', 'warrantyItemDetail', 'customer','items','replacement');
         $customer =$returnData->customer;
         $item=$returnData->items;
         $item=$item->first();
@@ -25,7 +25,7 @@ class ReturnController extends Controller
 
 
 
-        //echo $returnData;
+       // echo $returnData;
 //        echo $customer;
 //        echo $item;
 //        echo $supplier;
@@ -81,7 +81,7 @@ class ReturnController extends Controller
                 $returnDatas = Item::find($item['id'])->returnItemDetails;
                 //$returnDatas=Item::with('returnItemDetails.repairItemDetail','returnItemDetails.warrantyItemDetail')->find($item['id']);
                 $returnDatas->load('repairItemDetail', 'warrantyItemDetail');
-                echo $returnDatas;
+                //echo $returnDatas;
 
 
                 $supplier = Item::find($item['id'])->supplier;
@@ -117,12 +117,106 @@ class ReturnController extends Controller
     }
 
     public function updateReturn(Request $request){
-        echo "dfdsgsg";
-        //echo $request['data'];
-        $returnData=$request['data'];
-        //print_r($returnData['id']);
-        print_r($returnData);
-        echo $returnData;
+        $data= array();
+        parse_str('controler');
+        parse_str($request['data'], $data);
+        $returnData=ReturnItemDetail::find($request['returnid']);
+        $returnData->load('repairItemDetail', 'warrantyItemDetail','replacement','items');
+
+           // echo $returnData;
+       // echo $request['data'];
+//        echo $data['job_type'];
+//        echo 'job type printed';
+        $item=$returnData->items;
+        $item=$item->first();
+        if($returnData->replacement == null){
+            //echo 'first if';
+            if($data['replacement'] != ''){
+               // echo 'first inner if';
+                if($data['replacement']==$item['serial_number']){
+                    //echo 'inner inner';
+                    $item->returnItemDetail()->save($returnData);
+                }else{
+                    //echo 'inner inner else';
+                    $newitem=new Item();
+                    $newitem->serial_number=$data['replacement'];
+                    $newitem->item_name=$item['item_name'];
+                    $newitem->unit_cost=$item['unit_cost'];
+                    $newitem->sale_type=$item['sale_type'];
+                    $newitem->owner_id=$item['owner_id'];
+                    $newitem->warranty=$item['warranty'];
+                    $newitem->supplier_id=$item['supplier_id'];
+                    $newitem->save();
+                    $newitem->returnItemDetail()->save($returnData);
+                    echo 'end';
+                    //echo $newitem;
+                }
+            }
+        }else{
+            if($data['replacement']==$returnData->replacement['serial_number']){
+
+            }else{
+                $newitem=new Item();
+                $newitem->serial_number=$data['replacement'];
+                $newitem->item_name=$item['item_name'];
+                $newitem->unit_cost=$item['unit_cost'];
+                $newitem->sale_type=$item['sale_type'];
+                $newitem->owner_id=$item['owner_id'];
+                $newitem->warranty=$item['warranty'];
+                $newitem->supplier_id=$item['supplier_id'];
+                $newitem->save();
+                $newitem->returnItemDetail()->save($returnData);
+            }
+
+        }
+
+        if($data['job_type'] == "warranty"){
+            if($data['job_type'] !=$returnData['job_type'] ){
+                $returnData->job_type=$data['job_type'];
+                $returnData->save();
+            }
+            $warranty=$returnData->warrantyItemDetail;
+           // echo 'if working';
+            if($warranty == null){
+                //echo 'warranty if';
+                $warranty=new warrantyItemDetail();
+                $warranty->wcnNo=$data['wcnno'];
+                $warranty->wcnIssueDate=$data['wcndate'];
+                $warranty->receivedDate=$data['wrnreceived'];
+                $warranty->wrnNo=$data['wrnno'];
+                $returnData->warrantyItemDetail()->save($warranty);
+               // echo 'warranty if end';
+            }else{
+                //echo 'warranty else';
+                $warranty->wcnNo=$data['wcnno'];
+                $warranty->wcnIssueDate=$data['wcndate'];
+                $warranty->receivedDate=$data['wrnreceived'];
+                $warranty->wrnNo=$data['wrnno'];
+                $warranty->save();
+            }
+
+        }elseif($data['job_type'] == "repair"){
+            if($data['job_type'] !=$returnData['job_type'] ){
+                $returnData->job_type=$data['job_type'];
+                $returnData->save();
+            }
+            //echo 'repair if';
+            $repair=$returnData->repairItemDetail;
+            if($repair == null){
+                $repair=new repairItemDetail();
+                $repair->receiveDate=$data['receivedRepair'];
+                $repair->repairCost=$data['repairCost'];
+                $returnData->repairItemDetail()->save($repair);
+
+            }else{
+                $repair->receiveDate=$data['receivedRepair'];
+                $repair->repairCost=$data['repairCost'];
+                $repair->save();
+
+            }
+        }
+       // echo $data;
+
     }
 
     public function getRepairDetail()

@@ -13,6 +13,9 @@ class Item extends Model
     public function returnItemDetails(){
         return $this->belongsToMany('App\ReturnItemDetail','item_return_item_details');
     }
+    public function returnItemDetail(){
+        return $this->hasOne('App\ReturnItemDetail','replacement_id');
+    }
     public function Supplier(){
         return $this->belongsTo('App\Supplier');
     }

@@ -155,7 +155,7 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::post('/edit_return',[
         'uses'=>'ReturnController@updateReturn',
-        'as'=>'edit_return'
+        'as'=>'editreturn'
     ]);
 
 

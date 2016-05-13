@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterCustomerTable extends Migration
+class AlterReturnItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AlterCustomerTable extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function ($table) {
-            $table->integer('return_Item_Detail_id');
+        Schema::table('return_item_details', function ($table) {
+            $table->integer('replacement_id');
 
 
         });
@@ -26,6 +26,6 @@ class AlterCustomerTable extends Migration
      */
     public function down()
     {
-
+        //
     }
 }
