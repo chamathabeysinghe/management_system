@@ -95,26 +95,7 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <!-- This is our clonable table line -->
-                            {{--@foreach($recordList as $record)--}}
-                                {{--<tr >--}}
 
-                                    {{--<td contenteditable="true">{{$record->name}}</td>--}}
-                                    {{--<td class="right-align" contenteditable="true">{{$record->unitCost}}</td>--}}
-                                    {{--<td class="right-align" contenteditable="true">{{$record->quantity}}</td>--}}
-                                    {{--<td class="right-align" contenteditable="true">{{$record->totalCost}}</td>--}}
-                                    {{--<td class="right-align" contenteditable="true">{{$record->estimation}}</td>--}}
-                                    {{--<td class="right-align" contenteditable="true">$$$$</td>--}}
-
-                                    {{--<td>--}}
-                                        {{--<span class="table-remove glyphicon glyphicon-remove"></span>--}}
-                                    {{--</td>--}}
-                                    {{--<td>--}}
-                                        {{--<span class="table-up glyphicon glyphicon-arrow-up"></span>--}}
-                                        {{--<span class="table-down glyphicon glyphicon-arrow-down"></span>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                            {{--@endforeach--}}
                             <tr class="hide">
 
                                 <td contenteditable="true">unknown item</td>
@@ -132,6 +113,24 @@
                             </tr>
                         </table>
                     </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <label>Select Item</label>
+                            <select class="browser-default" id="item-list">
+                                <option value="" disabled selected>Choose your option</option>
+                                @foreach($sellingitems as $item)
+                                     <option value="1" data-price="{{$item->unit_price}}" data-name="{{$item->item_name}}">{{$item->item_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col s6">
+                            <a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
+                        </div>
+
+
+                    </div>
+
+
                     {{----}}
                     {{--<a  id="item_save" class="btn btn-primary">Export Data</a>--}}
                 </div>
@@ -148,6 +147,7 @@
     </div>
 
     <script>
+
         var project_id='{{$project->id}}';
         var token='{{Session::token()}}';
         var url_allocation='{{route('allocateitems')}}';
@@ -172,6 +172,23 @@
             selectYears: 15, // Creates a dropdown of 15 years to control year
             format: 'mm/dd/yyyy'
 
+        });
+        $('#select-item').click(function(event){
+            event.preventDefault();
+
+            var data_cost = $('#item-list').find(":selected").attr('data-price');
+            var data_name=  $('#item-list').find(":selected").attr('data-name');
+            var $clone = $('#item_table').find('tr.hide').clone(true).removeClass('hide table-line');
+            var i=0;
+            $clone.find('td').each (function(key) {
+                if(key==0){
+                    $(this).text(data_name);
+                }
+                if(key==2){
+                    $(this).text(data_cost);
+                }
+            });
+            $('#item_table').find('table').append($clone);
         });
 
         function changeTime(){
@@ -227,4 +244,5 @@
 
     </script>
     <script src="{{URL::to('js/itemeditable.js')}}"></script>
+
 @endsection

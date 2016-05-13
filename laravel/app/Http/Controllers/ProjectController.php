@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\Item;
 use App\Project;
+use App\SellingItem;
 use App\Technician;
 use App\TechnicianAllocation;
 use Illuminate\Database\Eloquent\Collection;
@@ -57,7 +58,8 @@ class ProjectController extends Controller
         //validate the project
         $project=Project::where('id',$project_id)->first();
         $technicians=Technician::get();
-        return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians]);
+        $selling_items=SellingItem::get();
+        return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians,'sellingitems'=>$selling_items]);
     }
 
     public function getProjectInfo($project_id){
@@ -85,23 +87,13 @@ class ProjectController extends Controller
     public function postProjectSearch(Request $request){
         $keyword=$request['keyWords'];
         $filter=$request['filter'];
-        echo Str::lower($filter);
-        echo '<br>';
-        if (strpos('where are you', 'are') !== false) {
-            echo 'true';
-        }
-        if(Str::contains('id','id date people')){
-            echo 'id as a filter';
-        }
-        else{
-            echo 'id not as a filter';
-        }
+
 
         $projects=Project::all();
         $resultProjects=new Collection();
         foreach($projects as $project){
 
-            if( Str::equals(Str::lower($project->id),Str::lower($keyword))){
+            if( (strpos($filter, 'id') !== false) and Str::equals(Str::lower($project->id),Str::lower($keyword))){
                $resultProjects->add($project);
             }
         }
@@ -109,13 +101,16 @@ class ProjectController extends Controller
             if($resultProjects->contains($project)){
                 continue;
             }
-            if(Str::contains('client',$filter) and Str::contains(Str::lower($project->client_name),Str::lower($keyword))){
+            if((strpos($filter, 'client') !== false) and Str::contains(Str::lower($project->client_name),Str::lower($keyword))){
+                $resultProjects->add($project);
+            }
+            if((strpos($filter, 'title') !== false) and Str::contains(Str::lower($project->title),Str::lower($keyword))){
                 $resultProjects->add($project);
             }
 //            else if(Str::contains(Str::lower($project->client_email),Str::lower($keyword))){
 //                $resultProjects->add($project);
 //            }
-            else if(Str::contains('date',$filter) and Str::contains(Str::lower($project->date),Str::lower($keyword))){
+            else if((strpos($filter, 'date') !== false) and Str::contains(Str::lower($project->date),Str::lower($keyword))){
                 $resultProjects->add($project);
             }
         }
