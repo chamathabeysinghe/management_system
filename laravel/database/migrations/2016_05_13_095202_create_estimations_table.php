@@ -15,6 +15,14 @@ class CreateEstimationsTable extends Migration
         Schema::create('estimations', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->date('estimation_date');
+            $table->string('client_name');
+            $table->string('client_address');
+            $table->string('client_email');
+            $table->string('client_tel');
+            $table->string('estimation_amount');
+            $table->string('estimation_status');
+            $table->string('estimation_record_list');
         });
     }
 

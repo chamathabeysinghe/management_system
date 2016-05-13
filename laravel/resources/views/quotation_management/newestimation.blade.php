@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">work</i>
-                    <input  value="{{ $estimation->id }}" id="estimation_number" name="estimation_number" type="text" class="validate">
+                    <input  value="{{--{{ $estimation->id }}--}}" id="estimation_number" name="estimation_number" type="text" class="validate">
                     <label class="active" for="estimation_number">Estimation Number</label>
                 </div>
                 <div class="input-field col s3 offset-s1">

@@ -237,12 +237,11 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'registerdealer'
     ]);
 
-    //direct to Quotation Summary page
+    //direct to Create Quotation  page
     Route::get('/newquotation',[
         'uses' => 'QuotationController@getQuotationID',
         'as' => 'newquotation'
     ]);
-
 
     Route::post('/createquotation',[
         'uses'=>'QuotationController@postCreateQuotation',
@@ -267,8 +266,13 @@ Route::group(['middleware'=>['web']],function(){
 
     //direct to Create Estimation page
     Route::get('/newestimation',[
-        'uses' => 'EstimationController@getEstimationView',
+        'uses' => 'EstimationController@getEstimationID',
         'as' => 'newestimation'
+    ]);
+
+    Route::post('/createestimation',[
+        'uses'=>'EstimationController@postCreateEstimation',
+        'as'=>'createestimation'
     ]);
 
 });
