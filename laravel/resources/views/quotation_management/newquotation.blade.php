@@ -68,25 +68,7 @@
                     <th></th>
                 </tr>
                 </thead>
-                <!-- This is our clonable table line -->
-                {{--@foreach($recordList as $record)
-                    <tr >
 
-                        <td contenteditable="true">{{$record->name}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->unitCost}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->quantity}}</td>
-                        <td class="right-align total-cost" contenteditable="true">{{$record->totalCost}}</td>
-
-
-                        <td>
-                            <span class="table-remove glyphicon glyphicon-remove"></span>
-                        </td>
-                        <td>
-                            <span class="table-up glyphicon glyphicon-arrow-up"></span>
-                            <span class="table-down glyphicon glyphicon-arrow-down"></span>
-                        </td>
-                    </tr>
-                @endforeach--}}
                 <tr class="hide">
 
                     <td contenteditable="true">DESXXXX</td>

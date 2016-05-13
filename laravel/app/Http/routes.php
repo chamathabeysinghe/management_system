@@ -265,4 +265,10 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'getquotationsummary'
     ]);
 
+    //direct to Create Estimation page
+    Route::get('/newestimation',[
+        'uses' => 'EstimationController@getEstimationView',
+        'as' => 'newestimation'
+    ]);
+
 });
