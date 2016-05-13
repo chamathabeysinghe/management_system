@@ -33,9 +33,8 @@
         {{--<li class="bold"><a href="#!" class="waves-effect waves-teal">Second Sidebar Link</a></li>--}}
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a style="text-decoration: none; " class="collapsible-header waves-effect waves-teal">Project Management<i class="mdi-navigation-arrow-drop-down"></i></a>
 
+                <li>
                     <a class="collapsible-header waves-effect waves-teal">Quotation Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
@@ -65,11 +64,6 @@
                         </ul>
                     </div>
                 </li>
-
-            </ul>
-        </li>
-        <li class="no-padding">
-            <ul class="collapsible collapsible-accordion">
                 <li>
                     <a class="collapsible-header waves-effect waves-teal">Return Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
@@ -80,8 +74,10 @@
                         </ul>
                     </div>
                 </li>
+
             </ul>
         </li>
+
     </ul>
     <a href="#" data-activates="slide-out" class="button-collapse show-on-large" style="text-decoration : none;color: inherit;"><i class="material-icons">menu</i></a>
 
