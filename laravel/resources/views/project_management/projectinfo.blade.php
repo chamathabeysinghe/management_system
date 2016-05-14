@@ -3,10 +3,20 @@
     Project Information
 @endsection
 @section('content')
+    <div class="row" style="margin: 5%">
+        <div class="col s12" style="margin-bottom: 2%">
+            <ul class="tabs blue-text" >
+                <li class="tab col s3"><a class="active"href="#details" style="text-decoration : none">Details</a></li>
+                <li class="tab col s3"><a style="text-decoration : none" href="#technicinas">Technicians</a></li>
+                <li class="tab col s3"><a style="text-decoration : none" href="#items">Items</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#gp">Gross profit</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#bills">Financial Report</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#freport">Bills</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#feedback">Feedback</a></li>
+            </ul>
+        </div>
 
-    <div class="row">
-        {{--<form class="col s12" action="{{Route('initiateproject')}}" method="post">--}}
-        <div class="section">
+        <div id="details" class="section">
             <h5>Project Details</h5>
             <div class="divider" style="margin-bottom: 10px"></div>
             <div class="row">
@@ -53,7 +63,7 @@
         </div>
 
 
-        <div class="section" >
+        <div id="technicinas" class="section" >
             <h5>Allocated Technicians</h5>
             <div class="divider"></div>
             <div class="row">
@@ -80,7 +90,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="items" class="section">
             <h5>Allocated Items</h5>
             <div class="divider"></div>
             <div class="row">
@@ -136,22 +146,22 @@
 
 
                     {{--<ul class="collection">--}}
-                        {{--@foreach($itemList as $item)--}}
-                            {{--<li class="collection-item avatar">--}}
-                                {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                                {{--<span class="title">{{$item->item_name}}</span>--}}
-                                {{--<p>First Line <br>--}}
-                                    {{--Second Line--}}
-                                {{--</p>--}}
-                                {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
-                            {{--</li>--}}
-                        {{--@endforeach--}}
+                    {{--@foreach($itemList as $item)--}}
+                    {{--<li class="collection-item avatar">--}}
+                    {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
+                    {{--<span class="title">{{$item->item_name}}</span>--}}
+                    {{--<p>First Line <br>--}}
+                    {{--Second Line--}}
+                    {{--</p>--}}
+                    {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
+                    {{--</li>--}}
+                    {{--@endforeach--}}
 
                     {{--</ul>--}}
                 </div>
             </div>
         </div>
-        <div class="section">
+        <div id="gp" class="section">
             <h5>Gross Profit</h5>
             <div class="divider"></div>
             <div class="row">
@@ -161,7 +171,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="bills" class="section">
             <h5>Financial Report</h5>
             <div class="divider"></div>
             <div class="row">
@@ -171,7 +181,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="freport" class="section">
             <h5>Bills</h5>
             <div class="divider"></div>
             <div class="row">
@@ -197,7 +207,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="feedback" class="section">
             <h5>Feedback</h5>
             <div class="divider"></div>
             <div class="row">
@@ -209,6 +219,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        {{--<form class="col s12" action="{{Route('initiateproject')}}" method="post">--}}
+
 
     </div>
 
