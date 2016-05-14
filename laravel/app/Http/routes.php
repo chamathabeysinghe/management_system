@@ -79,10 +79,10 @@ Route::group(['middleware'=>['web']],function(){
     })->name('newreturnitem');
 
     Route::get('/return/manageitem', function () {
-        return view('return_management/managereturnitem');
+        return view('return_management/ManageReturnItem');
     })->name('managereturnitem');
 
-    Route::get('/return/manageareturnitem/{id}',[
+    Route::get('/return/manageaReturnItem/{id}',[
             'uses'=>'ReturnController@getAReturnInfo',
             'as'=>'manageareturnitem']
 
@@ -90,7 +90,7 @@ Route::group(['middleware'=>['web']],function(){
 
 
     Route::get('/return/dashboard', function () {
-        return view('return_management/returndashboard');
+        return view('return_management/ReturnDashboard');
     })->name('returndashboard');
 
     //get project information form
