@@ -69,12 +69,16 @@
             <div class="row">
                 <div class="col s12 m6">
                     <ul class="collection " >
-                        @foreach($technicians as $technician)
+                        @foreach($technicians as $technicianallocation)
+                            <?php
+                                $technician=$technicianallocation[0];
+                                $value=$technicianallocation[1];
+                            ?>
                             <li class="collection-item avatar technician-list-item" data-id="{{$technician->id}}" >
                                 {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
                                 <span class="title">{{$technician->name}}</span>
-                                <p class="para">First Line <br>
-                                    Second Line
+                                <p class="para">{{$value}}
+
                                 </p>
                                 <a href="#" class="secondary-content remove-technician" data-id="{{$technician->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
                             </li>
@@ -144,20 +148,6 @@
                         </table>
                     </div>
 
-
-                    {{--<ul class="collection">--}}
-                    {{--@foreach($itemList as $item)--}}
-                    {{--<li class="collection-item avatar">--}}
-                    {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                    {{--<span class="title">{{$item->item_name}}</span>--}}
-                    {{--<p>First Line <br>--}}
-                    {{--Second Line--}}
-                    {{--</p>--}}
-                    {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
-                    {{--</li>--}}
-                    {{--@endforeach--}}
-
-                    {{--</ul>--}}
                 </div>
             </div>
         </div>
@@ -288,6 +278,7 @@
                 $(this).remove();
                 $(this).closest('.li').remove();//this thing is not working currently
                console.log('done');
+                location.reload();
             })
 
         });
@@ -302,6 +293,7 @@
                 data:{bill_id:bill_id,_token:token}
             }).done(function(){
                 console.log('Removed the fucker');
+                location.reload();
             });
         });
 
@@ -320,13 +312,13 @@
             })
 
 
-
-            $( ".technician-list-item" ).each(function( index ) {
-
-                console.log( index+"   "+$(this).find('.para').text('sdfadf'));
-
-
-            });
+            location.reload();
+//            $( ".technician-list-item" ).each(function( index ) {
+//
+//                console.log( index+"   "+$(this).find('.para').text('sdfadf'));
+//
+//
+//            });
         });
 
         $('#add-bill').click(function(event){

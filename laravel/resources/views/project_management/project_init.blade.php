@@ -127,7 +127,6 @@
                             <a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
                         </div>
 
-
                     </div>
 
 

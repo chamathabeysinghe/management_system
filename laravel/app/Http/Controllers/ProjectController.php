@@ -68,7 +68,7 @@ class ProjectController extends Controller
         $technicianAllocations=TechnicianAllocation::where('project_id',$project_id)->get();
         $technicianList=array();
         foreach($technicianAllocations as $allocation){
-            array_push($technicianList,Technician::where('id',$allocation->technician_id)->first());
+            array_push($technicianList,[Technician::where('id',$allocation->technician_id)->first(),($allocation->commission==0)?'':$allocation->commission]);
         }
         $items=Item::where('sale_type',1)->get();
         //echo sizeof($items);

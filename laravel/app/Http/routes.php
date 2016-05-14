@@ -306,4 +306,14 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ProjectController@postProjectSearch',
         'as'=>'projectfinder'
     ]);
+
+    Route::get('/deallocateditems',[
+       'uses'=>'DeallocatedItemController@getDealloctedView',
+        'as'=>'deallocateditems'
+    ]);
+
+    Route::post('/sendtostore',[
+        'uses'=>'DeallocatedItemController@postSendToStore',
+        'as'=>'sendtostore'
+    ]);
 });
