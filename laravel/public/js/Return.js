@@ -3,29 +3,19 @@
  */
 
 function updateReturnRecord(){
-    console.log('addreturn');
-    //console.log(returnData);
-    //var keywords=$('#search-input').val();
-    // var selected1=$('#jobNo').val();
-    // var selected2=$('#itemCode').val();
-    //if($('#jobNo').is(':checked')) {
-    //    var selected="jobNo";
-    //
-    //}else{
-    //    var selected="itemCode";
-    //}
-    var returnData1=returnData;
-        //console.log(returnData1);
-        console.log("if");
-        $.ajax({
-            method:'POST',
-            url:url2,
-            data:{_token:token,data:returnData1 },
-            success:function(data){
-                console.log(data);
-            }
-        });
-        console.log('done');
+    $.ajax({
+        method:'POST',
+        url:url3,
+        data:{_token:token, returnid:return_id, data: $('#form').serialize()},
+        success:function(data){
+            successHTML = '<div class="alert-success alert"><ul>';
+            successHTML += '<li> Records added successfully </li>';
+            successHTML += '</ul></di>';
+            $( '#form-errors' ).html( successHTML );
+            //console.log(data);
+        },
+    });
+    console.log('done');
 
 }
 function saveReturnRecord(){
@@ -36,19 +26,6 @@ function saveReturnRecord(){
     }else{
         selected="repair";
     }
-    //console.log(returnData);
-    //var keywords=$('#search-input').val();
-    // var selected1=$('#jobNo').val();
-    // var selected2=$('#itemCode').val();
-    //if($('#jobNo').is(':checked')) {
-    //    var selected="jobNo";
-    //
-    //}else{
-    //    var selected="itemCode";
-    //}
-    //var returnData1=returnData;
-    //console.log(returnData1);
-    //console.log("if");
     $.ajax({
         method:'POST',
         url:url2,
@@ -103,6 +80,26 @@ function getReturnRecord(){
             method:'POST',
             url:url,
             data:{keyWords:keywords,_token:token,searchType:selected}
+            //error :function( jqXhr ) {
+            //    if( jqXhr.status === 401 ) //redirect if not authenticated user.
+            //        $( location ).prop( 'pathname', 'auth/login' );
+            //    if( jqXhr.status === 422 ) {
+            //        //process validation errors here.
+            //        var errors = jqXhr.responseJSON; //this will get the errors response data.
+            //        //show them somewhere in the markup
+            //        //e.g
+            //        errorsHtml = '<div class="alert alert-danger"><ul>';
+            //
+            //        $.each( errors , function( key, value ) {
+            //            errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+            //        });
+            //        errorsHtml += '</ul></di>';
+            //
+            //        $( '#form-errors' ).html( errorsHtml ); //appending to a <div id="form-errors"></div> inside form
+            //    } else {
+            //        /// do some thing else
+            //    }
+            //}
         }).done(function(markup){
 
             $('#search_results').html(markup);

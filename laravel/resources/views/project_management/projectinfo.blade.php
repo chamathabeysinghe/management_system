@@ -3,10 +3,20 @@
     Project Information
 @endsection
 @section('content')
+    <div class="row" style="margin: 5%">
+        <div class="col s12" style="margin-bottom: 2%">
+            <ul class="tabs blue-text" >
+                <li class="tab col s3"><a class="active"href="#details" style="text-decoration : none">Details</a></li>
+                <li class="tab col s3"><a style="text-decoration : none" href="#technicinas">Technicians</a></li>
+                <li class="tab col s3"><a style="text-decoration : none" href="#items">Items</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#gp">Gross profit</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#bills">Financial Report</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#freport">Bills</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#feedback">Feedback</a></li>
+            </ul>
+        </div>
 
-    <div class="row">
-        {{--<form class="col s12" action="{{Route('initiateproject')}}" method="post">--}}
-        <div class="section">
+        <div id="details" class="section">
             <h5>Project Details</h5>
             <div class="divider" style="margin-bottom: 10px"></div>
             <div class="row">
@@ -53,18 +63,22 @@
         </div>
 
 
-        <div class="section" >
+        <div id="technicinas" class="section" >
             <h5>Allocated Technicians</h5>
             <div class="divider"></div>
             <div class="row">
                 <div class="col s12 m6">
                     <ul class="collection " >
-                        @foreach($technicians as $technician)
+                        @foreach($technicians as $technicianallocation)
+                            <?php
+                                $technician=$technicianallocation[0];
+                                $value=$technicianallocation[1];
+                            ?>
                             <li class="collection-item avatar technician-list-item" data-id="{{$technician->id}}" >
                                 {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
                                 <span class="title">{{$technician->name}}</span>
-                                <p class="para">First Line <br>
-                                    Second Line
+                                <p class="para">{{$value}}
+
                                 </p>
                                 <a href="#" class="secondary-content remove-technician" data-id="{{$technician->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
                             </li>
@@ -80,7 +94,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="items" class="section">
             <h5>Allocated Items</h5>
             <div class="divider"></div>
             <div class="row">
@@ -134,24 +148,10 @@
                         </table>
                     </div>
 
-
-                    {{--<ul class="collection">--}}
-                        {{--@foreach($itemList as $item)--}}
-                            {{--<li class="collection-item avatar">--}}
-                                {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                                {{--<span class="title">{{$item->item_name}}</span>--}}
-                                {{--<p>First Line <br>--}}
-                                    {{--Second Line--}}
-                                {{--</p>--}}
-                                {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
-                            {{--</li>--}}
-                        {{--@endforeach--}}
-
-                    {{--</ul>--}}
                 </div>
             </div>
         </div>
-        <div class="section">
+        <div id="gp" class="section">
             <h5>Gross Profit</h5>
             <div class="divider"></div>
             <div class="row">
@@ -161,7 +161,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="bills" class="section">
             <h5>Financial Report</h5>
             <div class="divider"></div>
             <div class="row">
@@ -171,7 +171,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="freport" class="section">
             <h5>Bills</h5>
             <div class="divider"></div>
             <div class="row">
@@ -197,7 +197,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="feedback" class="section">
             <h5>Feedback</h5>
             <div class="divider"></div>
             <div class="row">
@@ -209,6 +209,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        {{--<form class="col s12" action="{{Route('initiateproject')}}" method="post">--}}
+
 
     </div>
 
@@ -274,6 +278,7 @@
                 $(this).remove();
                 $(this).closest('.li').remove();//this thing is not working currently
                console.log('done');
+                location.reload();
             })
 
         });
@@ -288,6 +293,7 @@
                 data:{bill_id:bill_id,_token:token}
             }).done(function(){
                 console.log('Removed the fucker');
+                location.reload();
             });
         });
 
@@ -306,13 +312,13 @@
             })
 
 
-
-            $( ".technician-list-item" ).each(function( index ) {
-
-                console.log( index+"   "+$(this).find('.para').text('sdfadf'));
-
-
-            });
+            location.reload();
+//            $( ".technician-list-item" ).each(function( index ) {
+//
+//                console.log( index+"   "+$(this).find('.para').text('sdfadf'));
+//
+//
+//            });
         });
 
         $('#add-bill').click(function(event){

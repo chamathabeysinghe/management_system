@@ -12,10 +12,16 @@
 */
 
 Route::group(['middleware'=>['web']],function(){
+
     Route::get('/', function () {
         return view('login');
     })->name('home');
 
+    //log a user in
+    Route::post('/login',[
+        'uses'=>'UserController@postUserLogin',
+        'as'=>'login'
+    ]);
     //get new user view
     Route::get('/newuser', function () {
         return view('newuser');
@@ -35,12 +41,6 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/resetpassword', function () {
         return view('reset_password');
     });
-
-    //log a user in
-    Route::post('/login',[
-        'uses'=>'UserController@postUserLogin',
-        'as'=>'login'
-    ]);
 
 
     //save a feedback
@@ -70,6 +70,7 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
+
     //get project initiate window
     Route::get('/initiate-post/{project_id}',[
         'uses'=>'ProjectController@getProjectInitiatePage',
@@ -77,18 +78,28 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
-
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
     })->name('newreturnitem');
 
     Route::get('/return/manageitem', function () {
-        return view('return_management/managereturnitem');
+        return view('return_management/ManageReturnItem');
     })->name('managereturnitem');
 
+    Route::get('/return/manageaReturnItem/{id}',[
+            'uses'=>'ReturnController@getAReturnInfo',
+            'as'=>'manageareturnitem']
+
+   );
+
+
     Route::get('/return/dashboard', function () {
-        return view('return_management/returndashboard');
+        return view('return_management/ReturnDashboard');
     })->name('returndashboard');
+
+
+
+
 
     //get project information form
     Route::get('/projectinfo/{project_id}',[
@@ -101,6 +112,9 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ProjectController@postProjectSearch',
         'as'=>'project_search'
     ]);
+
+
+
     //get new technician page
     Route::get('/newtechnician',function(){
         return view('project_management/newtechnician');
@@ -144,15 +158,19 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'return_search'
     ]);
 
-
     Route::post('/search',[
-        'uses'=>'ItemController@getiteminfo',
+        'uses'=>'ItemController@getItemInfo',
         'as'=>'item_search'
+    ]);
+
+    Route::post('/itemsearch',[
+        'uses'=>'ItemController@getItemInfo',
+        'as'=>'search_item'
     ]);
 
     Route::post('/edit_return',[
         'uses'=>'ReturnController@updateReturn',
-        'as'=>'edit_return'
+        'as'=>'editreturn'
     ]);
 
 
@@ -317,4 +335,20 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
 
+
+
+    Route::post('/search',[
+        'uses'=>'ProjectController@postProjectSearch',
+        'as'=>'projectfinder'
+    ]);
+
+    Route::get('/deallocateditems',[
+       'uses'=>'DeallocatedItemController@getDealloctedView',
+        'as'=>'deallocateditems'
+    ]);
+
+    Route::post('/sendtostore',[
+        'uses'=>'DeallocatedItemController@postSendToStore',
+        'as'=>'sendtostore'
+    ]);
 });
