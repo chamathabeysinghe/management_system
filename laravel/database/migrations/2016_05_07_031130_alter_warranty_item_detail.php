@@ -14,8 +14,6 @@ class AlterWarrantyItemDetail extends Migration
     {
         Schema::table('warranty_item_details', function ($table) {
             $table->integer('return_Item_Detail_id');
-
-
         });
     }
 

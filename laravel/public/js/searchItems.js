@@ -6,7 +6,7 @@
 
 
 function getItem(){
-    console.log('searchitem');
+    //console.log('searchitem');
 
 
         var keywords=$('#search-input').val();
