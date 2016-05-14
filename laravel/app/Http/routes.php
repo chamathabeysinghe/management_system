@@ -197,15 +197,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'technicians'
     ]);
 
-//    Route::get('/bill',function(){
-//       return view('project_management/add_bill');
-//    })->name('bill');
 
-    //get bill view
-    Route::get('/bill',[
-        'uses'=>'BillController@getAddBillView',
-        'as'=>'bill'
-    ]);
 
     //add new bill
     Route::post('/addBill',[

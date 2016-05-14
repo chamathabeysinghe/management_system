@@ -8,7 +8,7 @@
 
     <div class="row ">
         <div class="col s12">
-            <h3>Sign Up</h3>
+            <h3>Log In</h3>
             <form action="{{route('login')}}" method="post">
                 <div class="row">
                     <div class="form-group {{$errors->has('email')?'has-error':''}} col s12 l6">

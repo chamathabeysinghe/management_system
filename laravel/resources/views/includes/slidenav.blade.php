@@ -1,24 +1,3 @@
-
-{{--<ul id="dropdown1" class="dropdown-content">--}}
-    {{--<li><a href="#!">one</a></li>--}}
-    {{--<li><a href="#!">two</a></li>--}}
-    {{--<li class="divider"></li>--}}
-    {{--<li><a href="#!">three</a></li>--}}
-{{--</ul>--}}
-{{--<nav>--}}
-    {{--<ul class="right hide-on-med-and-down">--}}
-        {{--<li><a href="#!">First Sidebar Link</a></li>--}}
-        {{--<li><a href="#!">Second Sidebar Link</a></li>--}}
-    {{--</ul>--}}
-    {{--<ul id="slide-out" class="side-nav ">--}}
-        {{--<li><a href="#!">Project Management</a></li>--}}
-        {{--<li><a href="#!">Second Sidebar Link</a></li>--}}
-        {{--<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>--}}
-
-    {{--</ul>--}}
-    {{--<a href="#" data-activates="slide-out" class="button-collapse show-on-large" style="text-decoration : none;color: inherit;"><i class="material-icons">menu</i></a>--}}
-{{--</nav>--}}
-
 <div class="navbar-fixed ">
 
 <nav class="teal lighten-2">
@@ -50,7 +29,9 @@
                     <div class="collapsible-body">
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('project')}}">Projects</a></li>
-                            <li><a style="text-decoration: none;" href="{{route('technicians')}}">Technicians</a></li>
+
+                            <li><a style="text-decoration: none;"href="{{route('technicians')}}">Technicians</a></li>
+                            <li><a style="text-decoration: none;"href="{{route('deallocateditems')}}">Return Items</a></li>
                         </ul>
                     </div>
                 </li>
@@ -74,6 +55,13 @@
                         </ul>
                     </div>
                 </li>
+                {{--@if(Auth::user()->user_type==1)--}}
+                    <li>
+                        <a class="waves-effect waves-teal" href="{{route('newuser')}}">New User</a>
+
+                    </li>
+                {{--@endif--}}
+
 
             </ul>
         </li>
