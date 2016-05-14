@@ -16,7 +16,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('login');
     })->name('home');
-
+    Route::get('/logout',[
+        'uses'=>'UserController@getLogout',
+        'as'=>'logout'
+    ]);
     //log a user in
     Route::post('/login',[
         'uses'=>'UserController@postUserLogin',

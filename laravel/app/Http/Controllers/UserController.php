@@ -21,27 +21,6 @@ class UserController extends  Controller
         return view('dashboard');
     }
     public function postNewUser(Request $request){
-
-//        $v = Validator::make($request->all(), [
-//            'full_name' => 'required',
-//            'email' => 'required',
-//        ]);
-//
-//        if ($v->fails())
-//        {
-////            echo 'Validator fails';
-////            foreach($v->errors()->all() as $error){
-////                echo 'new    ';
-////                echo $error;
-////             }
-//
-////            foreach($v->messages()->all() as $error){
-////                echo 'new eroor:::   ';
-////                echo $error;
-////                echo '<br>';
-////            }
-//            return redirect()->route('dashboard')->withErrors($v->errors());
-//        }
         $this->validate($request,[
             'full_name'=>'required',
             'email'=>'required|email|unique:users',
@@ -68,5 +47,10 @@ class UserController extends  Controller
         else{
             return redirect()->back()->with(['message'=>'User name or password is incorrect']);
         }
+    }
+
+    public function getLogout(){
+        Auth::logout();
+        return redirect()->route('home');
     }
 }

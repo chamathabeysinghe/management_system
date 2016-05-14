@@ -1,11 +1,19 @@
+<ul id="dropdown1" class="dropdown-content">
+
+    <li><a href="{{route('logout')}}" style="text-decoration: none; color: inherit;">Logout</a></li>
+
+</ul>
+
 <div class="navbar-fixed ">
 
 <nav class="teal lighten-2">
 
     <ul class="right hide-on-med-and-down" >
-        <li><a href="#!" style="text-decoration: none; color: inherit;">First Sidebar Link</a></li>
-        <li><a href="#!" style="text-decoration: none; color: inherit;">Second Sidebar Link</a></li>
-        <li><a href="#}" style="text-decoration: none; color: inherit;">{{Auth::check()? \Illuminate\Support\Facades\Auth::User()->full_name:''}}</a></li>
+        @if(Auth::check())
+            <li><a class="dropdown-button" data-beloworigin="true" style="text-decoration: none; color: inherit;"href="#!" data-activates="dropdown1">{{Auth::check()? \Illuminate\Support\Facades\Auth::User()->full_name:''}}<i class="material-icons right">arrow_drop_down</i></a></li>
+
+        @endif
+
     </ul>
     <ul id="slide-out" class="side-nav">
         {{--<li class="bold"><a href="#!" class="waves-effect waves-teal">First Sidebar Link</a></li>--}}
