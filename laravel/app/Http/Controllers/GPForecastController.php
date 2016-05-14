@@ -51,11 +51,6 @@ class GPForecastController extends Controller
 
         $project->gpforecast()->save($gpForecast);
 
-        //items block vidihata danna
-        //project ekakata eka gross profit ekak vitarak karanna
-        //project->gp vidihata save karanna
-        //table ekata anuwa wenas karanna gp eka current gp forecast eka update karanna
-        //echarai
 
     }
     //those things should be tested
@@ -71,9 +66,8 @@ class GPForecastController extends Controller
         $recordsList=array();
         foreach($fieldList as $field){
 
-            //echo unserialize($field)->name;
             array_push($recordsList,($field));
-            //echo '<br>';
+
         }
         return view('project_management/gp_forecast',['recordList'=>$recordsList,'project_id'=>$request['project_id']]);
 }
@@ -81,13 +75,10 @@ class GPForecastController extends Controller
     public function postUpdateGPForecast(Request $request){
         $project_id=$request['project_id'];
         $project=Project::where('id',$project_id)->first();
-
         $gpForecast=$project->GPForecast;
         $fieldsList=array();
         $jfo = json_decode($request['new_data']);
         foreach($jfo as $newData){
-
-
             $reportField=new ReportField();
             $reportField->name=$newData->item;
             $reportField->unitCost=$newData->unitprice;

@@ -29,6 +29,7 @@
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('project')}}">Projects</a></li>
                             <li><a style="text-decoration: none;"href="{{route('technicians')}}">Technicians</a></li>
+                            <li><a style="text-decoration: none;"href="{{route('deallocateditems')}}">Return Items</a></li>
                         </ul>
                     </div>
                 </li>
