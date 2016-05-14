@@ -61,11 +61,12 @@ $EST_SAVE.click(function() {
     // Output the result
     var estimation_date=$('#estimation_date').val();
     var estimation_amount=$('#estimation_amount').val();
+    console.log(estimation_amount);
     var client_name=$('#client_name').val();
     var client_address=$('#client_address').val();
     var client_email=$('#client_email').val();
     var client_tel=$('#client_tel').val();
-    $.post(url, {new_data:JSON.stringify(data),client_name:client_name,estimation_date:estimation_date, client_address:client_address, client_email:client_email, client_tel:client_tel, total_val:estimation_amount,_token:token });
+    $.post(url, {new_data:JSON.stringify(data),client_name:client_name,estimation_date:estimation_date, client_address:client_address, client_email:client_email, client_tel:client_tel, estimation_amount:estimation_amount,_token:token });
 
 
 

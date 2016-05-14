@@ -14,8 +14,8 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">work</i>
-                    <input  value="{{ $estimation->id }}" id="estimation_number" name="estimation_number" type="text" class="validate">
-                    <label class="active" for="estimation_number">Estimation Number</label>
+                    <input  value="{{ $quotation->id }}" id="estimation_number" name="estimation_number" type="text" class="validate">
+                    <label class="active" for="estimation_number">Quotation Number</label>
                 </div>
                 <div class="input-field col s3 offset-s1">
                     <i class="material-icons prefix">today</i>
@@ -26,24 +26,24 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">assignment_ind</i>
-                    <input value="{{ $estimation->client_name }}"id="client_name" name="client_name" type="text" class="validate">
+                    <input value="{{ $quotation->client_name }}"id="client_name" name="client_name" type="text" class="validate">
                     <label class="active" for="client_name">Client Name</label>
                 </div>
                 <div class="input-field col s5 offset-s1">
                     <i class="material-icons prefix">assignment_ind</i>
-                    <input value="{{ $estimation->client_email }}" id="client_email" name="client_email" type="email" class="validate">
+                    <input value="{{ $quotation->client_email }}" id="client_email" name="client_email" type="email" class="validate">
                     <label class="active" for="client_email">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">location_on</i>
-                    <input value="{{ $estimation->client_address }}" id="client_address" name="client_address" type="text" class="validate">
+                    <input value="{{ $quotation->client_address }}" id="client_address" name="client_address" type="text" class="validate">
                     <label class="active" for="client_address">Client Address</label>
                 </div>
                 <div class="input-field col s5 offset-s1">
                     <i class="material-icons prefix">contact_phone</i>
-                    <input value="{{ $estimation->client_tel }}" id="client_tel" name="client_tel" type="tel" class="validate">
+                    <input value="{{ $quotation->client_tel }}" id="client_tel" name="client_tel" type="tel" class="validate">
                     <label class="active" for="tel">Client Phone</label>
                 </div>
             </div>
@@ -73,12 +73,12 @@
                 @foreach($record_list as $record)
                     <tr >
 
-                        <td contenteditable="true">{{$record->itemcode}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->itemname}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->description}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->unitprice}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->quantity}}</td>
-                        <td class="right-align" contenteditable="true">{{$record->totalprice}}</td>
+                        <td contenteditable="false">{{$record->itemcode}}</td>
+                        <td class="right-align" contenteditable="false">{{$record->itemname}}</td>
+                        <td class="right-align" contenteditable="false">{{$record->description}}</td>
+                        <td class="right-align" contenteditable="false">{{$record->unitprice}}</td>
+                        <td class="right-align" contenteditable="false">{{$record->quantity}}</td>
+                        <td class="right-align" contenteditable="false">{{$record->totalprice}}</td>
                         <td>
                             <span class="table-remove glyphicon glyphicon-remove"></span>
                         </td>
@@ -90,12 +90,12 @@
                 @endforeach
                 <tr class="hide">
 
-                    <td contenteditable="true">DESXXXX</td>
-                    <td contenteditable="true">unknown item</td>
-                    <td contenteditable="true">unknown description</td>
-                    <td class="right-align" contenteditable="true">$$</td>
-                    <td class="right-align" contenteditable="true">unknown quantity</td>
-                    <td class="right-align" contenteditable="true">$$$$</td>
+                    <td contenteditable="true">0000</td>
+                    <td contenteditable="true">item</td>
+                    <td contenteditable="true">unknown</td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align total-price" contenteditable="true">0</td>
 
 
                     <td>
@@ -110,11 +110,11 @@
                 <tr class="not-write">
 
                     <td contenteditable="true">Total</td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" id="quotation_amount" contenteditable="true"></td>
+                    <td class="right-align" contenteditable="false"></td>
+                    <td class="right-align" contenteditable="false"></td>
+                    <td class="right-align" contenteditable="false"></td>
+                    <td class="right-align" contenteditable="false"></td>
+                    <td class="right-align" id="estimation_amount" contenteditable="false"></td>
 
 
                     <td>
@@ -125,6 +125,22 @@
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div class="row">
+            <div class="col s6">
+                <label>Select Item</label>
+                <select class="browser-default" id="item-list">
+                    <option value="" disabled selected>Choose your option</option>
+                    @foreach($sellingitems as $item)
+                        <option value="1" data-code="{{$item->item_code}}" data-description="{{$item->item_description}}" data-price="{{$item->unit_price}}" data-name="{{$item->item_name}}">{{$item->item_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col s6">
+                <br><br><a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
+            </div>
+
         </div>
 
         <button id="est_save" class="btn btn-primary">Export Data</button>
@@ -145,31 +161,59 @@
             <i class="material-icons right">email</i>
         </button>
     </div>
+
+
     <script>
         var token='{{Session::token()}}';
         var url='{{route('createestimation')}}';
 
         calTotal();
         $('td').keyup(function() {
-            console.log('hello world');
-            var total=0;
-            $('.total-cost').each(function(){
+            var total=parseFloat({{ $quotation->quotation_amount }});
+            $('.total-price').each(function(){
+                console.log('322');
                 console.log($(this).text());
                 total+=parseFloat($(this).text());
             })
-            console.log(total);
-            $('#final-value').text(total);
+            console.log('caltotal');
+            $('#estimation_amount').text(total);
         });
 
         function calTotal(){
-            var total=0;
+            var total=parseFloat({{ $quotation->quotation_amount }});
             $('.total-cost').each(function(){
                 console.log($(this).text());
                 total+=parseFloat($(this).text());
             })
             console.log(total);
-            $('#final-value').text(total);
+            $('#estimation_amount').text(total);
         }
+
+        $('#select-item').click(function(event){
+            event.preventDefault();
+
+            var data_cost = $('#item-list').find(":selected").attr('data-price');
+            var data_name=  $('#item-list').find(":selected").attr('data-name');
+            var data_description=  $('#item-list').find(":selected").attr('data-description');
+            var data_code=  $('#item-list').find(":selected").attr('data-code');
+            var $clone = $('#est_table').find('tr.hide').clone(true).removeClass('hide table-line');
+            console.log(data_cost);
+            $clone.find('td').each (function(key) {
+                if(key==0){
+                    $(this).text(data_code);
+                }
+                if(key==1){
+                    $(this).text(data_name);
+                }
+                if(key==2){
+                    $(this).text(data_description);
+                }
+                if(key==3){
+                    $(this).text(data_cost);
+                }
+            });
+            $('#est_table').find('table').append($clone);
+        });
 
     </script>
     <script src="{{URL::to('js/estimationeditable.js')}}"></script>
