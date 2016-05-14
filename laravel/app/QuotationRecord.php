@@ -13,5 +13,6 @@ class QuotationRecord extends Model
     protected $description;
     protected $unitprice;
     protected $quantity;
+    protected $totalprice;
 
 }

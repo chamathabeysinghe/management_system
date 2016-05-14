@@ -3,6 +3,7 @@ var $EST_SAVE = $('#est_save');
 
 
 $('.table-add').click(function() {
+    console.log("sdfsdafadfadfdafad");
     var $clone = $EST_TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
     $EST_TABLE.find('table').append($clone);
     if ($clone.index() === 1) return; // Don't go above the header

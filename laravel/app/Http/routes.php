@@ -275,4 +275,9 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'createestimation'
     ]);
 
+    Route::get('/estimationbyquotation',[
+        'uses'=>'EstimationController@getEstimationByQuotation',
+        'as'=>'estimationbyquotation'
+    ]);
+
 });

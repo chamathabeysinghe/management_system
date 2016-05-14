@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Estimation;
 use App\EstimationRecord;
+use App\Quotation;
 use Illuminate\Http\Request;
 
 class EstimationController extends Controller
@@ -35,10 +36,11 @@ class EstimationController extends Controller
         foreach($jfo as $newData){
 
             $reportField=new EstimationRecord();
-            $reportField->name=$newData->item;
-            $reportField->unitCost=$newData->unitprice;
+            $reportField->itemcode=$newData->itemcode;
+            $reportField->item=$newData->item;
+            $reportField->unitprice=$newData->unitprice;
             $reportField->quantity=$newData->quantity;
-            $reportField->totalCost=$newData->totalcost;
+            $reportField->totalprice=$newData->totalprice;
             $fieldsList[$newData->item]=$reportField;
         }
 
@@ -53,6 +55,19 @@ class EstimationController extends Controller
         $estimations = Estimation::orderBy('id','desc')->first();
         return view("quotation_management/newestimation", ['estimation'=>$estimations]);
     }
+
+    public function getEstimationByQuotation(Request $request){
+        $quotation=Quotation::where('id',55)->first();//$request['id']
+        $recordList=unserialize($quotation->quotation_record_list);
+
+        foreach($recordList as $record){
+            echo 'hello';
+            echo $record->totalprice;
+        }
+
+        return view("quotation_management/newestimation", ['estimation'=>$quotation,'record_list'=>$recordList]);
+    }
+
 
 
 }

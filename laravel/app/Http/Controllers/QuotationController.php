@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Quotation;
 use App\QuotationRecord;
+use App\SellingItem;
 use Illuminate\Http\Request;
 
 class QuotationController extends Controller
@@ -17,8 +18,8 @@ class QuotationController extends Controller
         $client_email = $request['client_email'];
         $client_address = $request['client_address'];
         $client_tel = $request['client_tel'];
-        //$quotation_amount = $request['quotation_amount'];
-        $quotation_amount = "0000";
+        $quotation_amount = $request['quotation_amount'];
+
         echo 'client';
         echo $client_name;
         $quotation = new Quotation();
@@ -36,11 +37,14 @@ class QuotationController extends Controller
         foreach($jfo as $newData){
 
             $reportField=new QuotationRecord();
-            $reportField->name=$newData->item;
-            $reportField->unitCost=$newData->unitprice;
+            $reportField->itemcode='sdfddfda';
+            $reportField->itemname=$newData->item;
+            $reportField->description=$newData->description;
+            $reportField->unitprice=$newData->unitprice;
             $reportField->quantity=$newData->quantity;
-            $reportField->totalCost=$newData->totalcost;
-            $fieldsList[$newData->item]=$reportField;
+            $reportField->totalprice=$newData->totalprice;
+            array_push($fieldsList,$reportField);
+//            $fieldsList[$newData->item]=$reportField;
         }
 
         $quotation->quotation_record_list=(serialize($fieldsList));
@@ -58,7 +62,8 @@ class QuotationController extends Controller
     public function getQuotationID()
     {
         $quotations = Quotation::orderBy('id', 'desc')->first();
-        return view("quotation_management/newquotation", ['quotation'=> $quotations]);
+        $sellingitems = SellingItem::all();
+        return view("quotation_management/newquotation", ['quotation'=> $quotations],['sellingitems'=> $sellingitems] );
     }
 
 }
