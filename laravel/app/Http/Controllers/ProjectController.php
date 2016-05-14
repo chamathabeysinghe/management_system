@@ -55,6 +55,7 @@ class ProjectController extends Controller
     }
 
     public function getProjectInitiatePage($project_id){
+
         //validate the project
         $project=Project::where('id',$project_id)->first();
         $technicians=Technician::get();
