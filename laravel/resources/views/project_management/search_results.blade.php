@@ -1,4 +1,5 @@
 @foreach($resultProjects as $project)
+
     <div class="row">
         <div class="col">
             <div class="card medium">
@@ -10,6 +11,7 @@
                     <div class="row">
                         <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
                     </div>
+
 
                     <div class="row">
                         <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Client:</span> {{$project->client_name}}</div>
