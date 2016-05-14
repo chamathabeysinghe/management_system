@@ -73,7 +73,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project.initiate',
         'middleware'=>'auth'
     ]);
-    
+
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
     })->name('newreturnitem');
@@ -154,10 +154,14 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'return_search'
     ]);
 
-
     Route::post('/search',[
-        'uses'=>'ItemController@getiteminfo',
+        'uses'=>'ItemController@getItemInfo',
         'as'=>'item_search'
+    ]);
+
+    Route::post('/itemsearch',[
+        'uses'=>'ItemController@getItemInfo',
+        'as'=>'search_item'
     ]);
 
     Route::post('/edit_return',[
