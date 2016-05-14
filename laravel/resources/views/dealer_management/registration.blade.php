@@ -6,7 +6,9 @@
 
 @section('content')
 
-    <h3>Dealer Registration</h3>
+    <div class="collection hoverable">
+        <a href="#!" class="collection-item active">Dealer Registration</a>
+    </div>
     @if(count($errors)>0)
         <div class="raw">
             <div class="col-mid-6">
@@ -53,7 +55,7 @@
                     <div class="input-field col s5 offset-s3">
                         <i class="material-icons prefix">mode_edit</i>
                         <input id="email" name="email" type="email" class="validate" value="{{Request::old('email')}}">
-                        <label class="active"   for="email">Email</label>
+                        <label class="active" for="email">Email</label>
                     </div>
                 </div>
                 <div class="row">

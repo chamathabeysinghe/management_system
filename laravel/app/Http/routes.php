@@ -31,6 +31,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/projectinit', function () {
         return view('/project_management/project_init');
     });
+    //reset password view
+    Route::get('/resetpassword', function () {
+        return view('reset_password');
+    });
 
     //log a user in
     Route::post('/login',[
@@ -225,6 +229,11 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'updatefinancialreport'
     ]);
 
+    Route::post('/savestock',[
+        'uses'=>'DealerStockController@saveStock',
+        'as'=>'savestock'
+    ]);
+
     //search for technician using date
     Route::post('/searchtechnician',[
        'uses'=>'TechnicianController@postTechnicianSearch',
@@ -300,6 +309,11 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/addsellingitem',[
         'uses'=>'SellingItemController@postAddSellingItems',
         'as'=>'addsellingitem'
+    ]);
+
+    Route::post('/resetpassword',[
+        'uses'=>'ResetPasswordController@resetPassword',
+        'as'=>'resetpassword',
     ]);
 
 
