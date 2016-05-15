@@ -8,7 +8,7 @@
     <div class="collection hoverable">
         <a href="#!" class="collection-item active">Create/View Gross Profit Forecast</a>
     </div>
-
+    <div id="printable">
     <div class="row">
         <form class="col s12">
             <div class="row">
@@ -77,12 +77,12 @@
                 @endforeach
                 <tr class="hide">
 
-                    <td contenteditable="true">unknown item</td>
-                    <td class="right-align" contenteditable="true">$$</td>
-                    <td class="right-align" contenteditable="true">unknown quantity</td>
+                    <td contenteditable="true"></td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" contenteditable="true"></td>
                     <td class="right-align total-cost" contenteditable="true">0</td>
-                    <td class="right-align" contenteditable="true">$$$$</td>
-                    <td class="right-align" contenteditable="true">$$$$</td>
+                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" contenteditable="true"></td>
 
                     <td>
                         <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -111,23 +111,38 @@
                 </tr>
             </table>
         </div>
-        @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
-            <button id="gp_save" class="btn btn-primary">Create/Update</button>
-        @endif
+
+    </div>
     </div>
 
-    <div class="row">
+    <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 
+    <div class="row">
+        @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+            <button id="gp_save" class="btn btn-primary">Save Data
+                <i class="material-icons right">save</i>
+            </button>
+        @endif
         <button class="btn waves-effect waves-light" type="submit" name="action">Download
             <i class="material-icons right">play_for_work</i>
         </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Print
+        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
             <i class="material-icons right">print</i>
         </button>
         <button class="btn waves-effect waves-light" type="submit" name="action">Email
             <i class="material-icons right">email</i>
         </button>
     </div>
+    <script>
+        printDivCSS = new String ('<link href="{{URL::to('css/materialize.css')}}" rel="stylesheet" type="text/css">'
+                +'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">'
+                +'<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">');
+        function printDiv(divId) {
+            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+    </script>
     <script>
         var token='{{Session::token()}}';
         var url='{{route('updategp')}}';
