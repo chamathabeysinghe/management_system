@@ -9,10 +9,12 @@
                 <li class="tab col s3"><a class="active"href="#details" style="text-decoration : none">Details</a></li>
                 <li class="tab col s3"><a style="text-decoration : none" href="#technicinas">Technicians</a></li>
                 <li class="tab col s3"><a style="text-decoration : none" href="#items">Items</a></li>
-                <li class="tab col s3"><a style="text-decoration : none"href="#gp">Gross profit</a></li>
-                <li class="tab col s3"><a style="text-decoration : none"href="#bills">Financial Report</a></li>
-                <li class="tab col s3"><a style="text-decoration : none"href="#freport">Bills</a></li>
+                <li class="tab col s3"><a style="text-decoration : none" href="#reports">Reports</a></li>
+                <li class="tab col s3"><a style="text-decoration : none"href="#bills">Bills</a></li>
                 <li class="tab col s3"><a style="text-decoration : none"href="#feedback">Feedback</a></li>
+                {{--<li class="tab col s3"><a style="text-decoration : none"href="#reports">Gross profit</a></li>--}}
+                {{--<li class="tab col s3"><a style="text-decoration : none"href="#freport">Financial Report</a></li>--}}
+
             </ul>
         </div>
 
@@ -33,8 +35,6 @@
             <div class="row">
                 <div class="input-field col s12 m6">
                     <input id="date" name="date" type="text" class="datepicker validate" onchange="changeTime()" value="{{$project->date}}">
-                    {{--<input type='text' class='inp' readOnly />--}}
-                    {{--<label class="" for="inp">Project date</label>--}}
                     <label class="active" for="date">Project date</label>
                 </div>
                 <div class="input-field col s12 m6">
@@ -80,18 +80,22 @@
                                 <p class="para">{{$value}}
 
                                 </p>
+                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                                 <a href="#" class="secondary-content remove-technician" data-id="{{$technician->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
+                                @endif
                             </li>
                         @endforeach
 
                     </ul>
                 </div>
             </div>
+            @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
             <div class="row">
                 <div class="col s12 m6">
                     <a href="#" class="btn btn-danger" id="calculate-commission" role="button">Calculate Commission</a>
                 </div>
             </div>
+            @endif
         </div>
 
         <div id="items" class="section">
@@ -100,7 +104,9 @@
             <div class="row">
                 <div class="col s12 m6">
                     <div id="item_table" class="table-editable">
+                        @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                         <span class="table-add glyphicon glyphicon-plus"></span>
+                        @endif
                         <table class="table highlight bordered">
                             <thead>
                             <tr>
@@ -120,13 +126,15 @@
                                     <td id="name{{$item->id}}" contenteditable="true">{{$item->item_name}}</td>
                                     <td id="serial{{$item->id}}"class="right-align" contenteditable="true">{{$item->serial_number}}</td>
                                     <td id="cost{{$item->id}}"class="right-align" contenteditable="true">{{$item->unit_cost}}</td>
+                                    @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                                     <td>
-                                        <span class="change table-down glyphicon glyphicon-pencil"></span>
+                                        <span class="change table-down glyphicon glyphicon-floppy-save"></span>
 
                                     </td>
                                     <td>
                                         <span class="table-remove glyphicon glyphicon-remove"></span>
                                     </td>
+                                    @endif
 
                                 </tr>
                             @endforeach
@@ -137,6 +145,7 @@
                                 <td class="name" contenteditable="true"></td>
                                 <td class="serial right-align" contenteditable="true"></td>
                                 <td class="cost right-align" contenteditable="true"></td>
+                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                                 <td>
                                     <span class="change table-down glyphicon glyphicon-pencil"></span>
 
@@ -144,34 +153,48 @@
                                 <td>
                                     <span class="table-remove glyphicon glyphicon-remove"></span>
                                 </td>
+                                @endif
                             </tr>
                         </table>
                     </div>
 
                 </div>
             </div>
+            @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+            <div>
+                <label for="item-list">Select Item</label>
+                <div class="row">
+                    <div class="col s6">
+
+                        <select class="browser-default" id="item-list">
+                            <option value="" disabled selected>Choose your option</option>
+                            @foreach($sellingitems as $item)
+                                <option value="1" data-price="{{$item->unit_price}}" data-name="{{$item->item_name}}">{{$item->item_name}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+                    <div class="col s6">
+
+                        <a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
+                    </div>
+
+                </div>
+            </div>
+            @endif
         </div>
-        <div id="gp" class="section">
-            <h5>Gross Profit</h5>
-            <div class="divider"></div>
+
+        <div id="reports">
             <div class="row">
 
-                <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View GP</a>
+                <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View/Create Gross Profit Forecast</a>
+                <a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View/Create Financial Report</a>
 
             </div>
+
         </div>
 
         <div id="bills" class="section">
-            <h5>Financial Report</h5>
-            <div class="divider"></div>
-            <div class="row">
-
-                <a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View Financial Report</a>
-
-            </div>
-        </div>
-
-        <div id="freport" class="section">
             <h5>Bills</h5>
             <div class="divider"></div>
             <div class="row">
@@ -180,35 +203,368 @@
                         @foreach($billList as $bill)
                             <li class="collection-item avatar">
                                 {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
-                                <span class="title">{{$bill->description}} </span> Value
+                                <p><span class="title"> Bill: {{$bill->description}} </span></p>
+                                <p><span class="title"> Value: {{$bill->value}} </span></p>
+
+                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+
                                 <a href="#" class="secondary-content remove-bill" data-id="{{$bill->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
                                 {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
+                                @endif
                             </li>
                         @endforeach
 
                     </ul>
                 </div>
             </div>
+            @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+
             <div class="row">
                 <div class="col s12 m6">
                     {{--{{route('bill',['project_id'=>$project->id])}}--}}
                     <a href="#" id="add-bill" class="btn btn-danger" role="button">Add Bill</a>
                 </div>
             </div>
+            @endif
         </div>
+
 
         <div id="feedback" class="section">
             <h5>Feedback</h5>
             <div class="divider"></div>
+            @if($feedback==null)
             <div class="row">
                 <div class="col s12 m4">
                     <a href="{{route('feedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
                 </div>
-                <div class="col s12 m4">
-                    <a href="{{route('reviewfeedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View Feedback</a>
-                </div>
             </div>
+            @endif
+            @if($feedback!=null)
+                <style>
+                    .inquiry{
+                        /*border-radius: 25px;*/
+                        /*border: 2px solid #5361ad;*/
+                        /*padding: 20px;*/
+                        margin-bottom: 30px;
+                    }
+                    .inquiry h4{
+                        color: #797979;
+                    }
+                    .inquiry label{
+                        color: #6e6e6e;
+                    }
+                </style>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Client feedback form</h3>
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2" >
+
+                                <form >
+
+                                    <div  class="inquiry">
+                                        <h4>How satisfied are you: </h4>
+
+                                        <div class="input-group" readonly style="margin-bottom: 20px">
+                                            <label>With your experience of the most recent installation?</label>
+                                            <p>
+                                                <input class="with-gap" name="group1"  value="1" type="radio" id="g1i1"  />
+                                                <label for="g1i1">Very Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group1" value="2" type="radio" id="g1i2"  />
+                                                <label for="g1i2">Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group1" value="3" type="radio" id="g1i3"  />
+                                                <label for="g1i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group1" value="4" type="radio" id="g1i4"  />
+                                                <label for="g1i4">Dissatisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group1" value="5" type="radio" id="g1i5"  />
+                                                <label for="g1i5">Very Dissatisfied</label>
+                                            </p>
+
+                                        </div>
+
+
+                                        <div class="input-group" style="margin-bottom: 20px" >
+                                            <label>With the timeliness of installation?</label>
+                                            <p>
+                                                <input class="with-gap" name="group2" value="1" type="radio" id="g2i1"  />
+                                                <label for="g2i1">Very Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group2" value="2" type="radio" id="g2i2"  />
+                                                <label for="g2i2">Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group2" value="3" type="radio" id="g2i3"  />
+                                                <label for="g2i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group2" value="4" type="radio" id="g2i4"  />
+                                                <label for="g2i4">Dissatisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group2" value="5" type="radio" id="g2i5"  />
+                                                <label for="g2i5">Very Dissatisfied</label>
+                                            </p>
+                                        </div>
+
+
+                                        <div class="input-group" style="margin-bottom: 20px" >
+                                            <label>With the quality of our installation?</label>
+                                            <p>
+                                                <input class="with-gap" name="group3" value="1" type="radio" id="g3i1"  />
+                                                <label for="g3i1">Very Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group3" value="2" type="radio" id="g3i2"  />
+                                                <label for="g3i2">Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group3" value="3" type="radio" id="g3i3"  />
+                                                <label for="g3i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group3" value="4" type="radio" id="g3i4"  />
+                                                <label for="g3i4">Dissatisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group3" value="5" type="radio" id="g3i5"  />
+                                                <label for="g3i5">Very Dissatisfied</label>
+                                            </p>
+                                        </div>
+
+
+                                        <div class="input-group" style="margin-bottom: 20px" >
+                                            <label>that installation personnel are sufficiently knowledgeable and professional?</label>
+                                            <p>
+                                                <input class="with-gap" name="group4" value="1" type="radio" id="g4i1"  />
+                                                <label for="g4i1">Very Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group4" value="2" type="radio" id="g4i2"  />
+                                                <label for="g4i2">Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group4" value="3" type="radio" id="g4i3"  />
+                                                <label for="g4i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group4" value="4" type="radio" id="g4i4"  />
+                                                <label for="g4i4">Dissatisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group4" value="5" type="radio" id="g4i5"  />
+                                                <label for="g4i5">Very Dissatisfied</label>
+                                            </p>
+                                        </div>
+
+                                        <div class="input-group" style="margin-bottom: 20px" >
+                                            <label>With installation service overall?</label>
+                                            <p>
+                                                <input class="with-gap" name="group5" value="1" type="radio" id="g5i1"  />
+                                                <label for="g5i1">Very Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group5" value="2" type="radio" id="g5i2"  />
+                                                <label for="g5i2">Satisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group5" value="3" type="radio" id="g5i3"  />
+                                                <label for="g5i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group5" value="4" type="radio" id="g5i4"  />
+                                                <label for="g5i4">Dissatisfied</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group5" value="5" type="radio" id="g5i5"  />
+                                                <label for="g5i5">Very Dissatisfied</label>
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div  class="inquiry">
+
+                                        <h4>Digital Engineering Solutions understands the service needs of my organization</h4>
+
+                                        <div class="input-group">
+                                            <p>
+                                                <input class="with-gap" name="group6" value="1" type="radio" id="g6i1"  />
+                                                <label for="g6i1">Very Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group6" value="2" type="radio" id="g6i2"  />
+                                                <label for="g6i2">Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group6" value="3" type="radio" id="g6i3"  />
+                                                <label for="g6i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group6" value="4" type="radio" id="g6i4"  />
+                                                <label for="g6i4">Disagree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group6" value="5" type="radio" id="g6i5"  />
+                                                <label for="g6i5">Very Disagree</label>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div  class="inquiry">
+
+                                        <h4>Digital Engineering Solutions understands the service needs of my organization</h4>
+
+                                        <div class="input-group">
+                                            <p>
+                                                <input class="with-gap" name="group7" value="1" type="radio" id="g7i1"  />
+                                                <label for="g7i1">Very Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group7" value="2" type="radio" id="g7i2"  />
+                                                <label for="g7i2">Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group7" value="3" type="radio" id="g7i3"  />
+                                                <label for="g7i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group7" value="4" type="radio" id="g7i4"  />
+                                                <label for="g7i4">Disagree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group7" value="5" type="radio" id="g7i5"  />
+                                                <label for="g7i5">Very Disagree</label>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="inquiry">
+
+                                        <h4>Overall, the value of DES's seervice compared with the price paid is</h4>
+
+                                        <div class="input-group">
+                                            <p>
+                                                <input class="with-gap" name="group8" value="1" type="radio" id="g8i1"  />
+                                                <label for="g8i1">Very Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group8" value="2" type="radio" id="g8i2"  />
+                                                <label for="g8i2">Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group8" value="3" type="radio" id="g8i3"  />
+                                                <label for="g8i3">Neutral</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group8" value="4" type="radio" id="g8i4"  />
+                                                <label for="g8i4">Disagree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group8" value="5" type="radio" id="g8i5"  />
+                                                <label for="g8i5">Very Disagree</label>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="inquiry">
+
+                                        <h4>Would you recommend our service?</h4>
+
+                                        <div class="input-group">
+                                            <p>
+                                                <input class="with-gap" name="group9" value="1" type="radio" id="g9i1"  />
+                                                <label for="g9i1">Very Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group9" value="2" type="radio" id="g9i2"  />
+                                                <label for="g9i2">Agree</label>
+                                            </p>
+                                            <p>
+                                                <input class="with-gap" name="group9" value="3" type="radio" id="g9i3"  />
+                                                <label for="g9i3">Neutral</label>
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="inquiry">
+
+                                        <h4>Other comments</h4>
+
+                            <textarea cols="90" rows="5" readonly name="comments" style="alignment: center">{{$feedback->comments}}
+
+                            </textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    var installation ='{{$feedback->installation}}';
+                    var timeliness ='{{$feedback->timeliness}}';
+                    var quality ='{{$feedback->quality}}';
+                    var personnel ='{{$feedback->personnel}}';
+                    var overall_service ='{{$feedback->overall_service}}';
+                    var service_needs ='{{$feedback->service_needs}}';
+                    var price ='{{$feedback->price}}';
+                    var recommendation ='{{$feedback->recommendation}}';
+                    $("input[name=group1][value=" + installation + "]").prop('checked', true);
+                    $("input[name=group2][value=" + timeliness + "]").prop('checked', true);
+                    $("input[name=group3][value=" + quality + "]").prop('checked', true);
+                    $("input[name=group4][value=" + personnel + "]").prop('checked', true);
+                    $("input[name=group5][value=" + overall_service + "]").prop('checked', true);
+                    $("input[name=group6][value=" + service_needs + "]").prop('checked', true);
+                    $("input[name=group7][value=" + service_needs + "]").prop('checked', true);
+                    $("input[name=group8][value=" + price + "]").prop('checked', true);
+                    $("input[name=group9][value=" + recommendation + "]").prop('checked', true);
+
+                    $('input').each(function()
+                    {
+                        $(this).click(function(){
+                            return false;
+                        });
+
+                    });
+                </script>
+            @endif
         </div>
+        {{--<div id="gp" class="section">--}}
+            {{--<h5>Gross Profit</h5>--}}
+            {{--<div class="divider"></div>--}}
+            {{--<div class="row">--}}
+
+                {{--<a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View GP</a>--}}
+
+            {{--</div>--}}
+        {{--</div>--}}
+
+        {{--<div id="freport" class="section">--}}
+            {{--<h5>Financial Report</h5>--}}
+            {{--<div class="divider"></div>--}}
+            {{--<div class="row">--}}
+
+                {{--<a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button" {{$project->project_status==2?'':'disabled'}}>View Financial Report</a>--}}
+
+            {{--</div>--}}
+        {{--</div>--}}
+
+
     </div>
     <div class="row">
         {{--<form class="col s12" action="{{Route('initiateproject')}}" method="post">--}}
@@ -229,19 +585,19 @@
                     </div>
                     <div class="input-field col s12 m3">
 
-                        <input name="description" id="description" type="text" class="validate">
-                        <label class="active" for="description">Description</label>
+                        <input name="description" id="bill-description" type="text" class="validate">
+                        <label class="active" for="description" >Description</label>
                     </div>
                     <div class="input-field col s12 m2">
 
-                        <input  name="value" id="value" type="text" class="validate">
+                        <input  name="value" id="bill-value" type="text" class="validate">
                         <label class="active" for="value">Value</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12 m4 offset-m4">
 
-                        <button type="submit" id="gp_save" style="margin-top: 15px" class="btn btn-primary"><i class="material-icons left">payment</i>Add Bill</button>
+                        <button type="submit" id="bill_save" style="margin-top: 15px" class="btn btn-primary"><i class="material-icons left">payment</i>Add Bill</button>
                         <input type="hidden" name="_token" value="{{Session::token()}}">
                     </div>
 
@@ -327,6 +683,56 @@
             console.log('add new bill');
         });
 
+        $('#select-item').click(function(event){
+            event.preventDefault();
+
+            var data_cost = $('#item-list').find(":selected").attr('data-price');
+            var data_name=  $('#item-list').find(":selected").attr('data-name');
+            var $clone = $('#item_table').find('tr.hide').clone(true).removeClass('hide table-line');
+
+            $clone.find('td').each (function(key) {
+                if(key==0){
+                    $(this).text(data_name);
+                }
+                if(key==2){
+                    $(this).text(data_cost);
+                }
+            });
+
+            $.post(url_add_single_item, {project_id:project_id,itemName:'',serialNumber:'',unitCost:0,_token:token }).done(function(markup){
+
+
+                $clone.attr('data-id',markup);
+
+                $clone.children('.name').attr('id','name'+markup);//repeat this for
+                $clone.children('.serial').attr('id','serial'+markup);//repeat this for
+                $clone.children('.cost').attr('id','cost'+markup);//repeat this for
+                $('#item_table').find('table').append($clone);
+
+            });
+
+
+
+
+
+
+        });
+        $('#bill_save').click(function(event){
+
+            console.log('clicked add tp bill');
+            var error=false;
+            if($('#bill-description').val()==''){
+                error=true;
+                $('#bill-description').addClass('invalid');
+            }
+            if($('#bill-value').val()=='' || isNaN($('#bill-value').val())){
+                error=true;
+                $('#bill-value').addClass('invalid');
+            }
+            if(error){
+                event.preventDefault();
+            }
+        });
     </script>
     <script src="{{URL::to('js/infoitemeditable.js')}}"></script>
 @endsection

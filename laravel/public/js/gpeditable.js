@@ -45,6 +45,7 @@ $GP_SAVE.click(function() {
     });
 
     // Turn all existing rows into a loopable array
+    var error=false;
     $rows.each(function() {
         if(!$(this).hasClass('not-write')) {
             var $td = $(this).find('td');
@@ -53,6 +54,84 @@ $GP_SAVE.click(function() {
             // Use the headers from earlier to name our hash keys
             headers.forEach(function (header, i) {
                 h[header] = $td.eq(i).text();
+                if(i==0){
+                    if( $td.eq(i).text().replace(/\s+/, "")==''){
+                        error=true;
+                        var element=$td[0];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[0];
+                        element.style.border='none';
+                    }
+                }
+
+                if(i==1){
+                    if($td.eq(i).text().replace(/\s+/, "")!='' && isNaN($td.eq(i).text())){
+                        error=true;
+                        var element=$td[1];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[1];
+                        element.style.border='none';
+                    }
+                }
+                if(i==2){
+                    if($td.eq(i).text().replace(/\s+/, "")!='' && isNaN($td.eq(i).text())){
+                        error=true;
+                        var element=$td[2];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[2];
+                        element.style.border='none';
+                    }
+                }
+
+                if(i==3){
+                    if($td.eq(i).text().replace(/\s+/, "") =='' || isNaN($td.eq(i).text())){
+                        error=true;
+                        var element=$td[3];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[3];
+                        element.style.border='none';
+                    }
+                }
+
+                if(i==4){
+                    if($td.eq(i).text().replace(/\s+/, "")!='' && isNaN($td.eq(i).text())){
+                        error=true;
+                        var element=$td[4];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[4];
+                        element.style.border='none';
+                    }
+                }
+                if(i==5){
+                    if($td.eq(i).text().replace(/\s+/, "")=='' || isNaN($td.eq(i).text())){
+                        error=true;
+                        var element=$td[5];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[5];
+                        element.style.border='none';
+                    }
+                }
+
+
+
             });
 
             data.push(h);
@@ -61,5 +140,14 @@ $GP_SAVE.click(function() {
 
     // Output the result
     var total=$('#final-value').text();
-    $.post(url, {new_data:JSON.stringify(data) ,total_val:total,project_id:project_id,_token:token });
+    var date=$('#gp_date').val();
+    var created_by=$('#prepare').val();
+    var checked_by=$('#check').val();
+    if(error){
+        Materialize.toast('Gross profit not saved.', 2000, 'rounded')
+    }
+    else{
+        $.post(url, {new_data:JSON.stringify(data) ,date:date,created_by:created_by,checked_by:checked_by,total_val:total,project_id:project_id,_token:token });
+    }
+
 });

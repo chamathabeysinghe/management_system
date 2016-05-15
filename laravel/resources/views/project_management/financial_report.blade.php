@@ -14,34 +14,28 @@
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">work</i>
-                    <input  id="project" type="text" class="validate">
-                    <label class="active" for="project">Project</label>
+                    <input  id="project" type="text" class="validate" value="{{$project_id}}" disabled>
+                    <label class="active" for="project">Project ID</label>
                 </div>
                 <div class="input-field col s3 offset-s1">
                     <i class="material-icons prefix">today</i>
-                    <input id="quotation_date" type="date" class="datepicker">
+                    <input id="f_date" type="date" class="datepicker" value="{{$freport->date}}">
                     <label class="active" for="quotation_date">Quotation Date</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s6">
                     <i class="material-icons prefix">assignment_ind</i>
-                    <input id="prepare" type="text" class="validate">
+                    <input id="prepare" type="text" class="validate" value="{{$freport->crated_by}}">
                     <label class="active" for="prepare">Prepared by</label>
                 </div>
                 <div class="input-field col s5 offset-s1">
                     <i class="material-icons prefix">assignment_ind</i>
-                    <input id="check" type="email" class="validate">
+                    <input id="check" type="text" class="validate" value="{{$freport->checked_by}}">
                     <label class="active" for="check">Checked by</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s10">
-                    <i class="material-icons prefix">location_on</i>
-                    <input  id="director" type="text" class="validate">
-                    <label class="active" for="director">Director</label>
-                </div>
-            </div>
+
         </form>
     </div>
 
@@ -114,15 +108,13 @@
                 </tr>
             </table>
         </div>
-
+        @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
         <button id="f_save" class="btn btn-primary">Export Data</button>
+        @endif
 
     </div>
 
     <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Create
-            <i class="material-icons right">done</i>
-        </button>
         <button class="btn waves-effect waves-light" type="submit" name="action">Download
             <i class="material-icons right">play_for_work</i>
         </button>

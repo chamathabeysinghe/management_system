@@ -45,63 +45,12 @@
                 </li>
             </ul>
 
-            <div class="input-field col s12">
-                <i class="material-icons prefix">search</i>
-                <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" >
-
-            </div>
-            {{--<div class="input-field col s6">--}}
-                {{--<i class="material-icons prefix">account_circle</i>--}}
-                {{--<input id="icon_prefix" type="text" class="validate">--}}
-                {{--<label for="icon_prefix">First Name</label>--}}
-            {{--</div>--}}
-            {{--<div class="input-field col s6">--}}
-                {{--<i class="material-icons prefix">account_circle</i>--}}
-                {{--<input type="text" id="search-input" placeholder="Search" onkeydown="down()" onkeyup="up()">--}}
-            {{--</div>--}}
 
 
-            {{--<nav>--}}
-                {{--<div class="nav-wrapper teal lighten-2">--}}
-                    {{--<form>--}}
-                        {{--<div class="input-field">--}}
-                            {{--<input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" style="height: 65px;">--}}
-                            {{--<label for="search"><i class="material-icons">search</i></label>--}}
-                            {{--<i class="material-icons">close</i>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
-            {{--</nav>--}}
-
-
-
-
-
-            
             <div id="search-results">
-
             </div>
             <div id="all-results">
                 @foreach($projects as $project)
-                    {{--<div class="panel panel-primary">--}}
-                        {{--<div class="panel-heading">Project Title</div>--}}
-                        {{--<div class="panel-body">--}}
-                            {{--<p>{{$project->description}}</p>--}}
-                            {{--<div><label>Project Client       :</label>{{$project->client_name}}</div>--}}
-                            {{--<div><label>Project Starting Date:</label>{{$project->date}}</div>--}}
-                            {{--<div><label>Project Incharge     :</label>CHAT</div>--}}
-                            {{--<div><label>Project Duration     :</label>4 Days</div>--}}
-                            {{--<p>--}}
-                                {{--<a href="{{route('project.info',['project_id'=>$project->id])}}" class="btn btn-primary" role="button">View Project</a>--}}
-                                {{--<a href="{{route('project.initiate',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Initiate Project</a>--}}
-                                {{--<a href="{{route('creategp',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Create GP</a>--}}
-                                {{--<a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Create Financial Report</a>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
-
-
                     <div class="row">
                         <div class="col">
                             <div class="card medium">
@@ -127,12 +76,15 @@
                                 <div class="card-action">
                                     <p>
                                         @if($project->project_status>=1)
-                                            <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>|
-                                            <a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|
-                                            <a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>|
-                                            <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
+                                            <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>
+                                            {{--<a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|--}}
+                                            {{--<a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>|--}}
+
+                                            @if(Auth::user()->user_type==1)
+                                            |&nbsp;&nbsp;&nbsp; <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
+                                            @endif
                                         @endif
-                                        @if($project->project_status==0)
+                                        @if($project->project_status==0 and (Auth::user()->user_type==1) )
                                             <a href="{{route('project.initiate',['project_id'=>$project->id])}}" >Initiate Project</a>
                                         @endif
                                     </p>
@@ -178,17 +130,6 @@
 
 
 
-    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">add</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-        </ul>
-    </div>
     <script>
         var token='{{Session::token()}}';
         var url='{{route('projectfinder')}}';

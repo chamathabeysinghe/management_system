@@ -16,7 +16,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('login');
     })->name('home');
-
+    Route::get('/logout',[
+        'uses'=>'UserController@getLogout',
+        'as'=>'logout'
+    ]);
     //log a user in
     Route::post('/login',[
         'uses'=>'UserController@postUserLogin',
@@ -191,6 +194,8 @@ Route::group(['middleware'=>['web']],function(){
 
     ////////////////////////////////////////////DEALER MANAGEMENT//////////////////////////////////////////////////
 
+
+
     //direct to dealer registration
     Route::get('/dealer/register',function(){
         return view("dealer_management/registration");
@@ -229,15 +234,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'technicians'
     ]);
 
-//    Route::get('/bill',function(){
-//       return view('project_management/add_bill');
-//    })->name('bill');
 
-    //get bill view
-    Route::get('/bill',[
-        'uses'=>'BillController@getAddBillView',
-        'as'=>'bill'
-    ]);
 
     //add new bill
     Route::post('/addBill',[
@@ -314,16 +311,11 @@ Route::group(['middleware'=>['web']],function(){
 
 
 
-
-    //direct to Project Summary page
-    Route::get('/quotationsummary',function(){
-        return view("quotation_management/quotation_summary");
-    })->name('quotationsummary');
-
-    //direct to New Quotation page
-    Route::get('/newquotation',function(){
-        return view("quotation_management/create_quotation");
-    })->name('newquotation');
+    //direct to Create Quotation  page
+    Route::get('/newquotation',[
+        'uses' => 'QuotationController@getQuotationID',
+        'as' => 'newquotation'
+    ]);
 
     Route::post('/createquotation',[
         'uses'=>'QuotationController@postCreateQuotation',
@@ -340,12 +332,35 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'addsellingitem'
     ]);
 
+
     Route::post('/resetpassword',[
         'uses'=>'ResetPasswordController@resetPassword',
         'as'=>'resetpassword',
     ]);
 
 
+    //direct to Quotation Summary page
+    Route::get('/getquotationsummary',[
+        'uses' => 'QuotationController@getQuotationSummary',
+        'as' => 'getquotationsummary'
+    ]);
+
+    //direct to Create Estimation page
+    Route::get('/newestimation',[
+        'uses' => 'EstimationController@getEstimationID',
+        'as' => 'newestimation'
+    ]);
+
+    Route::post('/createestimation',[
+        'uses'=>'EstimationController@postCreateEstimation',
+        'as'=>'createestimation'
+    ]);
+
+
+    Route::get('/estimationbyquotation',[
+        'uses'=>'EstimationController@getEstimationByQuotation',
+        'as'=>'estimationbyquotation'
+    ]);
 
 
     Route::post('/search',[
