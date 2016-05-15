@@ -11,7 +11,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Dealer;
 use App\Item;
+use App\Project;
 use Illuminate\Http\Request;
 
 
@@ -24,14 +26,21 @@ class ItemController extends Controller
     public function getItemInfo(Request $request)
     {
         // echo "item View";
+        $project=null;
+        $dealer=null;
         $itemCode = $request['keyWords'];
         $item = Item::where('serial_number', $itemCode)->first();
         $item->load('returnItemDetail');
         $supplier = Item::find($item['id'])->supplier;
+        if($item['sale_type']== 1){
+            $project=Project::find($item['owner_id']);
+        }else{
+            $dealer=Dealer::find($item['owner_id']);
+        }
         //echo $itemCode;
         //echo $item;
         //echo $supplier;
-        return View::make('/return_management/itemsearchresults')->with('item', $item)->with('supplier', $supplier);
+        return View::make('/return_management/itemsearchresults')->with('item', $item)->with('supplier', $supplier)->with('dealer', $dealer)->with('project', $project);
     }
 
     public function postDeallocateItem(Request $request)

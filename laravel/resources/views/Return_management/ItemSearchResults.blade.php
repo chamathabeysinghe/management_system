@@ -99,28 +99,96 @@
 
             <ul class="collapsible" data-collapsible="accordion">
                 @if( $item->returnItemDetail !=null)
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">receipt</i>Return Details</div>
-                    <div class="collapsible-body">
-                        <div class="row">
-                            <p class=" col s6">Return Id :</p>
-                            <p class=" col s6">{{$item->returnItemDetail->id}}</p>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">receipt</i>Return Details</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <p class=" col s6">Return Id :</p>
+                                <p class=" col s6">{{$item->returnItemDetail->id}}</p>
+                            </div>
+                            <div class="row">
+                                <p class=" col s6">Returned Date :</p>
+                                <p class=" col s6">{{$item->returnItemDetail->date}}</p>
+                            </div>
+                            <div class="row">
+                                <p class=" col s6">Job type :</p>
+                                <p class=" col s6">{{$item->returnItemDetail->job_type}}</p>
+                            </div>
+                            <div class="row">
+                                <p class=" col s6 ">Remarks :</p>
+                                <p class=" col s6 ">{{$item->returnItemDetail->remarks}}</p>
+                            </div>
                         </div>
-                        <div class="row">
-                            <p class=" col s6">Returned Date :</p>
-                            <p class=" col s6">{{$item->returnItemDetail->date}}</p>
-                        </div>
-                        <div class="row">
-                            <p class=" col s6">Job type :</p>
-                            <p class=" col s6">{{$item->returnItemDetail->job_type}}</p>
-                        </div>
-                        <div class="row">
-                            <p class=" col s6 ">Remarks  :</p>
-                            <p class=" col s6 ">{{$item->returnItemDetail->remarks}}</p>
-                        </div>
-                    </div>
-                </li>
+                    </li>
                 @endif
+                @if( $item->sale_type == 1)
+                    @if($project != null)
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">receipt</i>project Details</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <p class=" col s6">Client :</p>
+                                    <p class=" col s6">{{$project->client_name}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6"> Date :</p>
+                                    <p class=" col s6">{{$project->date}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6">Description :</p>
+                                    <p class=" col s6">{{$project->description}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">{{$project->client_email}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">{{$project->project_status}}</p>
+                                </div>
+                                <div class="row">
+                                    <a class="waves-effect waves-light btn col s6"
+                                       href="{{route('project.info',['project_id'=>$project->id])}}">View Project<i
+                                                class="material-icons left">play_arrow</i></a>
+                                </div>
+                            </div>
+                        </li>
+                    @endif
+                @endif
+                @if( $item->sale_type == 2)
+                    @if($dealer != null)
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">receipt</i>project Details</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <p class=" col s6">Client :</p>
+                                    <p class=" col s6">{{$dealer->client_name}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6"> Date :</p>
+                                    <p class=" col s6">{{$dealer->date}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6">Description :</p>
+                                    <p class=" col s6">{{$dealer->description}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">{{$dealer->client_email}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">{{$dealer->project_status}}</p>
+                                </div>
+                                <div class="row">
+                                    <a class="waves-effect waves-light btn col s6">View Project<i
+                                                class="material-icons left">play_arrow</i></a>
+                                </div>
+                            </div>
+                        </li>
+                    @endif
+                @endif
+
             </ul>
 
 
@@ -139,9 +207,9 @@
     <script>
         var token = '{{Session::token()}}';
         var url2 = '{{route('newreturn')}}';
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.collapsible').collapsible({
-                accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
             });
         });
     </script>
