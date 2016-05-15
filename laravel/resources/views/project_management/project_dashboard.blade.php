@@ -54,8 +54,21 @@
                     <div class="row">
                         <div class="col">
                             <div class="card medium">
-                                <div class="card-image waves-effect waves-block waves-light " style="height: 50%;">
-                                    <img class="activator" src="http://materializecss.com/images/sample-1.jpg">
+                                <?php
+                                    $url='';
+                                    $status=$project->project_status;
+                                    if($status==0){
+                                        $url=URL::to('images/red2.png');
+                                    }
+                                    if($status==1){
+                                        $url=URL::to('images/green.png');
+                                    }
+                                    if($status==2){
+                                        $url=URL::to('images/yellow.png');
+                                    }
+                                ?>
+                                <div class="card-image waves-effect waves-block waves-light " style="height: 30%;">
+                                    <img class="activator" src="{{$url}}">
                                     <span class="card-title">{{$project->title}}</span>
                                 </div>
                                 <div class="card-content ">
@@ -80,7 +93,7 @@
                                             {{--<a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|--}}
                                             {{--<a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>|--}}
 
-                                            @if(Auth::user()->user_type==1)
+                                            @if(Auth::user()->user_type==1 and $project->project_status!=2)
                                             |&nbsp;&nbsp;&nbsp; <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
                                             @endif
                                         @endif
