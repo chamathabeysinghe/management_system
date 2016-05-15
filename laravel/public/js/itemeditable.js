@@ -42,6 +42,7 @@ $ITEM_SAVE.click(function() {
     });
 
     // Turn all existing rows into a loopable array
+    var error=false;
     $rows.each(function() {
         var $td = $(this).find('td');
         var h = {};
@@ -49,6 +50,43 @@ $ITEM_SAVE.click(function() {
         // Use the headers from earlier to name our hash keys
         headers.forEach(function(header, i) {
             h[header] = $td.eq(i).text();
+            if(i==0){
+                if( $td.eq(i).text().replace(/\s+/, "")==''){
+                    error=true;
+                    var element=$td[0];
+                    element.style.borderBottom='solid';
+                    element.style.borderColor='#ff6666';
+                }
+                else{
+                    var element=$td[0];
+                    element.style.border='none';
+                }
+            }
+
+            if(i==1){
+                if($td.eq(i).text().replace(/\s+/, "")==''){
+                    error=true;
+                    var element=$td[1];
+                    element.style.borderBottom='solid';
+                    element.style.borderColor='#ff6666';
+                }
+                else{
+                    var element=$td[1];
+                    element.style.border='none';
+                }
+            }
+            if(i==2){
+                if($td.eq(i).text().replace(/\s+/, "")=='' || isNaN($td.eq(i).text())){
+                    error=true;
+                    var element=$td[2];
+                    element.style.borderBottom='solid';
+                    element.style.borderColor='#ff6666';
+                }
+                else{
+                    var element=$td[2];
+                    element.style.border='none';
+                }
+            }
         });
 
         data.push(h);
@@ -57,6 +95,15 @@ $ITEM_SAVE.click(function() {
     // Output the result
 
     console.log(project_id);
-    console.log('done');
-    $.post(url_allocation, {new_data:JSON.stringify(data) ,project_id:project_id,_token:token });
+    console.log('done item-save check here goies it   '+error);
+
+    if(error){
+        console.log('error occured')
+        event.preventDefault();
+    }
+    else{
+
+        $.post(url_allocation, {new_data:JSON.stringify(data) ,project_id:project_id,_token:token });
+    }
+
 });

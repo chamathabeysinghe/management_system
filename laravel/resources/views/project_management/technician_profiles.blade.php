@@ -82,12 +82,14 @@
 
 
         </ul>
-        <div class="fixed-action-btn"  style="bottom: 45px; right: 24px;">
+        @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+        <div class="fixed-action-btn"  style="bottom: 200px; right: 24px;">
             <a class="btn-floating btn-large red modal-trigger"  href="#modal1"id="add-technician">
                 <i class="large material-icons">add</i>
             </a>
 
         </div>
+        @endif
     </div>
 
     <div id="modal1" class="modal modal-fixed-footer" style="height: 50%;">
@@ -95,28 +97,35 @@
         <div class="modal-content">
             <h4>Add new technician</h4>
             @include('includes.message-block')
-
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-
-
                         <div class="form-group {{$errors->has('full_name')?'has-error':''}}">
                             <label for="full_name">Full Name</label>
                             <input class="form-control " type="text" name="name" id="name" value="{{Request::old('name')}}">
                         </div>
-
                         <input type="hidden" name="_token" value="{{Session::token()}}">
-
                 </div>
             </div>
         </div>
         <div class="modal-footer" >
-            <button type="submit" class="btn btn-primary col-md-offset-">Add Technician</button>
+            <button type="submit" class="btn btn-primary col-md-offset-" id="add-tech-name">Add Technician</button>
 
         </div>
         </form>
     </div>
 
 
+    <script>
+        $('#add-tech-name').click(function (event) {
+            var error=false;
+            if($('#name').val()==''){
+                error=true;
+                $('#name').addClass('invalid');
+            }
+            if(error){
+                event.preventDefault();
+            }
+        });
+    </script>
 
 @endsection
