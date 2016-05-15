@@ -31,19 +31,20 @@
                         </ul>
                     </div>
                 </li>
-
+                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2 or Auth::user()->user_type==3)
                 <li>
                     <a style="text-decoration: none;" class="collapsible-header waves-effect waves-teal">Project Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('project')}}">Projects</a></li>
-
                             <li><a style="text-decoration: none;"href="{{route('technicians')}}">Technicians</a></li>
+                            @if(Auth::user()->user_type==1)
                             <li><a style="text-decoration: none;"href="{{route('deallocateditems')}}">Return Items</a></li>
+                            @endif
                         </ul>
                     </div>
                 </li>
-
+                @endif
                 <li>
                     <a style="text-decoration: none; " class="collapsible-header waves-effect waves-teal">Dealer Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
@@ -63,12 +64,12 @@
                         </ul>
                     </div>
                 </li>
-                {{--@if(Auth::user()->user_type==1)--}}
+                @if(Auth::user()->user_type==1)
                     <li>
                         <a class="waves-effect waves-teal" href="{{route('newuser')}}">New User</a>
 
                     </li>
-                {{--@endif--}}
+                @endif
 
 
             </ul>

@@ -14,6 +14,7 @@ use App\Project;
 use App\Technician;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -22,9 +23,7 @@ class TechnicianController extends Controller
     public function postCalculateCommission(Request $request){
         $project=Project::where('id',$request['project_id'])->first();
         $gross_profit=$project->gpforecast;
-
         if($gross_profit!=null){
-
             foreach($project->technicianAllocations as $allocation){
                 echo $allocation->technician_id;
                 $allocation->commission=$gross_profit->profit*.1;
@@ -40,6 +39,7 @@ class TechnicianController extends Controller
     }
 
     public function postTechnicianView(Request $request){
+
         $technicians=Technician::get();
 
         return view('project_management/technician_profiles',['technicians'=>$technicians]);
@@ -52,19 +52,15 @@ class TechnicianController extends Controller
         $resultDetails=array();
 
         foreach($technicians as $technician){
-
             $allocationDetails='';
             foreach($technician->technicianallocations as $allocation){
                 if($allocation->project!=null  and $allocation->project->project_status==1){
                     $result=$this->check_availability($date,$duration,$allocation->project->id,$allocation->project->date,$allocation->project->duration);
-//                    echo $result;
-//                    echo '<br>';
                     if(!Str::equals($result,'')){
                         $allocationDetails.=$result.' , ';
                     }
                 }
             }
-
             array_push($resultDetails,$allocationDetails);
         }
         return View::make('/project_management/technician_search')->with('data',[$technicians,$resultDetails]);
@@ -76,14 +72,6 @@ class TechnicianController extends Controller
         $project_start_date=strtotime($project_date);
         $project_end_date=strtotime(date("m/d/Y", strtotime($project_date)) . " +".$project_duration." day");
         $outStr='';
-//        print_r(getdate($user_start_date));
-//        echo '<br>';
-//        print_r(getdate($user_end_date));
-//        echo '<br>';
-//        print_r(getdate($project_start_date));
-//        echo '<br>';
-//        print_r(getdate($project_end_date));
-//        echo '<br>';
         if($this->check_in_range($project_start_date, $project_end_date, $user_end_date) ){
             $outStr.='project('.$project_title.') from '.$project_date.' to';
         }
@@ -91,22 +79,12 @@ class TechnicianController extends Controller
             $outStr.='project('.$project_title.') from '.$project_date.' to';
         }
         return $outStr;
-
-
     }
     function check_in_range($start_date, $end_date, $date_from_user)
     {
-        // Convert to timestamp
         $start_ts = ($start_date);
         $end_ts = ($end_date);
         $user_ts = ($date_from_user);
-
-        // Check that user date is between start & end
         return (($user_ts >= $start_ts) && ($user_ts <= $end_ts));
     }
-
-
-
-
-
 }

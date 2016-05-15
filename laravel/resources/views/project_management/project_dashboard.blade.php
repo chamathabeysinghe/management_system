@@ -45,11 +45,7 @@
                 </li>
             </ul>
 
-            <div class="input-field col s12">
-                <i class="material-icons prefix">search</i>
-                <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" >
 
-            </div>
 
             <div id="search-results">
             </div>
@@ -80,12 +76,15 @@
                                 <div class="card-action">
                                     <p>
                                         @if($project->project_status>=1)
-                                            <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>|
-                                            <a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|
-                                            <a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>|
-                                            <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
+                                            <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>
+                                            {{--<a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|--}}
+                                            {{--<a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>|--}}
+
+                                            @if(Auth::user()->user_type==1)
+                                            |&nbsp;&nbsp;&nbsp; <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
+                                            @endif
                                         @endif
-                                        @if($project->project_status==0)
+                                        @if($project->project_status==0 and (Auth::user()->user_type==1) )
                                             <a href="{{route('project.initiate',['project_id'=>$project->id])}}" >Initiate Project</a>
                                         @endif
                                     </p>

@@ -1,5 +1,4 @@
 @foreach($resultProjects as $project)
-
     <div class="row">
         <div class="col">
             <div class="card medium">
@@ -11,7 +10,6 @@
                     <div class="row">
                         <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">more_vert</i></span>
                     </div>
-
 
                     <div class="row">
                         <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Client:</span> {{$project->client_name}}</div>
@@ -26,12 +24,15 @@
                 <div class="card-action">
                     <p>
                         @if($project->project_status>=1)
-                            <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>|
-                            <a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|
-                            <a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>
-                            <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
+                            <a href="{{route('project.info',['project_id'=>$project->id])}}" >View Project</a>
+                            {{--<a href="{{route('creategp',['project_id'=>$project->id])}}">Create GP</a>|--}}
+                            {{--<a href="{{route('createfinancialreport',['project_id'=>$project->id])}}" >Create Financial Report</a>|--}}
+
+                            @if(Auth::user()->user_type==1)
+                                |&nbsp;&nbsp;&nbsp; <a href="{{route('completeproject',['project_id'=>$project->id])}}" >Mark as Complete</a>
+                            @endif
                         @endif
-                        @if($project->project_status==0)
+                        @if($project->project_status==0 and (Auth::user()->user_type==1) )
                             <a href="{{route('project.initiate',['project_id'=>$project->id])}}" >Initiate Project</a>
                         @endif
                     </p>

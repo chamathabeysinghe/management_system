@@ -69,11 +69,14 @@ class GPForecastController extends Controller
             array_push($recordsList,($field));
 
         }
-        return view('project_management/gp_forecast',['recordList'=>$recordsList,'project_id'=>$request['project_id']]);
+        return view('project_management/gp_forecast',['recordList'=>$recordsList,'project_id'=>$request['project_id'],'gp'=>$gpForecast]);
 }
 
     public function postUpdateGPForecast(Request $request){
         $project_id=$request['project_id'];
+        $created_by=$request['created_by'];
+        $checked_by=$request['checked_by'];
+        $date=$request['date'];
         $project=Project::where('id',$project_id)->first();
         $gpForecast=$project->GPForecast;
         $fieldsList=array();
@@ -88,6 +91,9 @@ class GPForecastController extends Controller
         }
         $gpForecast->fieldList=(serialize($fieldsList));
         $gpForecast->profit=$request['total_val'];
+        $gpForecast->crated_by=$created_by;
+        $gpForecast->checked_by=$checked_by;
+        $gpForecast->date=$date;
         $project->gpforecast()->save($gpForecast);
     }
 
