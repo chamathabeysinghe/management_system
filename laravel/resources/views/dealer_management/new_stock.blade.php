@@ -11,23 +11,15 @@
 
     <div class="row">
         <form class="col s12">
-            <div class="raw">
-                <div class="col-s2">
-                    <div class="input-field col s2">
+            <div class="row">
+                <div class="col-s4">
+                    <div class="input-field col s3">
                         <input id="date" type="date" class="validate">
                         <label class="active" for="date">Date</label>
                     </div>
                 </div>
             </div>
-            {{--<div class="input-field col s12">--}}
-                {{--<select multiple id="selected_dealer" name = "selected_dealer">--}}
-                    {{--<option value="" disabled selected>Choose your option</option>--}}
-                    {{--<option value="1">Option 1</option>--}}
-                    {{--<option value="2">Option 2</option>--}}
-                    {{--<option value="3">Option 3</option>--}}
-                {{--</select>--}}
 
-            {{--</div>--}}
 
             <select class="browser-default" id = "dealer-list">
                 <option  value="" disabled selected>Select Dealer</option>
@@ -47,12 +39,13 @@
                 <thead>
                 <tr>
 
-                    <th data-field="item_code">Item Code</th>
-                    <th class="right-align" data-field="item_name">Item Name</th>
-                    <th class="right-align" data-field="serial_no">Serial No</th>
-                    <th class="right-align" data-field="unit_price">Unit Price</th>
-                    <th class="right-align" data-field="quantity">Quantity</th>
-                    <th class="right-align" data-field="total_cost">Total Cost</th>
+
+                    <th class="left-align" data-field="item_code">Item Code</th>
+                    <th class="left-align" data-field="item_name">Item Name</th>
+                    <th class="left-align" data-field="serial_no">Serial No</th>
+                    <th class="left-align" data-field="unit_price">Unit Price</th>
+                    <th class="left-align" data-field="quantity">Quantity</th>
+                    <th class="left-align" data-field="total_cost">Total Cost</th>
 
                     <th></th>
                     <th></th>
@@ -66,7 +59,7 @@
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
+                    <td contenteditable="true">1</td>
                     <td contenteditable="true"></td>
 
 
@@ -82,11 +75,11 @@
                 <tr class="not-write">
 
                     <td contenteditable="true">Total</td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" id="final-value" contenteditable="true">$$$$$$$$</td>
+                    <td class="left-align" contenteditable="true"></td>
+                    <td class="left-align" contenteditable="true"></td>
+                    <td class="left-align" contenteditable="true"></td>
+                    <td class="left-align" contenteditable="true"></td>
+                    <td class="left-align" id="final-value" contenteditable="true">$$$$$$$$</td>
 
 
                     <td>
@@ -97,6 +90,22 @@
                     </td>
                 </tr>
             </table>
+        </div>
+
+        <div class="row">
+            <div class="col s6">
+                <label>Select Item</label>
+                <select class="browser-default" id="item-list">
+                    <option value="" disabled selected>Choose your option</option>
+                    @foreach($sellingitems as $item)
+                        <option value="1" data-code="{{$item->item_code}}" data-description="{{$item->item_description}}" data-price="{{$item->unit_price}}" data-name="{{$item->item_name}}">{{$item->item_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col s6">
+                <br><br><a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
+            </div>
+
         </div>
 
 
@@ -117,7 +126,7 @@
                 console.log($(this).text());
                 total+=parseFloat($(this).text());
             })
-            console.log(total);
+
             $('#final-value').text(total);
         });
 
@@ -130,6 +139,32 @@
             console.log(total);
             $('#final-value').text(total);
         }
+
+        $('#select-item').click(function(event){
+            event.preventDefault();
+            var data_cost = $('#item-list').find(":selected").attr('data-price');
+            var data_name=  $('#item-list').find(":selected").attr('data-name');
+            var data_description=  $('#item-list').find(":selected").attr('data-description');
+            var data_code=  $('#item-list').find(":selected").attr('data-code');
+            var $clone = $('#s_table').find('tr.hide').clone(true).removeClass('hide table-line');
+            console.log(data_cost);
+            $clone.find('td').each (function(key) {
+                if(key==0){
+                    $(this).text(data_code);
+                }
+                if(key==1){
+                    $(this).text(data_name);
+                }
+                if(key==3){
+                    $(this).text(data_cost);
+                }
+
+                if(key==5){
+                    $(this).text(data_cost);
+                }
+            });
+            $('#s_table').find('table').append($clone);
+        });
 
     </script>
     <script src="{{URL::to('js/stockeditable.js')}}">

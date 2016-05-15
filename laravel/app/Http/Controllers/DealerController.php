@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Dealer;
+use App\SellingItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class DealerController extends Controller
 {
@@ -39,17 +41,29 @@ class DealerController extends Controller
 
         $dealer->save();
         return redirect()->back();
-
-
-
-
-
-
     }
 
     public function getStockView(Request $request){
         $dealers=Dealer::all();
-        return view('/dealer_management/new_stock',['dealers'=>$dealers]);
+        $sellingitems = SellingItem::all();
 
+        return view('/dealer_management/new_stock',['dealers'=>$dealers,'sellingitems'=> $sellingitems]);
+    }
+
+    public function getSearchResults(Request $request){
+        $this -> validate($request, [
+
+            'dealer_id' => 'required'
+
+        ]);
+
+        $register_no=$request['keyWords'];
+
+        $dealer=Dealer::where('register_no',$register_no)->first();
+
+        $stocks=$dealer->stock;
+
+
+        return View::make('/dealer_management/dealer_search_results')->with('stocks',$stocks);
     }
 }

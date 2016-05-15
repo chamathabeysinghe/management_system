@@ -1,19 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Chamath Abeysinghe
+ * User: Ashan
  * Date: 5/7/2016
  * Time: 10:07 AM
  */
 
 namespace App\Http\Controllers;
 
-use App\Bill;
+//use App\Bill;
 use App\Dealer;
-use App\FinancialReport;
-use App\Item;
-use App\Project;
-use App\ReportField;
+//use App\FinancialReport;
+//use App\Item;
+//use App\Project;
+//use App\ReportField;
 use App\Stock;
 use App\StockField;
 use Illuminate\Http\Request;
@@ -52,5 +52,10 @@ class DealerStockController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function getSellingItems(Request $request){
+        $sellingitems = SellingItem::all();
+        return view("dealer_management/new_stock",['sellingitems'=> $sellingitems] );
     }
 }

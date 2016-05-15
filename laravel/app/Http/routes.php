@@ -189,6 +189,7 @@ Route::group(['middleware'=>['web']],function(){
         return view("quotation_management/create_quotation");
     });
 
+    ////////////////////////////////////////////DEALER MANAGEMENT//////////////////////////////////////////////////
 
     //direct to dealer registration
     Route::get('/dealer/register',function(){
@@ -201,11 +202,26 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'new_stock'
     ]);
 
-
     Route::get('/dealer/view',function(){
         return view("dealer_management/dealers_view");
     })->name('view_dealer');
 
+    Route::post('/savestock',[
+        'uses'=>'DealerStockController@saveStock',
+        'as'=>'savestock'
+    ]);
+
+    Route::post('/registerdealer',[
+        'uses'=>'DealerController@registerDealer',
+        'as'=>'registerdealer'
+    ]);
+
+    Route::post('/dealersearch',[
+        'uses'=>'DealerController@getSearchResults',
+        'as'=>'dealersearch'
+    ]);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //get technician profile view
     Route::get('/technicians',[
@@ -247,10 +263,8 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'updatefinancialreport'
     ]);
 
-    Route::post('/savestock',[
-        'uses'=>'DealerStockController@saveStock',
-        'as'=>'savestock'
-    ]);
+
+
 
     //search for technician using date
     Route::post('/searchtechnician',[
@@ -298,10 +312,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'reviewfeedback'
     ]);
 
-    Route::post('/registerdealer',[
-       'uses'=>'DealerController@registerDealer',
-        'as'=>'registerdealer'
-    ]);
+
 
 
     //direct to Project Summary page
@@ -351,4 +362,6 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'DeallocatedItemController@postSendToStore',
         'as'=>'sendtostore'
     ]);
+
+
 });

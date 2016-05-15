@@ -67,6 +67,6 @@ $S_SAVE.click(function() {
 
 
 
-    console.log('end2');
+
 
 });
