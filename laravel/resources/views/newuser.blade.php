@@ -26,8 +26,21 @@
 
                 <div class="form-group {{$errors->has('user_type')?'has-error':''}}">
                     <label for="user_type">User type</label>
-                    <input class="form-control" type="number" name="user_type" id="user_type" value="{{Request::old('user_type')}}">
+                    {{--<input class="form-control" type="number" name="user_type" id="user_type" value="{{Request::old('user_type')}}">--}}
+                    <div class="form-group {{$errors->has('user_type')?'has-error':''}}">
 
+                        {{--<input class="form-control" type="number" name="user_type" id="user_type" value="{{Request::old('user_type')}}">--}}
+
+                        <select id="user_type" name="user_type">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Manager</option>
+                            <option value="2">Accountant</option>
+                            <option value="3">Sales Person</option>
+                        </select>
+
+
+
+                    </div>
 
                 </div>
 
@@ -41,4 +54,9 @@
             </form>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>
 @endsection

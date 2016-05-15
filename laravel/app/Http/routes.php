@@ -16,7 +16,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('login');
     })->name('home');
-
+    Route::get('/logout',[
+        'uses'=>'UserController@getLogout',
+        'as'=>'logout'
+    ]);
     //log a user in
     Route::post('/login',[
         'uses'=>'UserController@postUserLogin',
@@ -197,15 +200,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'technicians'
     ]);
 
-//    Route::get('/bill',function(){
-//       return view('project_management/add_bill');
-//    })->name('bill');
 
-    //get bill view
-    Route::get('/bill',[
-        'uses'=>'BillController@getAddBillView',
-        'as'=>'bill'
-    ]);
 
     //add new bill
     Route::post('/addBill',[
