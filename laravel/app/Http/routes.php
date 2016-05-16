@@ -16,7 +16,10 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('login');
     })->name('home');
-
+    Route::get('/logout',[
+        'uses'=>'UserController@getLogout',
+        'as'=>'logout'
+    ]);
     //log a user in
     Route::post('/login',[
         'uses'=>'UserController@postUserLogin',
@@ -31,6 +34,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/newuser',[
         'uses'=>'UserController@postNewUser',
         'as'=>'newuser',
+        'middleware'=>'auth'
     ]);
 
     //get the project initiate view
@@ -42,13 +46,15 @@ Route::group(['middleware'=>['web']],function(){
     //save a feedback
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
-        'as'=>'savefeedback'
+        'as'=>'savefeedback',
+        'middleware'=>'auth'
     ]);
 
     //get the feedback view
     Route::get('feedback', [
         'uses'=>'FeedbackController@getFeedbackView',
-        'as'=>'feedback'
+        'as'=>'feedback',
+        'middleware'=>'auth'
     ]);
 
 
@@ -56,7 +62,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/initiateproject',[
        'uses'=>'ProjectController@postInitiateProject',
         'as'=>'initiateproject',
-
+        'middleware'=>'auth'
     ]);
 
     //get the project dashboard
@@ -197,15 +203,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'technicians'
     ]);
 
-//    Route::get('/bill',function(){
-//       return view('project_management/add_bill');
-//    })->name('bill');
 
-    //get bill view
-    Route::get('/bill',[
-        'uses'=>'BillController@getAddBillView',
-        'as'=>'bill'
-    ]);
 
     //add new bill
     Route::post('/addBill',[

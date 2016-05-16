@@ -17,14 +17,75 @@ use App\Technician;
 use App\TechnicianAllocation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 
 class ProjectController extends Controller
 {
-    public function postInitiateProject(Request $request){
 
+    public function checkEligibility($status){
+        $user_type=Auth::user()->user_type;
+        if($status==1){
+            if($user_type==1 or $user_type==2 or $user_type==3 ){
+                return true;
+            }
+        }
+        if($status==2){
+            if($user_type==1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getDashboard(){
+        $projects=Project::orderBy('project_status','asc')->get();
+        return view('project_management\project_dashboard',['projects'=>$projects]);
+    }
+
+    public function getProjectInitiatePage($project_id){
+        if(!$this->checkEligibility(2)){
+            return redirect()->back();
+        }
+        //validate the project
+        $project=Project::where('id',$project_id)->first();
+        $technicians=Technician::get();
+        $selling_items=SellingItem::get();
+        return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians,'sellingitems'=>$selling_items]);
+    }
+    public function getProjectInfo($project_id){
+
+        $project=Project::where('id',$project_id)->first();
+        $feedback=$project->feedback;
+
+
+        $technicianAllocations=TechnicianAllocation::where('project_id',$project_id)->get();
+        $technicianList=array();
+        foreach($technicianAllocations as $allocation){
+            array_push($technicianList,[Technician::where('id',$allocation->technician_id)->first(),($allocation->commission==0)?'':$allocation->commission]);
+        }
+        $items=Item::where('sale_type',1)->get();
+        //echo sizeof($items);
+        $itemList=array();
+        foreach($items as $item){
+            if($item->owner_id==$project_id){
+                array_push($itemList,$item);
+            }
+        }
+
+        $billList=Bill::where('project_id',$project_id)->get();
+        $selling_items=SellingItem::get();
+        return view('/project_management/projectinfo',['project'=>$project,'technicians'=>$technicianList,'itemList'=>$itemList,'billList'=>$billList,'sellingitems'=>$selling_items,'feedback'=>$feedback]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * handle a project initiate request
+     */
+    public function postInitiateProject(Request $request){
         $project=Project::where('id',$request['project_id'])->first();
         $project->client_name=$request['client'];
         $project->date=$request['date'];
@@ -44,51 +105,18 @@ class ProjectController extends Controller
                 $allocation->save();
             }
         }
-
-
         return redirect()->route('project');
     }
 
-    public function getDashboard(){
-        $projects=Project::orderBy('created_at','desc')->get();
-        return view('project_management\project_dashboard',['projects'=>$projects]);
-    }
 
-    public function getProjectInitiatePage($project_id){
-        //validate the project
-        $project=Project::where('id',$project_id)->first();
-        $technicians=Technician::get();
-        $selling_items=SellingItem::get();
-        return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians,'sellingitems'=>$selling_items]);
-    }
 
-    public function getProjectInfo($project_id){
 
-        $project=Project::where('id',$project_id)->first();
-        $technicianAllocations=TechnicianAllocation::where('project_id',$project_id)->get();
-        $technicianList=array();
-        foreach($technicianAllocations as $allocation){
-            array_push($technicianList,[Technician::where('id',$allocation->technician_id)->first(),($allocation->commission==0)?'':$allocation->commission]);
-        }
-        $items=Item::where('sale_type',1)->get();
-        //echo sizeof($items);
-        $itemList=array();
-        foreach($items as $item){
-            if($item->owner_id==$project_id){
-                array_push($itemList,$item);
-            }
-        }
 
-        $billList=Bill::where('project_id',$project_id)->get();
-
-        return view('/project_management/projectinfo',['project'=>$project,'technicians'=>$technicianList,'itemList'=>$itemList,'billList'=>$billList]);
-    }
 
     public function postProjectSearch(Request $request){
+
         $keyword=$request['keyWords'];
         $filter=$request['filter'];
-
-
         $projects=Project::all();
         $resultProjects=new Collection();
         foreach($projects as $project){
@@ -107,9 +135,6 @@ class ProjectController extends Controller
             if((strpos($filter, 'title') !== false) and Str::contains(Str::lower($project->title),Str::lower($keyword))){
                 $resultProjects->add($project);
             }
-//            else if(Str::contains(Str::lower($project->client_email),Str::lower($keyword))){
-//                $resultProjects->add($project);
-//            }
             else if((strpos($filter, 'date') !== false) and Str::contains(Str::lower($project->date),Str::lower($keyword))){
                 $resultProjects->add($project);
             }
@@ -118,6 +143,7 @@ class ProjectController extends Controller
     }
 
     public function postItemAllocation(Request $request){
+
         $project_id=$request['project_id'];
         $project=Project::where('id',$project_id)->first();
 

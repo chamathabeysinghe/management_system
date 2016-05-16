@@ -21,27 +21,6 @@ class UserController extends  Controller
         return view('dashboard');
     }
     public function postNewUser(Request $request){
-
-//        $v = Validator::make($request->all(), [
-//            'full_name' => 'required',
-//            'email' => 'required',
-//        ]);
-//
-//        if ($v->fails())
-//        {
-////            echo 'Validator fails';
-////            foreach($v->errors()->all() as $error){
-////                echo 'new    ';
-////                echo $error;
-////             }
-//
-////            foreach($v->messages()->all() as $error){
-////                echo 'new eroor:::   ';
-////                echo $error;
-////                echo '<br>';
-////            }
-//            return redirect()->route('dashboard')->withErrors($v->errors());
-//        }
         $this->validate($request,[
             'full_name'=>'required',
             'email'=>'required|email|unique:users',
@@ -58,15 +37,24 @@ class UserController extends  Controller
     }
 
     public function postUserLogin(Request $request){
-        $pass=Auth::attempt(['email'=>$request['email'],'password'=>$request['password']]);
-        echo $request['email'];
-        echo $request['password'];
 
+        $remember=false;
+        if($request['selection']){
+        foreach($request['selection'] as $rem){
+            $remember= $rem;
+        }}
+        echo $request['email'];
+        $pass=Auth::attempt(['email'=>$request['email'],'password'=>$request['password']],$remember);
         if($pass){
-            return redirect()->route('project');
+           return redirect()->route('project');
         }
         else{
             return redirect()->back()->with(['message'=>'User name or password is incorrect']);
         }
+    }
+
+    public function getLogout(){
+        Auth::logout();
+        return redirect()->route('home');
     }
 }

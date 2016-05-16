@@ -6,40 +6,41 @@
 
     <div class="row">
         <form class="col s12" action="{{Route('initiateproject',['project_id'=>$project->id])}}" method="post">
+
             <div class="section" >
                 <h5>Project Details</h5>
                 <div class="divider" style="margin-bottom: 10px"></div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="title" name="title" type="text" class="validate" value="{{$project->title}}">
+                        <input id="title" name="title" type="text" class="validate" required >
 
                         <label class="active" for="title">Project Title</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="incharge" name="incharge" type="text" class="validate" value="{{$project->incharge}}">
+                        <input id="incharge" name="incharge" type="text" class="validate" required >
                         <label class="active" for="incharge">Project Incharge</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="date" name="date" type="date" class="datepicker validate" onchange="changeTime()" value="{{$project->date}}">
+                        <input id="date" name="date" type="date"  class="datepicker" onchange="changeTime()">
                         {{--<input type='text' class='inp' readOnly />--}}
                         {{--<label class="" for="inp">Project date</label>--}}
                         <label class="active" for="date">Project date</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="duration" name="duration" type="number" class="validate" onchange="changeTime()" value="{{$project->duration}}">
+                        <input id="duration" name="duration" type="number" required  onchange="changeTime()" ">
                         <label class="active" for="duration">Project Duration</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="client" name="client" type="text" class="validate" value="{{$project->client_name}}">
+                        <input id="client" name="client" type="text"required class="validate" >
                         <label class="active" for="client">Client Name</label>
                     </div>
 
                     <div class="input-field col s12 m6">
-                        <input id="email" name="email" type="email" class="validate" value="{{$project->client_email}}">
+                        <input id="email" name="email" type="email" class="validate" >
                         <label class="active" for="email">Client Email</label>
                     </div>
 
@@ -113,21 +114,29 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col s6">
-                            <label>Select Item</label>
-                            <select class="browser-default" id="item-list">
-                                <option value="" disabled selected>Choose your option</option>
-                                @foreach($sellingitems as $item)
-                                     <option value="1" data-price="{{$item->unit_price}}" data-name="{{$item->item_name}}">{{$item->item_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col s6">
-                            <a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
-                        </div>
 
+
+                    <div>
+                        <label for="item-list">Select Item</label>
+                        <div class="row">
+                            <div class="col s6">
+
+                                <select class="browser-default" id="item-list">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    @foreach($sellingitems as $item)
+                                        <option value="1" data-price="{{$item->unit_price}}" data-name="{{$item->item_name}}">{{$item->item_name}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                            <div class="col s6">
+
+                                <a href="#" id="select-item" class="btn btn-danger" role="button">Add item from list</a>
+                            </div>
+
+                        </div>
                     </div>
+
 
 
                     {{----}}
@@ -169,6 +178,7 @@
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
+
             format: 'mm/dd/yyyy'
 
         });
@@ -190,6 +200,35 @@
             $('#item_table').find('table').append($clone);
         });
 
+        $('#item_save').click(function(event){
+
+            var date=$('#date').val();
+            var duration=parseInt($('#duration').val());
+            var error=false;
+            if(!isValidDate(date)){
+               console.log('not valid');
+                $('#date').addClass('invalid');
+                error=true;
+            }
+            else{
+                $('#date').removeClass('invalid');
+            }
+
+            if(duration<=0){
+                $('#duration').addClass('invalid');
+                error=true;
+            }
+            else{
+                $('#duration').removeClass('invalid');
+            }
+
+
+            if(error){
+                event.preventDefault();
+            }
+
+
+        });
         function changeTime(){
             var date=$('#date').val();
             var duration=parseInt($('#duration').val());
