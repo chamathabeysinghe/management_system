@@ -96,7 +96,27 @@
                                 <th></th>
                             </tr>
                             </thead>
+                            @if($estimation_records!=null)
+                            @foreach($estimation_records as $estimation_record)
+                                @for($i=0;$i<$estimation_record->quantity;$i+=1)
+                                    <tr>
 
+                                        <td contenteditable="true">{{$estimation_record->item}}</td>
+                                        <td class="right-align" contenteditable="true"></td>
+                                        <td class="right-align" contenteditable="true">{{$estimation_record->unitprice}}</td>
+
+
+                                        <td>
+                                            <span class="table-remove glyphicon glyphicon-remove"></span>
+                                        </td>
+                                        <td>
+                                            <span class="table-up glyphicon glyphicon-arrow-up"></span>
+                                            <span class="table-down glyphicon glyphicon-arrow-down"></span>
+                                        </td>
+                                    </tr>
+                                @endfor
+                            @endforeach
+                            @endif
                             <tr class="hide">
 
                                 <td contenteditable="true">unknown item</td>

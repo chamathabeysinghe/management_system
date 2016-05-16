@@ -349,4 +349,9 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'sendtostore'
     ]);
 
+    Route::get('/projectbyestimation',[
+        'uses'=>'ProjectController@createProjectFromEstimation',
+        'as'=>'projectbyestimation'
+    ]);
+
 });
