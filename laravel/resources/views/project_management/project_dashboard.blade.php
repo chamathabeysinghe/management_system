@@ -81,7 +81,7 @@
                                         <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Starting Date:</span> {{$project->date}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Project Location:</span> {{$project->location}}</div>
+                                        <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Project ID:</span> {{$project->id}}</div>
                                         <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Project Incharge:</span> {{$project->incharge}}</div>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                         <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Starting Date:</span> {{$project->date}}</div>
                                     </div>
                                     <div class="row">
-                                        <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Project Location:</span> {{$project->location}}</div>
+                                        <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Project ID:</span> {{$project->id}}</div>
                                         <div class="col s12 m6"><span style=" font-size:15px;font-weight: bold;color: #747474">Project Incharge:</span> {{$project->incharge}}</div>
                                     </div>
                                     <div class="row">

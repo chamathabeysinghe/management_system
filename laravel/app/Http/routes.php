@@ -34,6 +34,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/newuser',[
         'uses'=>'UserController@postNewUser',
         'as'=>'newuser',
+        'middleware'=>'auth'
     ]);
 
     //get the project initiate view
@@ -45,13 +46,15 @@ Route::group(['middleware'=>['web']],function(){
     //save a feedback
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
-        'as'=>'savefeedback'
+        'as'=>'savefeedback',
+        'middleware'=>'auth'
     ]);
 
     //get the feedback view
     Route::get('feedback', [
         'uses'=>'FeedbackController@getFeedbackView',
-        'as'=>'feedback'
+        'as'=>'feedback',
+        'middleware'=>'auth'
     ]);
 
 
@@ -59,7 +62,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/initiateproject',[
        'uses'=>'ProjectController@postInitiateProject',
         'as'=>'initiateproject',
-
+        'middleware'=>'auth'
     ]);
 
     //get the project dashboard
