@@ -19,6 +19,7 @@ class EstimationController extends Controller
         $client_address = $request['client_address'];
         $client_tel = $request['client_tel'];
         $estimation_amount = $request['estimation_amount'];
+        //console.log(estimation_amount); <<--estimation amount not coming to this part, so it doesn't store in table-->>
         //$estimation_amount = "0000";
         //$estimation_status = $request['estimation_status'];
         $estimation_status = "not defined";
@@ -66,6 +67,13 @@ class EstimationController extends Controller
 
         return view("quotation_management/newestimation", ['quotation'=>$quotation,['estimation'=>$estimation], 'record_list'=>$recordList],['sellingitems'=> $sellingitems]);
     }
+
+    public function getEstimationSummary()
+    {
+        $estimations = Estimation::orderBy('id', 'desc')->get();
+        return view("quotation_management/estimation_summary", ['estimations'=> $estimations]);
+    }
+
 
 
 
