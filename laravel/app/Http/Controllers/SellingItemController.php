@@ -24,4 +24,9 @@ class SellingItemController extends Controller
         return redirect()->back();
     }
 
+    public function getSellingItemView()
+    {
+        return view("quotation_management/add_sellingitem");
+    }
+
 }
