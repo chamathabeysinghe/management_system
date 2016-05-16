@@ -33,10 +33,49 @@ $('.change').click(function(event) {
     event.preventDefault();
     console.log('Change');
     var itemID=event.target.parentNode.parentNode.dataset['id'];
-    var itemName=document.getElementById("name"+itemID).innerHTML;
-    var serialNumber=document.getElementById("serial"+itemID).innerHTML;
+    var itemName=document.getElementById("name"+itemID).textContent;
+    var serialNumber=document.getElementById("serial"+itemID).textContent;
     var unitCost=document.getElementById("cost"+itemID).textContent;
-    $.post(url_update_item, {item_id:itemID,itemName:itemName,serialNumber:serialNumber,unitCost:unitCost,_token:token });
+    var error=false;
+
+    if(serialNumber.replace(/\s+/, "")==''){
+        error=true;
+        var element=document.getElementById("serial"+itemID);
+        element.style.borderBottom='solid';
+        element.style.borderColor='#ff6666';
+    }
+    else{
+        var element=document.getElementById("serial"+itemID);
+        element.style.border='none';
+    }
+    if(unitCost.replace(/\s+/, "")=='' || isNaN(unitCost)){
+        error=true;
+        var element=document.getElementById("cost"+itemID);
+        element.style.borderBottom='solid';
+        element.style.borderColor='#ff6666';
+    }
+    else{
+        var element=document.getElementById("cost"+itemID);
+        element.style.border='none';
+    }
+    if(itemName.replace(/\s+/, "")==''){
+        error=true;
+        var element=document.getElementById("name"+itemID);
+        element.style.borderBottom='solid';
+        element.style.borderColor='#ff6666';
+    }
+    else{
+        var element=document.getElementById("name"+itemID);
+        element.style.border='none';
+    }
+    if(error){
+        Materialize.toast('Item not saved.', 2000, 'rounded')
+    }
+    else{
+         Materialize.toast("Saved!", 1500 );
+        $.post(url_update_item, {item_id:itemID,itemName:itemName,serialNumber:serialNumber,unitCost:unitCost,_token:token });
+    }
+
 });
 
 

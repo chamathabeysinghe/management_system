@@ -9,51 +9,56 @@
         <a href="#!" class="collection-item active">Quotation Summary</a>
     </div>
 
-    <div>
-        <input type="text" id="search-input" placeholder="Search" onkeydown="down()" onkeyup="up()">
-    </div>
+    @include('includes.message-block')
 
-    <table class="highlight responsive-table bordered">
-        <thead>
-            <tr>
-                <th data-field="date">Date</th>
-                <th data-field="quotation_number">Quotation Number</th>
-                <th data-field="client">Client</th>
-                <th data-field="amount">Amount</th>
-                <th data-field="quotation_status">Status</th>
-            </tr>
-        </thead>
+    <section class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="col-lg-8 col-lg-offset-2">
+            <header style="color: #747474;"><h3>Quotation Dashboard</h3></header>
 
-        <tbody>
-            <tr>
-                <td>2016-05-03</td>
-                <td>DES160503001</td>
-                <td>Thulana</td>
-                <td>$ 37.60</td>
-                <td>Accepted</td>
-            </tr>
-            <tr>
-                <td>2016-05-08</td>
-                <td>DES160508008</td>
-                <td>Ashan</td>
-                <td>$ 28.70</td>
-                <td>Estimation Sent</td>
-            </tr>
-            <tr>
-                <td>2016-05-08</td>
-                <td>DES160508012</td>
-                <td>Kasunjith</td>
-                <td>$ 52.30</td>
-                <td>Accepted</td>
-            </tr>
-            <tr>
-                <td>2016-05-09</td>
-                <td>DES160508002</td>
-                <td>Imesh</td>
-                <td>$ 2.00</td>
-                <td>Rejected</td>
-            </tr>
-        </tbody>
-    </table>
+            {{--<div>--}}
+            {{--<input type="text" id="search-input" placeholder="Search" onkeydown="down()" onkeyup="up()">--}}
+            {{--</div>--}}
+
+
+            <nav>
+                <div class="nav-wrapper teal lighten-2">
+                    <form>
+                        <div class="input-field">
+                            <input id="search-input" type="search" required onkeydown="down()" onkeyup="up()" style="height: 65px;">
+                            <label for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <section class="row posts">
+        <div class="col-md-6 col-md-offset-3">
+            @foreach($quotations as $quotation)
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+                                <span class="card-title">{{ $quotation->client_name }}</span>
+                                <p>
+                                    Quotation Date  : {{ $quotation->quotation_date }} <br>
+                                    Quotation Number: {{ $quotation->id }} <br>
+                                    Client Name     : {{ $quotation->client_name }} <br>
+                                    Amount          : {{ $quotation->quotation_amount }} <br>
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">Create Project</a> <br>
+                                <a href="#">Create Estimate</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
+
 
 @endsection

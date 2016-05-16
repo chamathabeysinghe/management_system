@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master_default')
 @section('title')
     Welcome
 @endsection()
@@ -8,7 +8,7 @@
 
     <div class="row ">
         <div class="col s12">
-            <h3>Sign Up</h3>
+            <h3>Log In</h3>
             <form action="{{route('login')}}" method="post">
                 <div class="row">
                     <div class="form-group {{$errors->has('email')?'has-error':''}} col s12 l6">
@@ -20,6 +20,15 @@
                     <div class="form-group {{$errors->has('password')?'has-error':''}} col s12 l6">
                         <label for="password">Password</label>
                         <input class="form-control" type="password" name="password" id="password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col s12 l6">
+                        <input type="checkbox" name="selection[]" value="true" id="remember" />
+                        <label for="remember">Remember me</label>
+
+                        {{--<input type="checkbox" class="filled-in" id="remember_me" value="true" name="selection[]"/>--}}
+                        {{--<label for="remember_me">Remember Me</label>--}}
                     </div>
                 </div>
 

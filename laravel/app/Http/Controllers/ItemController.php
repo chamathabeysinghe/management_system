@@ -11,7 +11,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Dealer;
+use App\DeallocatedItem;
 use App\Item;
 use App\Project;
 use Illuminate\Http\Request;
@@ -28,10 +30,14 @@ class ItemController extends Controller
         // echo "item View";
         $project=null;
         $dealer=null;
+
+
+
         $itemCode = $request['keyWords'];
         $item = Item::where('serial_number', $itemCode)->first();
         $item->load('returnItemDetail');
         $supplier = Item::find($item['id'])->supplier;
+
         if($item['sale_type']== 1){
             $project=Project::find($item['owner_id']);
         }else{
@@ -47,7 +53,12 @@ class ItemController extends Controller
     {
         $item_id = $request['item_id'];
         $item = Item::where('id', $item_id)->first();
+        $deallocated_item=new DeallocatedItem();
+        $deallocated_item->serial_number=$item->serial_number;
+        $deallocated_item->item_name=$item->item_name;
+        $deallocated_item->return_state=1;
         $item->delete();
+        $deallocated_item->save();
     }
 
     public function postChangeItem(Request $request)

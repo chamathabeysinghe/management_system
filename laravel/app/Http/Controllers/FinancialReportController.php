@@ -81,15 +81,19 @@ class FinancialReportController extends Controller
             array_push($recordsList,($field));
             //echo '<br>';
         }
-        return view('project_management/financial_report',['recordList'=>$recordsList,'project_id'=>$request['project_id']]);
+        return view('project_management/financial_report',['recordList'=>$recordsList,'freport'=>$financialReport,'project_id'=>$request['project_id']]);
     }
 
     public function postUpdateFinancialReport(Request $request){
         $project_id=$request['project_id'];
+        $created_by=$request['created_by'];
+        $checked_by=$request['checked_by'];
+        $date=$request['date'];
         $project=Project::where('id',$project_id)->first();
 
         $financialReport=$project->FinancialReport;
         $fieldsList=array();
+
         $jfo = json_decode($request['new_data']);
         foreach($jfo as $newData){
 
@@ -102,6 +106,10 @@ class FinancialReportController extends Controller
         }
         $financialReport->fieldList=(serialize($fieldsList));
         $financialReport->profit= $request['total_val'];
+
+        $financialReport->crated_by=$created_by;
+        $financialReport->checked_by=$checked_by;
+        $financialReport->date=$date;
         $project->financialReport()->save($financialReport);
 
     }
