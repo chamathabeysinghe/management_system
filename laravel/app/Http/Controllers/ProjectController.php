@@ -24,6 +24,12 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+//    public function createProjectFromEstimation(Request $request){
+//        $project=new Project();
+//        $estimation=$request['estimation'];
+//        $project->client_name=$estimation->client_name;
+//        $project->save();
+//    }
 
     public function checkEligibility($status){
         $user_type=Auth::user()->user_type;
@@ -46,6 +52,7 @@ class ProjectController extends Controller
     }
 
     public function getProjectInitiatePage($project_id){
+
         if(!$this->checkEligibility(2)){
             return redirect()->back();
         }
@@ -53,6 +60,7 @@ class ProjectController extends Controller
         $project=Project::where('id',$project_id)->first();
         $technicians=Technician::get();
         $selling_items=SellingItem::get();
+        //$estimation=$project->estimation;
         return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians,'sellingitems'=>$selling_items]);
     }
     public function getProjectInfo($project_id){

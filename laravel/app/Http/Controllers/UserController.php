@@ -17,8 +17,14 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends  Controller
 {
-    public function getDashboard(){
-        return view('dashboard');
+    public function getNewUserView(){
+        $user_type=Auth::user()->user_type;
+        if($user_type==1){
+            return view('newuser');
+        }
+        else{
+            return redirect()->back();
+        }
     }
     public function postNewUser(Request $request){
         $this->validate($request,[

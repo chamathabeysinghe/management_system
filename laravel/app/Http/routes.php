@@ -16,6 +16,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('login');
     })->name('home');
+
     Route::get('/logout',[
         'uses'=>'UserController@getLogout',
         'as'=>'logout'
@@ -23,31 +24,25 @@ Route::group(['middleware'=>['web']],function(){
     //log a user in
     Route::post('/login',[
         'uses'=>'UserController@postUserLogin',
-        'as'=>'login'
+        'as'=>'login',
     ]);
     //get new user view
-    Route::get('/newuser', function () {
-        return view('newuser');
-    });
+    Route::get('/newuser',[
+        'uses'=>'UserController@getNewUserView',
+        'as'=>'newuser',
+        'middleware'=>'auth'
+    ]);
 
     //create a new user
     Route::post('/newuser',[
         'uses'=>'UserController@postNewUser',
         'as'=>'newuser',
-        'middleware'=>'auth'
     ]);
 
-    //get the project initiate view
-    Route::get('/projectinit', function () {
-        return view('/project_management/project_init');
-    });
-
-
-    //save a feedback
+   //save a feedback
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
         'as'=>'savefeedback',
-        'middleware'=>'auth'
     ]);
 
     //get the feedback view
@@ -57,7 +52,17 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
+    //get the project initiate view
+//    Route::get('/projectinit', function () {
+//        return view('/project_management/project_init');
+//    });
 
+    //get project initiate window
+    Route::get('/initiate-post/{project_id}',[
+        'uses'=>'ProjectController@getProjectInitiatePage',
+        'as'=>'project.initiate',
+        'middleware'=>'auth'
+    ]);
     //initiate the project
     Route::post('/initiateproject',[
        'uses'=>'ProjectController@postInitiateProject',
@@ -73,12 +78,7 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
 
-    //get project initiate window
-    Route::get('/initiate-post/{project_id}',[
-        'uses'=>'ProjectController@getProjectInitiatePage',
-        'as'=>'project.initiate',
-        'middleware'=>'auth'
-    ]);
+
 
     Route::get('/return/newitem', function () {
         return view('return_management/NewReturnItem');
@@ -101,21 +101,18 @@ Route::group(['middleware'=>['web']],function(){
 
 
 
-
-
     //get project information form
     Route::get('/projectinfo/{project_id}',[
         'uses'=>'ProjectController@getProjectInfo',
         'as'=>'project.info',
         'middleware'=>'auth'
     ]);
+
     //search projects
     Route::post('/search',[
         'uses'=>'ProjectController@postProjectSearch',
         'as'=>'project_search'
     ]);
-
-
 
     //get new technician page
     Route::get('/newtechnician',function(){
@@ -200,7 +197,8 @@ Route::group(['middleware'=>['web']],function(){
     //get technician profile view
     Route::get('/technicians',[
         'uses'=>'TechnicianController@postTechnicianView',
-        'as'=>'technicians'
+        'as'=>'technicians',
+        'middleware'=>'auth'
     ]);
 
 

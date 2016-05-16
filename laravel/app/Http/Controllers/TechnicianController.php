@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
 
 class TechnicianController extends Controller
 {
+
     public function postCalculateCommission(Request $request){
         $project=Project::where('id',$request['project_id'])->first();
         $gross_profit=$project->gpforecast;
@@ -39,10 +40,17 @@ class TechnicianController extends Controller
     }
 
     public function postTechnicianView(Request $request){
+        $user_type=Auth::user()->user_type;
+        if($user_type==1 or $user_type==2 or $user_type==3){
+            $technicians=Technician::get();
 
-        $technicians=Technician::get();
+            return view('project_management/technician_profiles',['technicians'=>$technicians]);
+        }
+        else{
+            return redirect()->back();
+        }
 
-        return view('project_management/technician_profiles',['technicians'=>$technicians]);
+
     }
 
     public function postTechnicianSearch(Request $request){
