@@ -309,6 +309,12 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'getquotationsummary'
     ]);
 
+    //direct to Quotation Summary page
+    Route::get('/getestimationsummary',[
+        'uses' => 'EstimationController@getEstimationSummary',
+        'as' => 'getestimationsummary'
+    ]);
+
     //direct to Create Estimation page
     Route::get('/newestimation',[
         'uses' => 'EstimationController@getEstimationID',
