@@ -121,24 +121,29 @@
 
         </div>
 
-        <button id="q_save" class="btn btn-primary">Export Data</button>
+        <button id="q_save" class="btn btn-primary">Create Quotation<i class="material-icons right">done</i></button>
 
     </div>
+
+    <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 
     <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Create
-            <i class="material-icons right">done</i>
-        </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Download
-            <i class="material-icons right">play_for_work</i>
-        </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Print
+        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
             <i class="material-icons right">print</i>
         </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Email
-            <i class="material-icons right">email</i>
-        </button>
     </div>
+
+    <script>
+        printDivCSS = new String ('<link href="{{URL::to('css/materialize.css')}}" rel="stylesheet" type="text/css">'
+                +'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">'
+                +'<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">');
+        function printDiv(divId) {
+            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+    </script>
+
     <script>
         var token='{{Session::token()}}';
         var url='{{route('createquotation')}}';

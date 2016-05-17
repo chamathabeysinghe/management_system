@@ -143,22 +143,13 @@
 
         </div>
 
-        <button id="est_save" class="btn btn-primary">Export Data</button>
+        <button id="est_save" class="btn btn-primary">Create Estimation<i class="material-icons right">done</i></button>
 
     </div>
 
     <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Create
-            <i class="material-icons right">done</i>
-        </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Download
-            <i class="material-icons right">play_for_work</i>
-        </button>
         <button class="btn waves-effect waves-light" type="submit" name="action">Print
             <i class="material-icons right">print</i>
-        </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Email
-            <i class="material-icons right">email</i>
         </button>
     </div>
 
