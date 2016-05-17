@@ -1,9 +1,9 @@
 
 
-var $S_TABLE = $('#s_table');
-var $S_SAVE = $('#s_save');
+var $S_TABLE = $('#s_table'); //Editabale stock table
+var $S_SAVE = $('#s_save');     //save button
 
-
+//add new row to the table
 $('.table-add').click(function() {
     var $clone = $S_TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
     $S_TABLE.find('table').append($clone);
@@ -11,17 +11,20 @@ $('.table-add').click(function() {
     $clone.prev().before($clone.get(0));
 });
 
+//remove row from the table
 $('.table-remove').click(function() {
     $(this).parents('tr').detach();
     calTotal();
 });
 
+//moving a row to the above function
 $('.table-up').click(function() {
     var $row = $(this).parents('tr');
     if ($row.index() === 1) return; // Don't go above the header
     $row.prev().before($row.get(0));
 });
 
+//moving a row to the down function
 $('.table-down').click(function() {
     var $row = $(this).parents('tr');
     $row.next().after($row.get(0));
@@ -31,6 +34,7 @@ $('.table-down').click(function() {
 jQuery.fn.pop = [].pop;
 jQuery.fn.shift = [].shift;
 
+//save button functionality
 $S_SAVE.click(function() {
     console.log("start");
     var $rows = $S_TABLE.find('tr:not(:hidden)');
@@ -55,6 +59,7 @@ $S_SAVE.click(function() {
             headers.forEach(function(header, i) {
                 h[header] = $td.eq(i).text();
 
+                //necessary validation parts for the columns
                 if(i==0){
                     if( $td.eq(i).text().replace(/\s+/, "")==''){
                         error=true;
@@ -154,10 +159,9 @@ $S_SAVE.click(function() {
     // Output the result
     var date=$('#date').val();
     var total=$('#final-value').text();
-    console.log(date);
-    console.log(total);
+    //checking for errors
     var dealer_details=$('#dealer-list').find(":selected").attr("data-register_no");
-    console.log(dealer_details);
+
     if(date==''){
         error=true;
         Materialize.toast('Date not selected', 2000, 'rounded')

@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\View;
 
 class DealerController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * Function for registering dealers
+     */
     public function registerDealer(Request $request)
     {
-
+        //checking if the user filled required fields
         $this -> validate($request, [
             'register_no' => 'required|unique:dealers',
             'last_name' => 'required|max:120',
@@ -43,6 +49,12 @@ class DealerController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param Request $request
+     * @return View
+     * Function for get the stock view
+     */
+
     public function getStockView(Request $request){
         $dealers=Dealer::all();
         $sellingitems = SellingItem::all();
@@ -50,6 +62,11 @@ class DealerController extends Controller
         return view('/dealer_management/new_stock',['dealers'=>$dealers,'sellingitems'=> $sellingitems]);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * Function for get the search results of dealers
+     */
     public function getSearchResults(Request $request){
 
         $register_no=$request['keyWords'];

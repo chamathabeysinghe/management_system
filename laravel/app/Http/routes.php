@@ -209,21 +209,22 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'DealerController@getStockView',
         'as'=>'new_stock'
     ]);
-
+    //direct to search dealers view
     Route::get('/dealer/view',function(){
         return view("dealer_management/dealers_view");
     })->name('view_dealer');
 
+    //save stock
     Route::post('/savestock',[
         'uses'=>'DealerStockController@saveStock',
         'as'=>'savestock'
     ]);
-
+    //register dealers
     Route::post('/registerdealer',[
         'uses'=>'DealerController@registerDealer',
         'as'=>'registerdealer'
     ]);
-
+    //search dealers
     Route::post('/dealersearch',[
         'uses'=>'DealerController@getSearchResults',
         'as'=>'dealersearch'

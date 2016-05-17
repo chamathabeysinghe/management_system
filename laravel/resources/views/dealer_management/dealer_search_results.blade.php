@@ -4,10 +4,10 @@
     {{$dealer->first_name}} {{$dealer->last_name}}
 </div>
 <div class="row">
-    {{'Tel'}}   {{$dealer->telephone_no}}
+    {{'Telephone number'}} : {{$dealer->telephone_no}}
 </div>
 
-
+{{--showing the stocks that bought dealer--}}
 
 @foreach($stocks as $stock)
 
@@ -27,7 +27,6 @@
                         <th class="left-align" data-field="item_name">Item Name</th>
                         <th class="left-align" data-field="serial_no">Serial No</th>
                         <th class="left-align" data-field="unit_price">Unit Price</th>
-                        <th class="left-align" data-field="quantity">Quantity</th>
                         <th class="left-align" data-field="total_cost">Total Cost</th>
 
                         <th></th>
@@ -49,7 +48,6 @@
                             <td contenteditable="false">{{$field->itemName}}</td>
                             <td contenteditable="false">{{$field->serialNo}}</td>
                             <td contenteditable="false">{{$field->unitCost}}</td>
-                            <td contenteditable="false">{{$field->quantity}}</td>
                             <td contenteditable="false">{{$field->totalCost}}</td>
 
 
@@ -62,7 +60,7 @@
                         <td class="right-align" contenteditable="true"></td>
                         <td class="right-align" contenteditable="true"></td>
                         <td class="right-align" contenteditable="true"></td>
-                        <td class="right-align" contenteditable="true"></td>
+
                         <td class="right-align" id="final-value" contenteditable="true">{{$stock->total_cost}}</td>
 
 

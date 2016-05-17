@@ -24,6 +24,11 @@ use Mockery\CountValidator\Exception;
 class DealerStockController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * Function for saving stock
+     */
     public function saveStock(Request $request){
         $dealer_details=$request['dealer_details'];
         $finalTotal=$request['total'];
@@ -41,7 +46,6 @@ class DealerStockController extends Controller
             $stockField->itemName=$newData->itemname;
             $stockField->serialNo=$newData->serialno;
             $stockField->unitCost=$newData->unitprice;
-            //$stockField->quantity=$newData->quantity;
             $stockField->totalCost=$newData->totalcost;
             array_push($stockList,$stockField);
 
@@ -66,6 +70,12 @@ class DealerStockController extends Controller
         return redirect()->back();
 
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * Function for get selling item to include in the stock
+     */
 
     public function getSellingItems(Request $request){
         $sellingitems = SellingItem::all();
