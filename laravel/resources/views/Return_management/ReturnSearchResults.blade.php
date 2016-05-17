@@ -55,7 +55,12 @@
                             console.log('{{$data->job_type}}'+'job_type');
                             if ($state.val() == 'warranty') {
                                 //console.log($state.val());
-                                $('#wcn_btn').prop('disabled', false);
+                                if($('#wcnno').val()!=''){
+                                    $('#wcn_btn').prop('disabled', false);
+                                }else{
+                                    $('#wcn_btn').prop('disabled', true);
+                                }
+
                                 // $warranty.removeAttr('disabled');
                                 $repair.children().prop('disabled', true);
                                 $warranty.children().prop('disabled', false);
@@ -238,8 +243,6 @@
     <script>$('.collapsible').collapsible();</script>
     <div class="btn-group-lg row">
         <button role="button" id="wcn_btn"    onclick="window.location='{{ route('wcn',['id'=>$data->id]) }}'" class="btn btn-lg btn-primary left  ">WCN</button>
-        <button role="button" class="btn btn-lg btn-primary left ">Close Job</button>
-        <button role="button" class="btn btn-lg btn-primary right ">Cancel</button>
         <button role="button" onclick="updateReturnRecord()" class="btn btn-lg btn-primary  right ">Apply</button>
 
 

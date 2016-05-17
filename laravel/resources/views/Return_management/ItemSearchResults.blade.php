@@ -1,3 +1,5 @@
+{{--this blade is used to display data after serching item to return the item  --}}
+
 @if($item == null)
     <h5 class="alert-danger center-align">No record found</h5>
 
@@ -45,13 +47,18 @@
             </fieldset>
 
             <fieldset class="form-group input-group ">
+                <script>
+                    function saveEnable(){
+                        $('#save_btn').prop('disabled', false);
+                    }
+                </script>
                 <div class="row">
                     <p class="col-lg-6">
-                        <input class="with gap" type="radio" id="warrantyselect" value="warranty" name="option">
+                        <input class="with gap" type="radio" onclick="saveEnable()" id="warrantyselect" value="warranty" name="option">
                         <label for="warrantyselect">Warranty </label>
                     </p>
                     <p>
-                        <input class="with gap" type="radio" id="repairselect" value="repair" name="option">
+                        <input class="with gap" type="radio" onclick="saveEnable()" id="repairselect" value="repair" name="option">
                         <label for="repairselect">repair </label>
                     </p>
 
@@ -139,11 +146,11 @@
                                     <p class=" col s6">{{$project->description}}</p>
                                 </div>
                                 <div class="row">
-                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">Email :</p>
                                     <p class=" col s6 ">{{$project->client_email}}</p>
                                 </div>
                                 <div class="row">
-                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">Project status :</p>
                                     <p class=" col s6 ">{{$project->project_status}}</p>
                                 </div>
                                 <div class="row">
@@ -158,7 +165,7 @@
                 @if( $item->sale_type == 2)
                     @if($dealer != null)
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">receipt</i>project Details</div>
+                            <div class="collapsible-header"><i class="material-icons">receipt</i>Dealer Details</div>
                             <div class="collapsible-body">
                                 <div class="row">
                                     <p class=" col s6">Client :</p>
@@ -198,7 +205,7 @@
             </button>
             <div class="col pull-right">
 
-                <button type="submit" class="btn" onclick="saveReturnRecord()"><i class="material-icons right">save</i>Save
+                <button type="submit" class="btn" disabled='true' id="save_btn" onclick="saveReturnRecord()"><i class="material-icons right">save</i>Save
                 </button>
                 <input type="hidden" name="_token" value="{{Session::token()}}"/>
                 {{--<a class="waves-effect waves-light btn"><i class="material-icons right">cancel</i>Cancel</a>--}}

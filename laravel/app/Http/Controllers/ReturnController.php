@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\View;
 
 class ReturnController extends Controller
 {
+    // search and find a return record by return id
     public function getAReturnInfo($id)
     {
         $returnData = ReturnItemDetail::find($id);
@@ -23,15 +24,11 @@ class ReturnController extends Controller
         $item=$item->first();
         $supplier=$item->Supplier;
 
-
-
-       // echo $returnData;
-//        echo $customer;
-//        echo $item;
-//        echo $supplier;
         return View::make('/return_management/returnsearchresults')->with('data', $returnData)->with('item', $item)->with('customer', $customer)->with('supplier', $supplier);
 
     }
+
+    // get return info dynamically
     public function getReturnInfo(Request $request)
     {
         // echo "item View";
@@ -92,23 +89,14 @@ class ReturnController extends Controller
                     $id = $returnData['id'];
                     $customer = ReturnItemDetail::find($id)->customer;
                 }
-//                $allData=$repairs->merge($warrantys);
-//                $allData=$allData->merge($returnDatas);
+
 
 
             }
 
         }
 
-        //echo $itemCode;
-//        echo $item;
-//       echo $returnDatas;
-//        echo $customer;
-//        echo  $supplier;
-//        echo "----------------------------------------------------------------";
-//        echo $allData;
-//        echo "----------------------------------------------------------------";
-//        echo $returnDatas;
+        // send data to the view
         return View::make('/return_management/managereturnview')->with('returnDatas', $returnDatas)->with('items', $item)->with('customers', $customer)->with('supplier', $supplier);
     }
 
@@ -117,16 +105,19 @@ class ReturnController extends Controller
 
     }
     public function newReturnItem(){
+        //simple redirect thru controller
         return View::make('return_management/NewReturnItem');
     }
     public function manageReturnItem(){
+        //simple redirect thru controller
         return View::make('return_management/ManageReturnItem');
     }
     public function returnDashboard(){
+        //simple redirect thru controller
         return View::make('return_management/ReturnDashboard');
     }
 
-
+    // update return record accordingly. this can happen in various ways.
     public function updateReturn(Request $request){
         $data= array();
         parse_str('controler');
@@ -134,21 +125,18 @@ class ReturnController extends Controller
         $returnData=ReturnItemDetail::find($request['returnid']);
         $returnData->load('repairItemDetail', 'warrantyItemDetail','replacement','items');
 
-           // echo $returnData;
-       // echo $request['data'];
-//        echo $data['job_type'];
-//        echo 'job type printed';
+
         $item=$returnData->items;
         $item=$item->first();
+        // if there is no replacement added already
         if($returnData->replacement == null){
-            //echo 'first if';
+            //check if replacement is added
             if($data['replacement'] != ''){
-               // echo 'first inner if';
+               // check if replacement is the same item
                 if($data['replacement']==$item['serial_number']){
-                    //echo 'inner inner';
                     $item->returnItemDetail()->save($returnData);
                 }else{
-                    //echo 'inner inner else';
+                    //add new replacement
                     $newitem=new Item();
                     $newitem->serial_number=$data['replacement'];
                     $newitem->item_name=$item['item_name'];
@@ -160,13 +148,14 @@ class ReturnController extends Controller
                     $newitem->save();
                     $newitem->returnItemDetail()->save($returnData);
                     echo 'end';
-                    //echo $newitem;
+
                 }
             }
         }else{
             if($data['replacement']==$returnData->replacement['serial_number']){
-
+                // do nothing if replacement is added
             }else{
+                // add new replacement
                 $newitem=new Item();
                 $newitem->serial_number=$data['replacement'];
                 $newitem->item_name=$item['item_name'];
@@ -180,7 +169,9 @@ class ReturnController extends Controller
             }
 
         }
-
+        /**
+         *if job type is warranty add data
+         */
         if($data['job_type'] == "warranty"){
             if($data['job_type'] !=$returnData['job_type'] ){
                 $returnData->job_type=$data['job_type'];
@@ -205,7 +196,9 @@ class ReturnController extends Controller
                 $warranty->wrnNo=$data['wrnno'];
                 $warranty->save();
             }
-
+        /**
+         * if job type is return add data
+         */
         }elseif($data['job_type'] == "repair"){
             if($data['job_type'] !=$returnData['job_type'] ){
                 $returnData->job_type=$data['job_type'];
@@ -226,7 +219,6 @@ class ReturnController extends Controller
 
             }
         }
-       // echo $data;
 
     }
 
@@ -235,6 +227,11 @@ class ReturnController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * get detail wanted for job note
+     */
     public function getJobNote(Request $request){
         $returnData=ReturnItemDetail::all() -> last();
         $returnData->load('items');
@@ -245,6 +242,13 @@ class ReturnController extends Controller
 
         return View::make('/return_management/job_note')->with('data', $returnData)->with('item', $item)->with('customer', $customer);
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * get detail wanted for WCN
+     */
     public function getWCN(Request $request){
         $id=$request['id'];
         //echo $id;
@@ -258,6 +262,11 @@ class ReturnController extends Controller
 
         return View::make('/return_management/WCN')->with('data', $returnData)->with('item', $item)->with('supplier', $supplier);
     }
+
+    /**
+     * @param Request $request
+     * add new return item to the database
+     */
     public function addNewReturn(Request $request)
     {
        // echo $request;

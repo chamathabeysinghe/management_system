@@ -25,6 +25,12 @@ use Illuminate\Support\Facades\View;
 class ItemController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * get item info wanted for return new item
+     */
     public function getItemInfo(Request $request)
     {
         // echo "item View";

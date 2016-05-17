@@ -73,6 +73,12 @@
 
                     </li>
                 @endif
+                @if(Auth::user()->user_type==1)
+                    <li>
+                        <a class="waves-effect waves-teal" href="{{route('edituser')}}">Edit User</a>
+
+                    </li>
+                @endif
 
 
             </ul>

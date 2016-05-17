@@ -1,7 +1,9 @@
 /**
  * Created by TK on 10/05/2016.
  */
-
+/**
+ * forwording ajax request to update retur record
+ */
 function updateReturnRecord(){
     $.ajax({
         method:'POST',
@@ -19,6 +21,9 @@ function updateReturnRecord(){
     console.log('done');
 
 }
+/**
+ * ajax request handler for the save return records
+ */
 function saveReturnRecord(){
     console.log('addreturn');
     if($('#warrantyselect').is(':checked')) {
@@ -63,6 +68,9 @@ function saveReturnRecord(){
     console.log('done');
 
 }
+/**
+ * get return data using ajax
+ */
 function getReturnRecord(){
     console.log('searchreturn');
 

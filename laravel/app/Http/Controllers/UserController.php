@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\View;
 
 class UserController extends  Controller
 {
@@ -56,5 +57,28 @@ class UserController extends  Controller
     public function getLogout(){
         Auth::logout();
         return redirect()->route('home');
+    }
+    public function getEditDealer(){
+        return View::make('edituser');
+    }
+    public function saveEditDealer(Request $request){
+        $this->validate($request,[
+            'full_name'=>'required',
+            'email'=>'required|email',
+            'user_type'=>'required',
+            'password'=>'required|min:4'
+        ]);
+        $user =User::where('email',$request['email'])->first();
+        if($user != null){
+            $user->full_name=$request['full_name'];
+            $user->email=$request['email'];
+            $user->user_type=$request['user_type'];
+            $user->password=bcrypt($request['password']);
+            $user->save();
+            return redirect()->back();
+        }else{
+            return redirect()->back()->with(['message'=>'Incorrect email']);
+        }
+
     }
 }
