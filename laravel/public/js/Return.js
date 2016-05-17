@@ -12,6 +12,7 @@ function updateReturnRecord(){
             successHTML += '<li> Records added successfully </li>';
             successHTML += '</ul></di>';
             $( '#form-errors' ).html( successHTML );
+            $( '#wcn_btn').prop( "disabled", false );
             //console.log(data);
         },
     });
@@ -111,8 +112,8 @@ function getReturnRecord(){
     }
     else{
         console.log("CLEAR");
-        //$('#search_results').hide();
-        //$('#search-results').hide();
+        $('#search_results').hide();
+        $('#search-results').hide();
     }
 
 }

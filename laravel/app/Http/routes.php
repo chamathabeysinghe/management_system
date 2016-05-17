@@ -118,6 +118,13 @@ Route::group(['middleware'=>['web']],function(){
         ]
 
     );
+    Route::get('/return/wcn',[
+            'uses'=>'ReturnController@getWCN',
+            'as'=>'wcn',
+            'middleware'=>'auth'
+        ]
+
+    );
 
 
 //    Route::get('/return/dashboard', function () {

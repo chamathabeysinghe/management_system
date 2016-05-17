@@ -245,6 +245,19 @@ class ReturnController extends Controller
 
         return View::make('/return_management/job_note')->with('data', $returnData)->with('item', $item)->with('customer', $customer);
     }
+    public function getWCN(Request $request){
+        $id=$request['id'];
+        //echo $id;
+        //echo 'controller';
+        $returnData=ReturnItemDetail::find($id);
+        $returnData->load('items','warrantyItemDetail');
+       // $customer =$returnData->customer;
+        $item=$returnData->items;
+        $item=$item->first();
+        $supplier=$item->Supplier;
+
+        return View::make('/return_management/WCN')->with('data', $returnData)->with('item', $item)->with('supplier', $supplier);
+    }
     public function addNewReturn(Request $request)
     {
        // echo $request;

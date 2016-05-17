@@ -35,14 +35,18 @@ class ItemController extends Controller
 
         $itemCode = $request['keyWords'];
         $item = Item::where('serial_number', $itemCode)->first();
-        $item->load('returnItemDetail');
-        $supplier = Item::find($item['id'])->supplier;
+        $supplier=null;
+        if($item !=null){
+            $item->load('returnItemDetail');
+            $supplier = Item::find($item['id'])->supplier;
 
-        if($item['sale_type']== 1){
-            $project=Project::find($item['owner_id']);
-        }else{
-            $dealer=Dealer::find($item['owner_id']);
+            if($item['sale_type']== 1){
+                $project=Project::find($item['owner_id']);
+            }else{
+                $dealer=Dealer::find($item['owner_id']);
+            }
         }
+
         //echo $itemCode;
         //echo $item;
         //echo $supplier;

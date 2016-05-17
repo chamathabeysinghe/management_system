@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
        // echo $e;
-        //return parent::render($request, $e);
+        return parent::render($request, $e);
         switch ($e) {
 
             case ($e instanceof ModelNotFoundException):
