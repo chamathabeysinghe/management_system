@@ -9,7 +9,7 @@
         <a href="#!" class="collection-item active">Create Estimation</a>
     </div>
 
-    <div class="row">
+    <div class="row" id="printable">
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
@@ -147,12 +147,24 @@
 
     </div>
 
+    <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+
     <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Print
+        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
             <i class="material-icons right">print</i>
         </button>
     </div>
 
+    <script>
+        printDivCSS = new String ('<link href="{{URL::to('css/materialize.css')}}" rel="stylesheet" type="text/css">'
+                +'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">'
+                +'<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">');
+        function printDiv(divId) {
+            window.frames["print_frame"].document.body.innerHTML=printDivCSS + document.getElementById(divId).innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+    </script>
 
     <script>
         var token='{{Session::token()}}';

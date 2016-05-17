@@ -9,7 +9,7 @@
         <a href="#!" class="collection-item active">Create Quotation</a>
     </div>
 
-    <div class="row">
+    <div class="row" id="printable">
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
