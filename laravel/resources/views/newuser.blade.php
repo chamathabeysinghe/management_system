@@ -36,6 +36,7 @@
                             <option value="1">Manager</option>
                             <option value="2">Accountant</option>
                             <option value="3">Sales Person</option>
+                            <option value="4">Receptionist</option>
                         </select>
 
 

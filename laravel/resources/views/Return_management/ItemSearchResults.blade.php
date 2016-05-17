@@ -194,6 +194,8 @@
 
         </form>
         <div class="btn-group-lg row">
+            <button type="submit" class="btn " onclick="window.location='{{ route('jobNote') }}'" id="job_note_btn" disabled="true" ><i class="material-icons right">comment</i>Job Note
+            </button>
             <div class="col pull-right">
 
                 <button type="submit" class="btn" onclick="saveReturnRecord()"><i class="material-icons right">save</i>Save

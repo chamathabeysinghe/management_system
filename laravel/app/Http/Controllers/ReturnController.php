@@ -44,12 +44,13 @@ class ReturnController extends Controller
 
         if ($searchType == "jobNo") {
             $returnData = ReturnItemDetail::find($itemCode);
-            $returnDatas = new Collection();
-            $returnDatas->add($returnData);
-            $returnDatas->load('repairItemDetail', 'warrantyItemDetail');
+
             //echo $item;
             //echo "-------------------------------------------";
             if ($returnData != null) {
+                $returnDatas = new Collection();
+                $returnDatas->add($returnData);
+                $returnDatas->load('repairItemDetail', 'warrantyItemDetail');
                 foreach ($returnData->items as $item) {
                     $item = $item;
                 }
@@ -115,6 +116,16 @@ class ReturnController extends Controller
     {
 
     }
+    public function newReturnItem(){
+        return View::make('return_management/NewReturnItem');
+    }
+    public function manageReturnItem(){
+        return View::make('return_management/ManageReturnItem');
+    }
+    public function returnDashboard(){
+        return View::make('return_management/ReturnDashboard');
+    }
+
 
     public function updateReturn(Request $request){
         $data= array();
@@ -224,6 +235,16 @@ class ReturnController extends Controller
 
     }
 
+    public function getJobNote(Request $request){
+        $returnData=ReturnItemDetail::all() -> last();
+        $returnData->load('items');
+        $customer =$returnData->customer;
+        $item=$returnData->items;
+        $item=$item->first();
+        //$supplier=$item->Supplier;
+
+        return View::make('/return_management/job_note')->with('data', $returnData)->with('item', $item)->with('customer', $customer);
+    }
     public function addNewReturn(Request $request)
     {
        // echo $request;

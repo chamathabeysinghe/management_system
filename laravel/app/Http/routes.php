@@ -80,24 +80,49 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
-    Route::get('/return/newitem', function () {
-        return view('return_management/NewReturnItem');
-    })->name('newreturnitem');
+    Route::get('/return/newitem',[
+        'uses'=>'ReturnController@newReturnItem',
+        'as'=>'newreturnitem',
+        'middleware'=>'auth'
+    ]);
+    Route::get('/return/manageitem',[
+        'uses'=>'ReturnController@manageReturnItem',
+        'as'=>'managereturnitem',
+        'middleware'=>'auth'
+    ]);
+    Route::get('/return/dashboard',[
+        'uses'=>'ReturnController@returnDashboard',
+        'as'=>'returndashboard',
+        'middleware'=>'auth'
+    ]);
 
-    Route::get('/return/manageitem', function () {
-        return view('return_management/ManageReturnItem');
-    })->name('managereturnitem');
+//    Route::get('/return/newitem', function () {
+//        return view('return_management/NewReturnItem');
+//    })->name('newreturnitem');
+
+//    Route::get('/return/manageitem', function () {
+//        return view('return_management/ManageReturnItem');
+//    })->name('managereturnitem');
 
     Route::get('/return/manageaReturnItem/{id}',[
             'uses'=>'ReturnController@getAReturnInfo',
-            'as'=>'manageareturnitem']
+            'as'=>'manageareturnitem',
+            'middleware'=>'auth'
+        ]
 
    );
+    Route::get('/return/jobNote',[
+            'uses'=>'ReturnController@getJobNote',
+            'as'=>'jobNote',
+            'middleware'=>'auth'
+        ]
+
+    );
 
 
-    Route::get('/return/dashboard', function () {
-        return view('return_management/ReturnDashboard');
-    })->name('returndashboard');
+//    Route::get('/return/dashboard', function () {
+//        return view('return_management/ReturnDashboard');
+//    })->name('returndashboard');
 
 
 
@@ -148,6 +173,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/newcustomer',[
         'uses'=>'CustomerController@addNewCustomer',
         'as'=>'newcustomer',
+
     ]);
     Route::post('/newreturn',[
         'uses'=>'ReturnController@addNewReturn',
@@ -157,17 +183,20 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::post('/searchReturn',[
         'uses'=>'ReturnController@getReturnInfo',
-        'as'=>'return_search'
+        'as'=>'return_search',
+        'middleware'=>'auth'
     ]);
 
     Route::post('/search',[
         'uses'=>'ItemController@getItemInfo',
-        'as'=>'item_search'
+        'as'=>'item_search',
+        'middleware'=>'auth'
     ]);
 
     Route::post('/itemsearch',[
         'uses'=>'ItemController@getItemInfo',
-        'as'=>'search_item'
+        'as'=>'search_item',
+        'middleware'=>'auth'
     ]);
 
     Route::post('/edit_return',[
