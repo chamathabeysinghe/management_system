@@ -60,7 +60,7 @@ class EstimationController extends Controller
     }
 
     public function getEstimationByQuotation(Request $request){
-        $quotation=Quotation::where('id',57)->first();//$request['id']
+        $quotation=Quotation::where('id',$request['id'])->first();//$request['id']
         $estimation = Estimation::orderBy('id','desc')->first();
         $recordList=unserialize($quotation->quotation_record_list);
         $sellingitems = SellingItem::all();

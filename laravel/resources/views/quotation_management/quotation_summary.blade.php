@@ -50,8 +50,7 @@
                                 </p>
                             </div>
                             <div class="card-action">
-                                <a href="#">Create Project</a> <br>
-                                <a href="#">Create Estimate</a>
+                                <a href="{{route('estimationbyquotation',['id'=>$quotation->id])}}">Create Estimate</a>
                             </div>
                         </div>
                     </div>
