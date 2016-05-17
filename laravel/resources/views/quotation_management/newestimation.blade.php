@@ -9,9 +9,11 @@
         <a href="#!" class="collection-item active">Create Estimation</a>
     </div>
 
+    {{--Importing some data from Quotation and filling the relevant fields on Estimation--}}
     <div class="row" id="printable">
         <form class="col s12">
             <div class="row">
+                {{--Displaying the id of the Quotation which is used for creating Extimation--}}
                 <div class="input-field col s6">
                     <i class="material-icons prefix">work</i>
                     <input  value="{{ $quotation->id }}" id="estimation_number" name="estimation_number" type="text" class="validate">
@@ -50,6 +52,7 @@
         </form>
     </div>
 
+    {{--Validated table for storing item details of Estimation--}}
     <div class="row">
         <div id="est_table" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
@@ -69,7 +72,7 @@
                 </tr>
                 </thead>
 
-
+                {{--Filling the table using data imported from Quotation--}}
                 @foreach($record_list as $record)
                     <tr >
 
@@ -88,16 +91,15 @@
                         </td>
                     </tr>
                 @endforeach
-                <tr class="hide">
 
+                {{--Adding new item entries on table--}}
+                <tr class="hide">
                     <td contenteditable="true">0000</td>
                     <td contenteditable="true">item</td>
                     <td contenteditable="true">unknown</td>
                     <td class="right-align" contenteditable="true"></td>
                     <td class="right-align" contenteditable="true"></td>
                     <td class="right-align total-price" contenteditable="true">0</td>
-
-
                     <td>
                         <span class="table-remove glyphicon glyphicon-remove"></span>
                     </td>
@@ -107,6 +109,7 @@
                     </td>
                 </tr>
 
+                {{--Showing total--}}
                 <tr class="not-write">
 
                     <td contenteditable="false"></td>
@@ -127,6 +130,7 @@
             </table>
         </div>
 
+        {{--Adding items from the Selling Items table--}}
         <div class="row">
             <div class="col s6">
                 <label>Select Item</label>
@@ -143,6 +147,7 @@
 
         </div>
 
+        {{--Authenticated button to save the Estimation--}}
         @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
             <button id="est_save" class="btn btn-primary">Create Estimation<i class="material-icons right">done</i></button>
         @endif
@@ -151,6 +156,7 @@
 
     <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 
+    {{--Print functionality--}}
     <div class="row">
         @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
             <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
@@ -170,6 +176,7 @@
         }
     </script>
 
+    {{--Front-end Logic for Calculating Total--}}
     <script>
         var token='{{Session::token()}}';
         var url='{{route('createestimation')}}';
@@ -224,8 +231,8 @@
             if ($row.index() === 1)return;
             $row.prev().before($row.get(0));
         });
-
     </script>
+
     <script src="{{URL::to('js/estimationeditable.js')}}"></script>
 
 @endsection

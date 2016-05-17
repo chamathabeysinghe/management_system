@@ -9,6 +9,7 @@
         <a href="#!" class="collection-item active">Add Selling Items</a>
     </div>
 
+    {{--Form for adding New Selling Items as Post--}}
     <div class="row">
         <form class="col s12" action="{{Route('addsellingitem')}}" method="post">
             <div class="row">
@@ -39,6 +40,7 @@
                     <label class="active" for="unit_price">Unit Price</label>
                 </div>
             </div>
+            {{--Authenticated button for 'Add Item'--}}
             <input type="hidden" name="_token" value="{{Session::token()}}">
             @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
                 <button type="submit" class="btn waves-effect waves-light" type="submit" name="action">Add Item

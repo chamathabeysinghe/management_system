@@ -19,6 +19,7 @@
 
     <section class="row posts">
         <div class="col-md-6 col-md-offset-3">
+            {{--showing the Estimation details using Materialize Cards--}}
             @foreach($estimations as $estimation)
                 <div class="row">
                     <div class="col s12 m6">

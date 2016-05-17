@@ -9,6 +9,7 @@
         <a href="#!" class="collection-item active">Create Quotation</a>
     </div>
 
+    {{--Form for entering Quotation Details--}}
     <div class="row" id="printable">
         <form class="col s12">
             <div class="row">
@@ -50,13 +51,13 @@
         </form>
     </div>
 
+    {{--Table for entering items to quotation items table--}}
     <div class="row">
         <div id="q_table" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
             <table class="table highlight bordered">
                 <thead>
                 <tr>
-
                     <th data-field="item_code">Item Code</th>
                     <th data-field="item">Item</th>
                     <th data-field="description">Description</th>
@@ -105,6 +106,7 @@
             </table>
         </div>
 
+        {{--Adding items to Quotation table from SellingItems Table--}}
         <div class="row">
             <div class="col s6">
                 <label>Select Item</label>
@@ -121,6 +123,7 @@
 
         </div>
 
+        {{--Authenticated button to Save the Quotation--}}
         @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
             <button id="q_save" class="btn btn-primary">Create Quotation<i class="material-icons right">done</i></button>
         @endif
