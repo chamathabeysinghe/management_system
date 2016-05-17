@@ -40,9 +40,11 @@
                 </div>
             </div>
             <input type="hidden" name="_token" value="{{Session::token()}}">
-            <button type="submit" class="btn waves-effect waves-light" type="submit" name="action">Add Item
-                <i class="material-icons right">done</i>
-            </button>
+            @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
+                <button type="submit" class="btn waves-effect waves-light" type="submit" name="action">Add Item
+                    <i class="material-icons right">done</i>
+                </button>
+            @endif
         </form>
     </div>
 

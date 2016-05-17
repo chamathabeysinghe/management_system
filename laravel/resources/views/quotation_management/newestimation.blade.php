@@ -114,7 +114,7 @@
                     <td class="right-align" contenteditable="false"></td>
                     <td class="right-align" contenteditable="false"></td>
                     <td class="right-align" contenteditable="false"></td>
-                    <td class="right-align" id="estimation_amount" contenteditable="false"></td>
+                    <td class="right-align" id="estimation_amount" contenteditable="true"></td>
 
 
                     <td>
@@ -143,16 +143,20 @@
 
         </div>
 
-        <button id="est_save" class="btn btn-primary">Create Estimation<i class="material-icons right">done</i></button>
+        @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
+            <button id="est_save" class="btn btn-primary">Create Estimation<i class="material-icons right">done</i></button>
+        @endif
 
     </div>
 
     <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 
     <div class="row">
-        <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
-            <i class="material-icons right">print</i>
-        </button>
+        @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
+                <i class="material-icons right">print</i>
+            </button>
+        @endif
     </div>
 
     <script>
