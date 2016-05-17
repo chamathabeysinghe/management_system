@@ -55,6 +55,7 @@
                         </ul>
                     </div>
                 </li>
+                @if(Auth::user()->user_type==1 or Auth::user()->user_type==4 )
                 <li>
                     <a class="collapsible-header waves-effect waves-teal">Return Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
@@ -65,9 +66,16 @@
                         </ul>
                     </div>
                 </li>
+                @endif
                 @if(Auth::user()->user_type==1)
                     <li>
                         <a class="waves-effect waves-teal" href="{{route('newuser')}}">New User</a>
+
+                    </li>
+                @endif
+                @if(Auth::user()->user_type==1)
+                    <li>
+                        <a class="waves-effect waves-teal" href="{{route('edituser')}}">Edit User</a>
 
                     </li>
                 @endif

@@ -1,10 +1,6 @@
-//
-//$('#search-input').keydown(function(){
-//    console.log("It works");
-//    //$('#search-input').css("background-color", "pink");
-//});
-
-
+/**
+ * search items using ajax
+ */
 function getItem(){
     //console.log('searchitem');
 

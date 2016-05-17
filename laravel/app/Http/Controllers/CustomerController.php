@@ -12,7 +12,12 @@ use App\Http\Requests;
 
 class CustomerController extends Controller
 {
-    //
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * add new customer to the database when returning a item
+     */
     public function addNewCustomer(Request $request){
 
 
