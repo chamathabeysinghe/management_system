@@ -60,7 +60,7 @@ $EST_SAVE.click(function() {
 
     // Output the result
     var estimation_date=$('#estimation_date').val();
-    var estimation_amount=$('#estimation_amount').val();
+    var estimation_amount=$('#estimation_amount').text();
     console.log(estimation_amount);
     var client_name=$('#client_name').val();
     var client_address=$('#client_address').val();
