@@ -17,6 +17,12 @@ Route::group(['middleware'=>['web']],function(){
         return view('login');
     })->name('home');
 
+
+    Route::get('/home', function () {
+        return view('startpage');
+    })->name('startpage');
+
+
     Route::get('/logout',[
         'uses'=>'UserController@getLogout',
         'as'=>'logout',
@@ -42,6 +48,18 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
    //save a feedback
+
+    //get the project initiate view
+    Route::get('/projectinit', function () {
+        return view('/project_management/project_init');
+    });
+    //reset password view
+    Route::get('/resetpassword', function () {
+        return view('reset_password');
+    });
+
+
+    //save a feedback
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
         'as'=>'savefeedback',
@@ -73,6 +91,48 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project',
         'middleware'=>'auth'
     ]);
+
+    // edit user detail view
+    Route::get('/edituser',[
+        'uses'=>'UserController@getEditDealer',
+        'as'=>'edituser',
+        'middleware'=>'auth'
+    ]);
+    Route::post('/edituser',[
+        'uses'=>'UserController@saveEditDealer',
+        'as'=>'edituser',
+        'middleware'=>'auth'
+    ]);
+
+
+
+
+
+    //get project initiate window
+    Route::get('/initiate-post/{project_id}',[
+        'uses'=>'ProjectController@getProjectInitiatePage',
+        'as'=>'project.initiate',
+        'middleware'=>'auth'
+    ]);
+
+
+
+//    Route::get('/return/newitem', function () {
+//        return view('return_management/NewReturnItem');
+//    })->name('newreturnitem');
+
+//    Route::get('/return/manageitem', function () {
+//        return view('return_management/ManageReturnItem');
+//    })->name('managereturnitem');
+
+
+
+//    Route::get('/return/dashboard', function () {
+//        return view('return_management/ReturnDashboard');
+//    })->name('returndashboard');
+
+
+
 
 
     //get project information form
@@ -124,12 +184,82 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'GPForecastController@getGPForecast',
         'as'=>'gpforecast'
     ]);
+
+
+    // submitnew customer
+    Route::post('/newcustomer',[
+        'uses'=>'CustomerController@addNewCustomer',
+        'as'=>'newcustomer',
+
+    ]);
+    Route::post('/newreturn',[
+        'uses'=>'ReturnController@addNewReturn',
+        'as'=>'newreturn',
+    ]);
+
+
+
+
+
+
     //update the gross profit forecast
 
     Route::post('/updategp',[
         'uses'=>'GPForecastController@postUpdateGPForecast',
         'as'=>'updategp'
     ]);
+
+
+
+    //direct to Create Project page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    });
+
+    ////////////////////////////////////////////DEALER MANAGEMENT//////////////////////////////////////////////////
+
+
+
+    //direct to dealer registration
+    Route::get('/dealer/register',function(){
+        return view("dealer_management/registration");
+    })->name('register_dealer');
+
+    //direct to stocks that dealer bought
+    Route::get('/dealer/stock',[
+        'uses'=>'DealerController@getStockView',
+        'as'=>'new_stock'
+    ]);
+    //direct to search dealers view
+    Route::get('/dealer/view',function(){
+        return view("dealer_management/dealers_view");
+    })->name('view_dealer');
+
+    //save stock
+    Route::post('/savestock',[
+        'uses'=>'DealerStockController@saveStock',
+        'as'=>'savestock'
+    ]);
+    //register dealers
+    Route::post('/registerdealer',[
+        'uses'=>'DealerController@registerDealer',
+        'as'=>'registerdealer'
+    ]);
+    //search dealers
+    Route::post('/dealersearch',[
+        'uses'=>'DealerController@getSearchResults',
+        'as'=>'dealersearch'
+    ]);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //get technician profile view
+    Route::get('/technicians',[
+        'uses'=>'TechnicianController@postTechnicianView',
+        'as'=>'technicians'
+    ]);
+
+
 
 
     //add new bill
@@ -156,6 +286,9 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'FinancialReportController@postUpdateFinancialReport',
         'as'=>'updatefinancialreport'
     ]);
+
+
+
 
     //search for technician using date
     Route::post('/searchtechnician',[
@@ -367,6 +500,13 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'addsellingitem'
     ]);
 
+
+    Route::post('/resetpassword',[
+        'uses'=>'ResetPasswordController@resetPassword',
+        'as'=>'resetpassword',
+    ]);
+
+
     //direct to Quotation Summary page
     Route::get('/getquotationsummary',[
         'uses' => 'QuotationController@getQuotationSummary',
@@ -392,6 +532,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'createestimation'
     ]);
 
+
     Route::get('/estimationbyquotation',[
         'uses'=>'EstimationController@getEstimationByQuotation',
         'as'=>'estimationbyquotation',
@@ -400,5 +541,101 @@ Route::group(['middleware'=>['web']],function(){
 
 
 
+
+
+
+    /**
+     * get the view to return a item
+     */
+    Route::get('/return/newitem',[
+        'uses'=>'ReturnController@newReturnItem',
+        'as'=>'newreturnitem',
+        'middleware'=>'auth'
+    ]);
+
+    /**
+     * get the view to manage returned item
+     */
+    Route::get('/return/manageitem',[
+        'uses'=>'ReturnController@manageReturnItem',
+        'as'=>'managereturnitem',
+        'middleware'=>'auth'
+    ]);
+
+    /**
+     * get the return dashboard view
+     */
+    Route::get('/return/dashboard',[
+        'uses'=>'ReturnController@returnDashboard',
+        'as'=>'returndashboard',
+        'middleware'=>'auth'
+    ]);
+
+    /**
+     * get return item info from database and return it to view
+     */
+    Route::post('/searchReturn',[
+        'uses'=>'ReturnController@getReturnInfo',
+        'as'=>'return_search',
+        'middleware'=>'auth'
+    ]);
+
+    /**
+     * get item info with supplier and every other detail and display them
+     */
+    Route::post('/search',[
+        'uses'=>'ItemController@getItemInfo',
+        'as'=>'item_search',
+        'middleware'=>'auth'
+    ]);
+
+    /**
+     * get item info with supplier and every other detail and display them
+     */
+    Route::post('/itemsearch',[
+        'uses'=>'ItemController@getItemInfo',
+        'as'=>'search_item',
+        'middleware'=>'auth'
+    ]);
+
+    /**
+     * send and save edited return item record
+     */
+    Route::post('/edit_return',[
+        'uses'=>'ReturnController@updateReturn',
+        'as'=>'editreturn'
+    ]);
+
+    /**
+     * search a return item by id
+     */
+    Route::get('/return/manageaReturnItem/{id}',[
+            'uses'=>'ReturnController@getAReturnInfo',
+            'as'=>'manageareturnitem',
+            'middleware'=>'auth'
+        ]
+
+    );
+
+    /**
+     * retrieve and send data necessary for the job note
+     */
+    Route::get('/return/jobNote',[
+            'uses'=>'ReturnController@getJobNote',
+            'as'=>'jobNote',
+            'middleware'=>'auth'
+        ]
+
+    );
+    /**
+     * retrieve and send data necessary for the WCN
+     */
+    Route::get('/return/wcn',[
+            'uses'=>'ReturnController@getWCN',
+            'as'=>'wcn',
+            'middleware'=>'auth'
+        ]
+
+    );
 
 });

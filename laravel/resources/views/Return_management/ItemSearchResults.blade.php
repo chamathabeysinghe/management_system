@@ -1,3 +1,5 @@
+{{--this blade is used to display data after serching item to return the item  --}}
+
 @if($item == null)
     <h5 class="alert-danger center-align">No record found</h5>
 
@@ -45,13 +47,18 @@
             </fieldset>
 
             <fieldset class="form-group input-group ">
+                <script>
+                    function saveEnable(){
+                        $('#save_btn').prop('disabled', false);
+                    }
+                </script>
                 <div class="row">
                     <p class="col-lg-6">
-                        <input class="with gap" type="radio" id="warrantyselect" value="warranty" name="option">
+                        <input class="with gap" type="radio" onclick="saveEnable()" id="warrantyselect" value="warranty" name="option">
                         <label for="warrantyselect">Warranty </label>
                     </p>
                     <p>
-                        <input class="with gap" type="radio" id="repairselect" value="repair" name="option">
+                        <input class="with gap" type="radio" onclick="saveEnable()" id="repairselect" value="repair" name="option">
                         <label for="repairselect">repair </label>
                     </p>
 
@@ -99,36 +106,106 @@
 
             <ul class="collapsible" data-collapsible="accordion">
                 @if( $item->returnItemDetail !=null)
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">receipt</i>Return Details</div>
-                    <div class="collapsible-body">
-                        <div class="row">
-                            <p class=" col s6">Return Id :</p>
-                            <p class=" col s6">{{$item->returnItemDetail->id}}</p>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">receipt</i>Return Details</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <p class=" col s6">Return Id :</p>
+                                <p class=" col s6">{{$item->returnItemDetail->id}}</p>
+                            </div>
+                            <div class="row">
+                                <p class=" col s6">Returned Date :</p>
+                                <p class=" col s6">{{$item->returnItemDetail->date}}</p>
+                            </div>
+                            <div class="row">
+                                <p class=" col s6">Job type :</p>
+                                <p class=" col s6">{{$item->returnItemDetail->job_type}}</p>
+                            </div>
+                            <div class="row">
+                                <p class=" col s6 ">Remarks :</p>
+                                <p class=" col s6 ">{{$item->returnItemDetail->remarks}}</p>
+                            </div>
                         </div>
-                        <div class="row">
-                            <p class=" col s6">Returned Date :</p>
-                            <p class=" col s6">{{$item->returnItemDetail->date}}</p>
-                        </div>
-                        <div class="row">
-                            <p class=" col s6">Job type :</p>
-                            <p class=" col s6">{{$item->returnItemDetail->job_type}}</p>
-                        </div>
-                        <div class="row">
-                            <p class=" col s6 ">Remarks  :</p>
-                            <p class=" col s6 ">{{$item->returnItemDetail->remarks}}</p>
-                        </div>
-                    </div>
-                </li>
+                    </li>
                 @endif
+                @if( $item->sale_type == 1)
+                    @if($project != null)
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">receipt</i>project Details</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <p class=" col s6">Client :</p>
+                                    <p class=" col s6">{{$project->client_name}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6"> Date :</p>
+                                    <p class=" col s6">{{$project->date}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6">Description :</p>
+                                    <p class=" col s6">{{$project->description}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Email :</p>
+                                    <p class=" col s6 ">{{$project->client_email}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Project status :</p>
+                                    <p class=" col s6 ">{{$project->project_status}}</p>
+                                </div>
+                                <div class="row">
+                                    <a class="waves-effect waves-light btn col s6"
+                                       href="{{route('project.info',['project_id'=>$project->id])}}">View Project<i
+                                                class="material-icons left">play_arrow</i></a>
+                                </div>
+                            </div>
+                        </li>
+                    @endif
+                @endif
+                @if( $item->sale_type == 2)
+                    @if($dealer != null)
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">receipt</i>Dealer Details</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <p class=" col s6">Client :</p>
+                                    <p class=" col s6">{{$dealer->client_name}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6"> Date :</p>
+                                    <p class=" col s6">{{$dealer->date}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6">Description :</p>
+                                    <p class=" col s6">{{$dealer->description}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">{{$dealer->client_email}}</p>
+                                </div>
+                                <div class="row">
+                                    <p class=" col s6 ">Remarks :</p>
+                                    <p class=" col s6 ">{{$dealer->project_status}}</p>
+                                </div>
+                                <div class="row">
+                                    <a class="waves-effect waves-light btn col s6">View Project<i
+                                                class="material-icons left">play_arrow</i></a>
+                                </div>
+                            </div>
+                        </li>
+                    @endif
+                @endif
+
             </ul>
 
 
         </form>
         <div class="btn-group-lg row">
+            <button type="submit" class="btn " onclick="window.location='{{ route('jobNote') }}'" id="job_note_btn" disabled="true" ><i class="material-icons right">comment</i>Job Note
+            </button>
             <div class="col pull-right">
 
-                <button type="submit" class="btn" onclick="saveReturnRecord()"><i class="material-icons right">save</i>Save
+                <button type="submit" class="btn" disabled='true' id="save_btn" onclick="saveReturnRecord()"><i class="material-icons right">save</i>Save
                 </button>
                 <input type="hidden" name="_token" value="{{Session::token()}}"/>
                 {{--<a class="waves-effect waves-light btn"><i class="material-icons right">cancel</i>Cancel</a>--}}
@@ -139,9 +216,9 @@
     <script>
         var token = '{{Session::token()}}';
         var url2 = '{{route('newreturn')}}';
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.collapsible').collapsible({
-                accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+                accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
             });
         });
     </script>

@@ -11,8 +11,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Dealer;
 use App\DeallocatedItem;
 use App\Item;
+use App\Project;
 use Illuminate\Http\Request;
 
 
@@ -22,14 +25,38 @@ use Illuminate\Support\Facades\View;
 class ItemController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return mixed
+     *
+     * get item info wanted for return new item
+     */
     public function getItemInfo(Request $request)
     {
+        // echo "item View";
+        $project=null;
+        $dealer=null;
+
+
 
         $itemCode = $request['keyWords'];
         $item = Item::where('serial_number', $itemCode)->first();
-        $item->load('returnItemDetail');
-        $supplier = Item::find($item['id'])->supplier;
-        return View::make('/return_management/itemsearchresults')->with('item', $item)->with('supplier', $supplier);
+        $supplier=null;
+        if($item !=null){
+            $item->load('returnItemDetail');
+            $supplier = Item::find($item['id'])->supplier;
+
+            if($item['sale_type']== 1){
+                $project=Project::find($item['owner_id']);
+            }else{
+                $dealer=Dealer::find($item['owner_id']);
+            }
+        }
+
+        //echo $itemCode;
+        //echo $item;
+        //echo $supplier;
+        return View::make('/return_management/itemsearchresults')->with('item', $item)->with('supplier', $supplier)->with('dealer', $dealer)->with('project', $project);
     }
 
     /**
