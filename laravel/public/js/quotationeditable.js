@@ -135,9 +135,10 @@ $Q_SAVE.click(function() {
     var client_email=$('#client_email').val();
     var client_tel=$('#client_tel').val();
     if(error){
-        Materialize.toast('Quotation not saved', 2000, 'rounded red')
+        Materialize.toast('Quotation Not Saved', 2000, 'rounded red')
     }
     else {
+        Materialize.toast('Quotation Saved Successfully', 2000, 'rounded blue')
         $.post(url, {
             new_data: JSON.stringify(data),
             client_name: client_name,
