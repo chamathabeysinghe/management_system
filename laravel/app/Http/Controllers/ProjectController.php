@@ -41,7 +41,7 @@ class ProjectController extends Controller
     }
 
     public function getDashboard(){
-        $projects=Project::orderBy('created_at','desc')->get();
+        $projects=Project::orderBy('project_status','asc')->get();
         return view('project_management\project_dashboard',['projects'=>$projects]);
     }
 
