@@ -1,7 +1,9 @@
 /**
  * Created by TK on 10/05/2016.
  */
-
+/**
+ * forwording ajax request to update retur record
+ */
 function updateReturnRecord(){
     $.ajax({
         method:'POST',
@@ -12,12 +14,16 @@ function updateReturnRecord(){
             successHTML += '<li> Records added successfully </li>';
             successHTML += '</ul></di>';
             $( '#form-errors' ).html( successHTML );
+            $( '#wcn_btn').prop( "disabled", false );
             //console.log(data);
         },
     });
     console.log('done');
 
 }
+/**
+ * ajax request handler for the save return records
+ */
 function saveReturnRecord(){
     console.log('addreturn');
     if($('#warrantyselect').is(':checked')) {
@@ -35,6 +41,7 @@ function saveReturnRecord(){
             successHTML += '<li> Records added successfully </li>';
             successHTML += '</ul></di>';
             $( '#form-errors' ).html( successHTML );
+            $( '#job_note_btn').prop( "disabled", false );
             //console.log(data);
         },
         error :function( jqXhr ) {
@@ -61,6 +68,9 @@ function saveReturnRecord(){
     console.log('done');
 
 }
+/**
+ * get return data using ajax
+ */
 function getReturnRecord(){
     console.log('searchreturn');
 
@@ -110,8 +120,8 @@ function getReturnRecord(){
     }
     else{
         console.log("CLEAR");
-        //$('#search_results').hide();
-        //$('#search-results').hide();
+        $('#search_results').hide();
+        $('#search-results').hide();
     }
 
 }
