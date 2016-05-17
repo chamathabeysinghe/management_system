@@ -74,8 +74,8 @@
                     <tr >
 
                         <td contenteditable="false">{{$record->itemcode}}</td>
-                        <td class="right-align" contenteditable="false">{{$record->itemname}}</td>
-                        <td class="right-align" contenteditable="false">{{$record->description}}</td>
+                        <td contenteditable="false">{{$record->itemname}}</td>
+                        <td contenteditable="true">{{$record->description}}</td>
                         <td class="right-align" contenteditable="false">{{$record->unitprice}}</td>
                         <td class="right-align" contenteditable="false">{{$record->quantity}}</td>
                         <td class="right-align" contenteditable="false">{{$record->totalprice}}</td>
@@ -109,12 +109,12 @@
 
                 <tr class="not-write">
 
-                    <td contenteditable="true">Total</td>
+                    <td contenteditable="false"></td>
+                    <td contenteditable="false">Total</td>
                     <td class="right-align" contenteditable="false"></td>
                     <td class="right-align" contenteditable="false"></td>
                     <td class="right-align" contenteditable="false"></td>
-                    <td class="right-align" contenteditable="false"></td>
-                    <td class="right-align" id="estimation_amount" contenteditable="true"></td>
+                    <td class="right-align" id="estimation_amount" contenteditable="false"></td>
 
 
                     <td>
@@ -187,7 +187,7 @@
         });
 
         function calTotal(){
-            var total=parseFloat({{ $quotation->quotation_amount }});
+            var total=0;
             $('.total-cost').each(function(){
                 console.log($(this).text());
                 total+=parseFloat($(this).text());
@@ -220,6 +220,9 @@
                 }
             });
             $('#est_table').find('table').append($clone);
+            var $row = $("#est_table").find("tr").last();
+            if ($row.index() === 1)return;
+            $row.prev().before($row.get(0));
         });
 
     </script>

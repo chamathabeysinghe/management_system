@@ -198,6 +198,9 @@
                 }
             });
             $('#q_table').find('table').append($clone);
+            var $row = $("#q_table").find("tr").last();
+            if ($row.index() === 1)return;
+            $row.prev().before($row.get(0));
         });
 
 
