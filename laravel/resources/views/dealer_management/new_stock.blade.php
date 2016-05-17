@@ -9,10 +9,13 @@
         <a href="#!" class="collection-item active">Stock Details</a>
     </div>
 
+
+
     <div class="row">
         <form class="col s12">
             <div class="row">
                 <div class="col-s4">
+
                     <div class="input-field col s3">
                         <input id="date" type="date" class="validate">
                         <label class="active" for="date">Date</label>
@@ -35,7 +38,7 @@
     <div class="row">
         <div id="s_table" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
-            <table class="table highlight bordered">
+            <table class="table highlight bordered" id="data_table">
                 <thead>
                 <tr>
 
@@ -60,7 +63,7 @@
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true">1</td>
-                    <td contenteditable="true"></td>
+                    <td class="total-cost" contenteditable="true">0</td>
 
 
                     <td>
@@ -126,7 +129,7 @@
                 console.log($(this).text());
                 total+=parseFloat($(this).text());
             })
-
+            console.log(total);
             $('#final-value').text(total);
         });
 
@@ -139,6 +142,7 @@
             console.log(total);
             $('#final-value').text(total);
         }
+        $
 
         $('#select-item').click(function(event){
             event.preventDefault();
@@ -147,6 +151,8 @@
             var data_description=  $('#item-list').find(":selected").attr('data-description');
             var data_code=  $('#item-list').find(":selected").attr('data-code');
             var $clone = $('#s_table').find('tr.hide').clone(true).removeClass('hide table-line');
+
+
             console.log(data_cost);
             $clone.find('td').each (function(key) {
                 if(key==0){
@@ -164,6 +170,9 @@
                 }
             });
             $('#s_table').find('table').append($clone);
+            var $row =$("#data_table").find("tr").last();
+            if ($row.index() === 1) return; // Don't go above the header
+            $row.prev().before($row.get(0));
         });
 
     </script>

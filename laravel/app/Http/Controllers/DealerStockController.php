@@ -25,8 +25,9 @@ class DealerStockController extends Controller
 
     public function saveStock(Request $request){
         $dealer_details=$request['dealer_details'];
-        echo $dealer_details;
-        print_r("controller");
+        $finalTotal=$request['total'];
+        echo "testing total";
+        echo $finalTotal;
         $dealer=Dealer::where('register_no',$dealer_details)->first();
 
         $stock=new Stock();
@@ -48,9 +49,10 @@ class DealerStockController extends Controller
         $stock->stock_field=(serialize($stockList));
         $stock->date= $request['date'];
         $stock->register_no = $request['dealer_details'];
+        $stock->total_cost =$request['total'];
         $dealer->stock()->save($stock);
 
-        return redirect()->back();
+       // return redirect()->back();
 
     }
 

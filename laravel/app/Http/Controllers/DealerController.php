@@ -51,11 +51,6 @@ class DealerController extends Controller
     }
 
     public function getSearchResults(Request $request){
-        $this -> validate($request, [
-
-            'dealer_id' => 'required'
-
-        ]);
 
         $register_no=$request['keyWords'];
 
@@ -64,6 +59,6 @@ class DealerController extends Controller
         $stocks=$dealer->stock;
 
 
-        return View::make('/dealer_management/dealer_search_results')->with('stocks',$stocks);
+        return View::make('/dealer_management/dealer_search_results')->with('stocks',$stocks)->with('dealer',$dealer);
     }
 }
