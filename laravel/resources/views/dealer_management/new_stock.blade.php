@@ -47,7 +47,8 @@
                     <th class="left-align" data-field="item_name">Item Name</th>
                     <th class="left-align" data-field="serial_no">Serial No</th>
                     <th class="left-align" data-field="unit_price">Unit Price</th>
-                    <th class="left-align" data-field="quantity">Quantity</th>
+                    <th class="left-align" data-field="quantity">Supplier</th>
+                    <th class="left-align" data-field="quantity">Warranty</th>
                     <th class="left-align" data-field="total_cost">Total Cost</th>
 
                     <th></th>
@@ -62,7 +63,8 @@
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
                     <td contenteditable="true"></td>
-                    <td contenteditable="true">1</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
                     <td class="total-cost" contenteditable="true">0</td>
 
 
@@ -78,6 +80,7 @@
                 <tr class="not-write">
 
                     <td contenteditable="true">Total</td>
+                    <td class="left-align" contenteditable="true"></td>
                     <td class="left-align" contenteditable="true"></td>
                     <td class="left-align" contenteditable="true"></td>
                     <td class="left-align" contenteditable="true"></td>
@@ -165,7 +168,7 @@
                     $(this).text(data_cost);
                 }
 
-                if(key==5){
+                if(key==6){
                     $(this).text(data_cost);
                 }
             });

@@ -122,7 +122,7 @@ $S_SAVE.click(function() {
                     }
                 }
                 if(i==5){
-                    if($td.eq(i).text().replace(/\s+/, "")=='' || isNaN($td.eq(i).text())){
+                    if( $td.eq(i).text().replace(/\s+/, "")==''){
                         error=true;
                         var element=$td[5];
                         element.style.borderBottom='solid';
@@ -130,6 +130,18 @@ $S_SAVE.click(function() {
                     }
                     else{
                         var element=$td[5];
+                        element.style.border='none';
+                    }
+                }
+                if(i==6){
+                    if($td.eq(i).text().replace(/\s+/, "")=='' || isNaN($td.eq(i).text())){
+                        error=true;
+                        var element=$td[6];
+                        element.style.borderBottom='solid';
+                        element.style.borderColor='#ff6666';
+                    }
+                    else{
+                        var element=$td[6];
                         element.style.border='none';
                     }
                 }
@@ -142,11 +154,20 @@ $S_SAVE.click(function() {
     // Output the result
     var date=$('#date').val();
     var total=$('#final-value').text();
+    console.log(date);
     console.log(total);
     var dealer_details=$('#dealer-list').find(":selected").attr("data-register_no");
-
+    console.log(dealer_details);
+    if(date==''){
+        error=true;
+        Materialize.toast('Date not selected', 2000, 'rounded')
+    }
+    if(dealer_details==null){
+        error=true;
+        Materialize.toast('Dealer not selected', 2000, 'rounded')
+    }
     if(error){
-        Materialize.toast('Gross profit not saved.', 2000, 'rounded')
+        Materialize.toast('Stock not saved.', 2000, 'rounded')
     }
     else {
         $.post(url, {
@@ -156,6 +177,7 @@ $S_SAVE.click(function() {
             total: total,
             _token: token
         });
+        Materialize.toast('Stock saved.', 2000, 'rounded')
     }
 
 

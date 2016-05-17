@@ -14,6 +14,7 @@ use App\Dealer;
 //use App\Item;
 //use App\Project;
 //use App\ReportField;
+use App\Item;
 use App\Stock;
 use App\StockField;
 use Illuminate\Http\Request;
@@ -40,10 +41,20 @@ class DealerStockController extends Controller
             $stockField->itemName=$newData->itemname;
             $stockField->serialNo=$newData->serialno;
             $stockField->unitCost=$newData->unitprice;
-            $stockField->quantity=$newData->quantity;
+            //$stockField->quantity=$newData->quantity;
             $stockField->totalCost=$newData->totalcost;
             array_push($stockList,$stockField);
-//            $stockField[$newData->item]=$stockField;
+
+            $item = new Item();
+            $item->serial_number=$newData->serialno;
+            $item->item_name=$newData->itemname;
+            $item->unit_cost=$newData->unitprice;
+            $item->sale_type=2;
+            $item->owner_id=$dealer->id;
+            $item->warranty=$newData->warranty;
+            $item->supplier_id=$newData->supplier;
+            $item->item_code=$newData->itemcode;
+            $item->save();
         }
 
         $stock->stock_field=(serialize($stockList));
@@ -52,7 +63,7 @@ class DealerStockController extends Controller
         $stock->total_cost =$request['total'];
         $dealer->stock()->save($stock);
 
-       // return redirect()->back();
+        return redirect()->back();
 
     }
 
