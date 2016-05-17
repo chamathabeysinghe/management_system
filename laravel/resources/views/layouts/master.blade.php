@@ -26,7 +26,7 @@
 {{--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>--}}
 {{--@include('includes.header')--}}
 
-{{--//dfdssdfsdfds--}}
+
 @include('includes.slidenav')
 
 <div class="container">

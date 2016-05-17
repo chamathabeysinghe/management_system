@@ -50,22 +50,24 @@
                     </div>
                 </li>
                 @endif
+
+                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                 <li>
                     <a style="text-decoration: none; " class="collapsible-header waves-effect waves-teal">Dealer Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
                             <li><a style="text-decoration: none;" href="{{route('register_dealer')}}">Registration</a></li>
-
                             <li><a style="text-decoration: none;"href="{{route('new_stock')}}">Stock</a></li>
                             <li><a style="text-decoration: none;"href="{{route('view_dealer')}}">Search</a></li>
-                            
-
-                            <li><a style="text-decoration: none;" href="{{route('new_stock')}}">Stock</a></li>
 
                         </ul>
                     </div>
                 </li>
+<<<<<<< HEAD
                 @if(Auth::user()->user_type==1 or Auth::user()->user_type==4 )
+=======
+                @endif
+>>>>>>> ashan
                 <li>
                     <a class="collapsible-header waves-effect waves-teal">Return Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">

@@ -188,6 +188,16 @@ Route::group(['middleware'=>['web']],function(){
 
 
 
+
+    //direct to Create Project page
+    Route::get('/newquotation',function(){
+        return view("quotation_management/create_quotation");
+    });
+
+    ////////////////////////////////////////////DEALER MANAGEMENT//////////////////////////////////////////////////
+
+
+
     //direct to dealer registration
     Route::get('/dealer/register',function(){
         return view("dealer_management/registration");
@@ -198,12 +208,28 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'DealerController@getStockView',
         'as'=>'new_stock'
     ]);
-
-
+    //direct to search dealers view
     Route::get('/dealer/view',function(){
         return view("dealer_management/dealers_view");
     })->name('view_dealer');
 
+    //save stock
+    Route::post('/savestock',[
+        'uses'=>'DealerStockController@saveStock',
+        'as'=>'savestock'
+    ]);
+    //register dealers
+    Route::post('/registerdealer',[
+        'uses'=>'DealerController@registerDealer',
+        'as'=>'registerdealer'
+    ]);
+    //search dealers
+    Route::post('/dealersearch',[
+        'uses'=>'DealerController@getSearchResults',
+        'as'=>'dealersearch'
+    ]);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //get technician profile view
     Route::get('/technicians',[
@@ -237,10 +263,8 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'updatefinancialreport'
     ]);
 
-    Route::post('/savestock',[
-        'uses'=>'DealerStockController@saveStock',
-        'as'=>'savestock'
-    ]);
+
+
 
     //search for technician using date
     Route::post('/searchtechnician',[
@@ -288,10 +312,7 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'reviewfeedback'
     ]);
 
-    Route::post('/registerdealer',[
-       'uses'=>'DealerController@registerDealer',
-        'as'=>'registerdealer'
-    ]);
+
 
     //direct to Create Quotation  page
     Route::get('/newquotation',[
@@ -371,6 +392,7 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'DeallocatedItemController@postSendToStore',
         'as'=>'sendtostore'
     ]);
+
 
 
     /**

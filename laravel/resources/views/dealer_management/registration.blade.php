@@ -13,6 +13,8 @@
         <div class="raw">
             <div class="col-mid-6">
                 <ul>
+
+                    {{--//showing error messeges--}}
                     @foreach($errors->all() as $error)
                         <li>{{$error}}</li>
                     @endforeach
