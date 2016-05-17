@@ -22,6 +22,15 @@
                         <input class="form-control" type="password" name="password" id="password">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col s12 l6">
+                        <input type="checkbox" name="selection[]" value="true" id="remember" />
+                        <label for="remember">Remember me</label>
+
+                        {{--<input type="checkbox" class="filled-in" id="remember_me" value="true" name="selection[]"/>--}}
+                        {{--<label for="remember_me">Remember Me</label>--}}
+                    </div>
+                </div>
 
                 <button type="submit" class="btn btn-primary col-md-offset-">Submit</button>
                 <input type="hidden" name="_token" value="{{Session::token()}}">

@@ -34,6 +34,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/newuser',[
         'uses'=>'UserController@postNewUser',
         'as'=>'newuser',
+        'middleware'=>'auth'
     ]);
 
     //get the project initiate view
@@ -49,13 +50,15 @@ Route::group(['middleware'=>['web']],function(){
     //save a feedback
     Route::post('/savefeedback',[
         'uses'=>'FeedbackController@postSaveFeedback',
-        'as'=>'savefeedback'
+        'as'=>'savefeedback',
+        'middleware'=>'auth'
     ]);
 
     //get the feedback view
     Route::get('feedback', [
         'uses'=>'FeedbackController@getFeedbackView',
-        'as'=>'feedback'
+        'as'=>'feedback',
+        'middleware'=>'auth'
     ]);
 
 
@@ -63,7 +66,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::post('/initiateproject',[
        'uses'=>'ProjectController@postInitiateProject',
         'as'=>'initiateproject',
-
+        'middleware'=>'auth'
     ]);
 
     //get the project dashboard
@@ -314,7 +317,8 @@ Route::group(['middleware'=>['web']],function(){
     //direct to Create Quotation  page
     Route::get('/newquotation',[
         'uses' => 'QuotationController@getQuotationID',
-        'as' => 'newquotation'
+        'as' => 'newquotation',
+        'middleware'=>'auth'
     ]);
 
     Route::post('/createquotation',[
@@ -323,9 +327,11 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
     //direct to Add Selling Items page
-    Route::get('/newsellingitem',function(){
-        return view("quotation_management/add_sellingitem");
-    })->name('newsellingitem');
+    Route::get('/newsellingitem',[
+        'uses'=>'SellingItemController@getSellingItemView',
+        'as'=>'newsellingitem',
+        'middleware'=>'auth'
+    ]);
 
     Route::post('/addsellingitem',[
         'uses'=>'SellingItemController@postAddSellingItems',
@@ -342,7 +348,15 @@ Route::group(['middleware'=>['web']],function(){
     //direct to Quotation Summary page
     Route::get('/getquotationsummary',[
         'uses' => 'QuotationController@getQuotationSummary',
-        'as' => 'getquotationsummary'
+        'as' => 'getquotationsummary',
+        'middleware'=>'auth'
+    ]);
+
+    //direct to Quotation Summary page
+    Route::get('/getestimationsummary',[
+        'uses' => 'EstimationController@getEstimationSummary',
+        'as' => 'getestimationsummary',
+        'middleware'=>'auth'
     ]);
 
     //direct to Create Estimation page
@@ -359,7 +373,8 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/estimationbyquotation',[
         'uses'=>'EstimationController@getEstimationByQuotation',
-        'as'=>'estimationbyquotation'
+        'as'=>'estimationbyquotation',
+        'middleware'=>'auth'
     ]);
 
 

@@ -37,12 +37,16 @@ class UserController extends  Controller
     }
 
     public function postUserLogin(Request $request){
-        $pass=Auth::attempt(['email'=>$request['email'],'password'=>$request['password']]);
-        echo $request['email'];
-        echo $request['password'];
 
+        $remember=false;
+        if($request['selection']){
+        foreach($request['selection'] as $rem){
+            $remember= $rem;
+        }}
+        echo $request['email'];
+        $pass=Auth::attempt(['email'=>$request['email'],'password'=>$request['password']],$remember);
         if($pass){
-            return redirect()->route('project');
+           return redirect()->route('project');
         }
         else{
             return redirect()->back()->with(['message'=>'User name or password is incorrect']);
