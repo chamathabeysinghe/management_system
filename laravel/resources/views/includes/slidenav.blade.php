@@ -25,10 +25,14 @@
                     <a style="text-decoration: none;" class="collapsible-header waves-effect waves-teal">Quotation Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a style="text-decoration: none;" href="{{route('newquotation')}}">New Quotation</a></li>
-                            <li><a style="text-decoration: none;" href="{{route('newsellingitem')}}">New Selling Item</a></li>
-                            <li><a style="text-decoration: none;" href="{{route('getquotationsummary')}}">Quotation Summary</a></li>
-                            <li><a style="text-decoration: none;" href="{{route('getestimationsummary')}}">Estimation Summary</a></li>
+                            @if(Auth::user()->user_type==1 or Auth::user()->user_type==3)
+                                <li><a style="text-decoration: none;" href="{{route('newquotation')}}">New Quotation</a></li>
+                                <li><a style="text-decoration: none;" href="{{route('newsellingitem')}}">New Selling Item</a></li>
+                            @endif
+                            @if(Auth::user()->user_type==1)
+                                <li><a style="text-decoration: none;" href="{{route('getquotationsummary')}}">Quotation Summary</a></li>
+                                <li><a style="text-decoration: none;" href="{{route('getestimationsummary')}}">Estimation Summary</a></li>
+                            @endif
                         </ul>
                     </div>
                 </li>
