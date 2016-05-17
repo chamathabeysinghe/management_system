@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        
+        {{--technician section--}}
         <div id="technicinas" class="section" >
             <h5>Allocated Technicians</h5>
             <div class="divider"></div>
@@ -96,6 +96,7 @@
             @endif
         </div>
 
+        {{--items section--}}
         <div id="items" class="section">
             <h5>Allocated Items</h5>
             <div class="divider"></div>
@@ -189,7 +190,7 @@
             </div>
             @endif
         </div>
-
+        {{--report section--}}
         <div id="reports">
             <div class="row" style="margin-bottom: 10%">
                 <div class="col s8 offset-s2">
@@ -201,7 +202,7 @@
             </div>
 
         </div>
-
+        {{--bill section--}}
         <div id="bills" class="section">
             <h5>Bills</h5>
             <div class="divider"></div>
@@ -237,7 +238,7 @@
 
         </div>
 
-
+        {{--feedback section--}}
         <div id="feedback" class="section">
             <h5>Feedback</h5>
             <div class="divider"></div>

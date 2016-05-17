@@ -1,3 +1,5 @@
+{{--div for search results of project--}}
+
 @foreach($resultProjects as $project)
 
     <div class="row">

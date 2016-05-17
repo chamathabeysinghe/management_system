@@ -3,13 +3,13 @@
     Technician Profile
 @endsection
 @section('content')
+    {{--technician profile views--}}
     <div class="row">
 
         <ul class="collapsible" data-collapsible="accordion">
             @foreach($technicians as $technician)
             <li>
                 <div class="collapsible-header"><i class="material-icons">people</i>{{$technician->name}}</div>
-                {{--<img src="http://materializecss.com/images/yuna.jpg"  width="5%" height="5%" alt="" class="circle">--}}
 
                 <div class="collapsible-body ">
 
