@@ -87,6 +87,18 @@ $ITEM_SAVE.click(function() {
                     element.style.border='none';
                 }
             }
+            if(i==4){
+                if($td.eq(i).text().replace(/\s+/, "")=='' || isNaN($td.eq(i).text())){
+                    error=true;
+                    var element=$td[4];
+                    element.style.borderBottom='solid';
+                    element.style.borderColor='#ff6666';
+                }
+                else{
+                    var element=$td[4];
+                    element.style.border='none';
+                }
+            }
         });
 
         data.push(h);

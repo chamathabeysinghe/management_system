@@ -21,6 +21,10 @@ use Illuminate\Support\Str;
 class TechnicianController extends Controller
 {
 
+    /**
+     * calculate the commission for technicians
+     * @param Request $request
+     */
     public function postCalculateCommission(Request $request){
         $project=Project::where('id',$request['project_id'])->first();
         $gross_profit=$project->gpforecast;
@@ -32,6 +36,12 @@ class TechnicianController extends Controller
             }
         }
     }
+
+    /**
+     * add a new technician
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postAddTechnician(Request $request){
         $technician=new Technician();
         $technician->name=$request['name'];
@@ -39,6 +49,11 @@ class TechnicianController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * get technician view
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|View
+     */
     public function postTechnicianView(Request $request){
         $user_type=Auth::user()->user_type;
         if($user_type==1 or $user_type==2 or $user_type==3){
@@ -49,10 +64,13 @@ class TechnicianController extends Controller
         else{
             return redirect()->back();
         }
-
-
     }
 
+    /**
+     * post technician search
+     * @param Request $request
+     * @return mixed
+     */
     public function postTechnicianSearch(Request $request){
         $date=$request['date'];
         $duration=$request['duration'];
@@ -74,6 +92,15 @@ class TechnicianController extends Controller
         return View::make('/project_management/technician_search')->with('data',[$technicians,$resultDetails]);
     }
 
+    /**
+     * check the availability of technicians
+     * @param $date
+     * @param $duration
+     * @param $project_title
+     * @param $project_date
+     * @param $project_duration
+     * @return string
+     */
     function check_availability($date,$duration,$project_title,$project_date,$project_duration){
         $user_start_date=strtotime($date);
         $user_end_date=strtotime(date("m/d/Y", strtotime($date)) . " +".$duration." day");
@@ -88,6 +115,14 @@ class TechnicianController extends Controller
         }
         return $outStr;
     }
+
+    /**
+     * check if a date is in a range
+     * @param $start_date
+     * @param $end_date
+     * @param $date_from_user
+     * @return bool
+     */
     function check_in_range($start_date, $end_date, $date_from_user)
     {
         $start_ts = ($start_date);

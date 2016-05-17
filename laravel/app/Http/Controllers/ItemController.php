@@ -32,6 +32,10 @@ class ItemController extends Controller
         return View::make('/return_management/itemsearchresults')->with('item', $item)->with('supplier', $supplier);
     }
 
+    /**
+     * get deallocated items
+     * @param Request $request
+     */
     public function postDeallocateItem(Request $request)
     {
         $item_id = $request['item_id'];
@@ -44,6 +48,10 @@ class ItemController extends Controller
         $deallocated_item->save();
     }
 
+    /**
+     * change a item
+     * @param Request $request
+     */
     public function postChangeItem(Request $request)
     {
         $item_id = $request['item_id'];
@@ -51,9 +59,16 @@ class ItemController extends Controller
         $item->item_name = $request['itemName'];
         $item->serial_number = $request['serialNumber'];
         $item->unit_cost = $request['unitCost'];
+        $item->warranty = $request['warranty'];
+        $item->supplier_id = $request['supplier_id'];
         $item->update();
     }
 
+    /**
+     * allocate a singhle item
+     * @param Request $request
+     * @return mixed
+     */
     public function postAllocateSingleItem(Request $request)
     {
 

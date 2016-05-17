@@ -8,6 +8,7 @@
     <div class="collection hoverable">
         <a href="#!" class="collection-item active">Create/View Gross Profit Forecast</a>
     </div>
+    {{--printable porting of the page--}}
     <div id="printable">
     <div class="row">
         <form class="col s12">
@@ -38,6 +39,7 @@
         </form>
     </div>
 
+    {{--table for gross profit    --}}
     <div class="row">
         <div id="gp_table" class="table-editable">
             <span class="table-add glyphicon glyphicon-plus"></span>
@@ -117,22 +119,25 @@
 
     <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 
+    {{--gp reltaed actions--}}
     <div class="row">
         @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
             <button id="gp_save" class="btn btn-primary">Save Data
                 <i class="material-icons right">save</i>
             </button>
         @endif
-        <button class="btn waves-effect waves-light" type="submit" name="action">Download
-            <i class="material-icons right">play_for_work</i>
-        </button>
+        {{--<button class="btn waves-effect waves-light" type="submit" name="action">Download--}}
+            {{--<i class="material-icons right">play_for_work</i>--}}
+        {{--</button>--}}
         <button class="btn waves-effect waves-light" type="submit" name="action" onclick="printDiv('printable')">Print
             <i class="material-icons right">print</i>
         </button>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Email
-            <i class="material-icons right">email</i>
-        </button>
+        {{--<button class="btn waves-effect waves-light" type="submit" name="action">Email--}}
+            {{--<i class="material-icons right">email</i>--}}
+        {{--</button>--}}
     </div>
+
+    {{--script to print the div--}}
     <script>
         printDivCSS = new String ('<link href="{{URL::to('css/materialize.css')}}" rel="stylesheet" type="text/css">'
                 +'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">'
@@ -143,6 +148,9 @@
             window.frames["print_frame"].window.print();
         }
     </script>
+
+
+    {{--handle url calls--}}
     <script>
         var token='{{Session::token()}}';
         var url='{{route('updategp')}}';

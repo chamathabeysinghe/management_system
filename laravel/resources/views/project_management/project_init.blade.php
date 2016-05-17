@@ -7,51 +7,60 @@
     <div class="row">
         <form class="col s12" action="{{Route('initiateproject',['project_id'=>$project->id])}}" method="post">
 
+            {{--basic project details--}}
             <div class="section" >
                 <h5>Project Details</h5>
                 <div class="divider" style="margin-bottom: 10px"></div>
                 <div class="row">
                     <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">title</i>
                         <input id="title" name="title" type="text" class="validate" required >
 
                         <label class="active" for="title">Project Title</label>
                     </div>
                     <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">person</i>
                         <input id="incharge" name="incharge" type="text" class="validate" required >
                         <label class="active" for="incharge">Project Incharge</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">timelapse</i>
                         <input id="date" name="date" type="date"  class="datepicker" onchange="changeTime()">
                         {{--<input type='text' class='inp' readOnly />--}}
                         {{--<label class="" for="inp">Project date</label>--}}
                         <label class="active" for="date">Project date</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="duration" name="duration" type="number" required  onchange="changeTime()" ">
+                        <i class="material-icons prefix">timelapse</i>
+                        <input id="duration" name="duration" type="number" required  onchange="changeTime()" >
                         <label class="active" for="duration">Project Duration</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="client" name="client" type="text"required class="validate" >
+                        <i class="material-icons prefix">person</i>
+                        <input id="client" name="client" type="text"required class="validate" value="{{$project->client_name}}">
                         <label class="active" for="client">Client Name</label>
                     </div>
 
                     <div class="input-field col s12 m6">
-                        <input id="email" name="email" type="email" class="validate" >
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" name="email" type="email" class="validate" value="{{$project->client_email}}">
                         <label class="active" for="email">Client Email</label>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
+                        <i class="material-icons prefix">assessment</i>
                         <textarea id="description" name="description" class="materialize-textarea">{{$project->description}}</textarea>
                         <label class="active" for="description">Project Description</label>
                     </div>
                 </div>
             </div>
+            {{--allocating technicians--}}
             <div class="section" >
                 <h5>Technician Allocation</h5> <div class="divider"></div>
 
@@ -80,6 +89,7 @@
                 </div>
 
             </div>
+            {{--item allocating section--}}
             <div class="section">
                 <h5>Item Allocation</h5> <div class="divider"></div>
                 <div class="row">
@@ -92,6 +102,8 @@
                                 <th data-field="item">Item</th>
                                 <th class="right-align" data-field="quantity">Serial Number</th>
                                 <th class="right-align" data-field="unit_price">Unit Cost</th>
+                                <th class="right-align" data-field="warranty">Warranty</th>
+                                <th class="right-align" data-field="supplier_id">Supplier ID</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -104,7 +116,8 @@
                                         <td contenteditable="true">{{$estimation_record->item}}</td>
                                         <td class="right-align" contenteditable="true"></td>
                                         <td class="right-align" contenteditable="true">{{$estimation_record->unitprice}}</td>
-
+                                        <td class="right-align" contenteditable="true"></td>
+                                        <td class="right-align" contenteditable="true"></td>
 
                                         <td>
                                             <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -119,9 +132,11 @@
                             @endif
                             <tr class="hide">
 
-                                <td contenteditable="true">unknown item</td>
-                                <td class="right-align" contenteditable="true">$$</td>
-                                <td class="right-align" contenteditable="true">unknown quantity</td>
+                                <td contenteditable="true"></td>
+                                <td class="right-align" contenteditable="true"></td>
+                                <td class="right-align" contenteditable="true"></td>
+                                <td class="right-align" contenteditable="true"></td>
+                                <td class="right-align" contenteditable="true"></td>
 
 
                                 <td>
@@ -156,15 +171,10 @@
 
                         </div>
                     </div>
-
-
-
-                    {{----}}
-                    {{--<a  id="item_save" class="btn btn-primary">Export Data</a>--}}
                 </div>
             </div>
 
-
+            {{--initiatin button--}}
             <button class="btn waves-effect waves-light" type="submit" id="item_save">Initiate Project
                 <i class="material-icons right">send</i>
             </button>

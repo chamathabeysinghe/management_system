@@ -18,6 +18,10 @@ use Illuminate\Http\Request;
 class GPForecastController extends Controller
 {
 
+    /**
+     * create the gp forecast
+     * @param Request $request
+     */
     public function postCreateGPForecast(Request $request){
         $project_id=$request['project_id'];
         $items=Item::where('owner_id',$project_id)->get();
@@ -53,7 +57,12 @@ class GPForecastController extends Controller
 
 
     }
-    //those things should be tested
+
+    /**
+     * get the gp forecast
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getGPForecast(Request $request){
         $gpForecast=GPForecast::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
         if($gpForecast==null){
@@ -70,8 +79,12 @@ class GPForecastController extends Controller
 
         }
         return view('project_management/gp_forecast',['recordList'=>$recordsList,'project_id'=>$request['project_id'],'gp'=>$gpForecast]);
-}
+    }
 
+    /**
+     * post update to gp forecast
+     * @param Request $request
+     */
     public function postUpdateGPForecast(Request $request){
         $project_id=$request['project_id'];
         $created_by=$request['created_by'];
@@ -87,6 +100,8 @@ class GPForecastController extends Controller
             $reportField->unitCost=$newData->unitprice;
             $reportField->quantity=$newData->quantity;
             $reportField->totalCost=$newData->totalcost;
+            $reportField->estimation=$newData->estimate;
+            $reportField->unitmargin=$newData->unitmargine;
             $fieldsList[$newData->item]=$reportField;
         }
         $gpForecast->fieldList=(serialize($fieldsList));
@@ -97,5 +112,11 @@ class GPForecastController extends Controller
         $project->gpforecast()->save($gpForecast);
     }
 
-
+    /**
+     * get the gp view
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getGPView(){
+        return view("project_management/gp_forecast");
+    }
 }

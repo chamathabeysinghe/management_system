@@ -13,4 +13,5 @@ class ReportField extends Model
     protected $unitCost;
     protected $totalCost;
     protected $estimation;
+    protected $unitmargin;
 }

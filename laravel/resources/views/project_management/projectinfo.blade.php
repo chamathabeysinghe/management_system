@@ -12,12 +12,10 @@
                 <li class="tab col s3"><a style="text-decoration : none" href="#reports">Reports</a></li>
                 <li class="tab col s3"><a style="text-decoration : none"href="#bills">Bills</a></li>
                 <li class="tab col s3"><a style="text-decoration : none"href="#feedback">Feedback</a></li>
-                {{--<li class="tab col s3"><a style="text-decoration : none"href="#reports">Gross profit</a></li>--}}
-                {{--<li class="tab col s3"><a style="text-decoration : none"href="#freport">Financial Report</a></li>--}}
 
             </ul>
         </div>
-
+        {{--project details div--}}
         <div id="details" class="section">
             <h5>Project Details</h5>
             <div class="divider" style="margin-bottom: 10px"></div>
@@ -62,7 +60,7 @@
             </div>
         </div>
 
-
+        
         <div id="technicinas" class="section" >
             <h5>Allocated Technicians</h5>
             <div class="divider"></div>
@@ -102,7 +100,7 @@
             <h5>Allocated Items</h5>
             <div class="divider"></div>
             <div class="row">
-                <div class="col s12 m6">
+                <div class="col s12 m612">
                     <div id="item_table" class="table-editable">
                         @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                         <span class="table-add glyphicon glyphicon-plus"></span>
@@ -114,8 +112,11 @@
                                 <th data-field="item">Item</th>
                                 <th class="right-align" data-field="quantity">Serial Number</th>
                                 <th class="right-align" data-field="unit_price">Unit Cost</th>
+                                <th class="right-align" data-field="warranty">Warranty</th>
+                                <th class="right-align" data-field="supplier_id">Supplier ID</th>
                                 <th></th>
                                 <th></th>
+
                             </tr>
                             </thead>
 
@@ -126,7 +127,10 @@
                                     <td id="name{{$item->id}}" contenteditable="true">{{$item->item_name}}</td>
                                     <td id="serial{{$item->id}}"class="right-align" contenteditable="true">{{$item->serial_number}}</td>
                                     <td id="cost{{$item->id}}"class="right-align" contenteditable="true">{{$item->unit_cost}}</td>
-                                    @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+                                    <td id="warranty{{$item->id}}"class="right-align" contenteditable="true">{{$item->warranty}}</td>
+                                    <td id="supplier_id{{$item->id}}"class="right-align" contenteditable="true">{{$item->supplier_id}}</td>
+
+                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                                     <td>
                                         <span class="change table-down glyphicon glyphicon-floppy-save"></span>
 
@@ -145,6 +149,8 @@
                                 <td class="name" contenteditable="true"></td>
                                 <td class="serial right-align" contenteditable="true"></td>
                                 <td class="cost right-align" contenteditable="true"></td>
+                                <td class="warranty right-align" contenteditable="true"></td>
+                                <td class="supplier_id right-align" contenteditable="true"></td>
                                 @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
                                 <td>
                                     <span class="change table-down glyphicon glyphicon-pencil"></span>
@@ -185,10 +191,12 @@
         </div>
 
         <div id="reports">
-            <div class="row">
+            <div class="row" style="margin-bottom: 10%">
+                <div class="col s8 offset-s2">
+                    <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View/Create Gross Profit Forecast</a>
+                    <a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View/Create Financial Report</a>
 
-                <a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View/Create Gross Profit Forecast</a>
-                <a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View/Create Financial Report</a>
+                </div>
 
             </div>
 
@@ -219,13 +227,14 @@
             </div>
             @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
 
-            <div class="row">
-                <div class="col s12 m6">
+            <div class="row" style="margin-top: 5%">
+                <div class="col s12 m6 offset-s3">
                     {{--{{route('bill',['project_id'=>$project->id])}}--}}
                     <a href="#" id="add-bill" class="btn btn-danger" role="button">Add Bill</a>
                 </div>
             </div>
             @endif
+
         </div>
 
 
@@ -233,8 +242,8 @@
             <h5>Feedback</h5>
             <div class="divider"></div>
             @if($feedback==null)
-            <div class="row">
-                <div class="col s12 m4">
+            <div class="row" style="margin-top: 10%">
+                <div class="col s12 m4 offset-m4">
                     <a href="{{route('feedback',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">Add Feedback</a>
                 </div>
             </div>
@@ -544,33 +553,11 @@
                 </script>
             @endif
         </div>
-        {{--<div id="gp" class="section">--}}
-            {{--<h5>Gross Profit</h5>--}}
-            {{--<div class="divider"></div>--}}
-            {{--<div class="row">--}}
-
-                {{--<a href="{{route('gpforecast',['project_id'=>$project->id])}}" class="btn btn-danger" role="button">View GP</a>--}}
-
-            {{--</div>--}}
-        {{--</div>--}}
-
-        {{--<div id="freport" class="section">--}}
-            {{--<h5>Financial Report</h5>--}}
-            {{--<div class="divider"></div>--}}
-            {{--<div class="row">--}}
-
-                {{--<a href="{{route('financialreport',['project_id'=>$project->id])}}" class="btn btn-danger" role="button" {{$project->project_status==2?'':'disabled'}}>View Financial Report</a>--}}
-
-            {{--</div>--}}
-        {{--</div>--}}
-
 
     </div>
-    <div class="row">
-        {{--<form class="col s12" action="{{Route('initiateproject')}}" method="post">--}}
 
 
-    </div>
+
 
 
     <div id="add-bill-modal" class="modal modal-fixed-footer" style="height: 30%;">
@@ -633,8 +620,10 @@
             }).done(function(){
                 $(this).remove();
                 $(this).closest('.li').remove();//this thing is not working currently
-               console.log('done');
-                location.reload();
+                console.log('done');
+                window.location.href = document.URL +  ' #technicians';
+                //$('#technicinas').load(document.URL +  ' #technicians');
+                //location.reload();
             })
 
         });
@@ -649,7 +638,8 @@
                 data:{bill_id:bill_id,_token:token}
             }).done(function(){
                 console.log('Removed the fucker');
-                location.reload();
+                window.location.href = document.URL +  ' #bills';
+                //location.reload();
             });
         });
 
@@ -707,14 +697,12 @@
                 $clone.children('.name').attr('id','name'+markup);//repeat this for
                 $clone.children('.serial').attr('id','serial'+markup);//repeat this for
                 $clone.children('.cost').attr('id','cost'+markup);//repeat this for
+                $clone.children('.warranty').attr('id','warranty'+markup);//repeat this for
+                $clone.children('.supplier_id').attr('id','supplier_id'+markup);//repeat this for
+
                 $('#item_table').find('table').append($clone);
 
             });
-
-
-
-
-
 
         });
         $('#bill_save').click(function(event){

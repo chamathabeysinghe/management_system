@@ -46,7 +46,7 @@
             </ul>
 
 
-
+            {{--search bar output--}}
             <div id="search-results">
             </div>
             <div id="all-results">
@@ -67,6 +67,7 @@
                                         $url=URL::to('images/yellow.png');
                                     }
                                 ?>
+                                {{--card for project--}}
                                 <div class="card-image waves-effect waves-block waves-light " style="height: 30%;">
                                     <img class="activator" src="{{$url}}">
                                     <span class="card-title">{{$project->title}}</span>
@@ -134,18 +135,14 @@
 
                 @endforeach
             </div>
-
-
         </div>
-
-
     </section>
 
 
-
+    {{--script data for searching--}}
     <script>
         var token='{{Session::token()}}';
-        var url='{{route('projectfinder')}}';
+        var url='{{route('runsearch')}}';
     </script>
 
 @endsection()

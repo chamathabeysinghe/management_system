@@ -20,7 +20,7 @@
                         </tr>
                         </thead>
 
-
+                        {{--for each deallocated item go through this list--}}
                         @foreach($items as $item)
                             @if($item->return_state==1)
                             <tr>
@@ -30,15 +30,14 @@
                             </tr>
                             @endif
                         @endforeach
-
-
-
                     </table>
                 </div>
 
             </div>
         </div>
     </div>
+
+    {{--send to store button--}}
     <div class="row">
         <form action="{{Route('sendtostore')}}" method="post">
             <button class="btn waves-effect waves-light" type="submit" id="item_save">Return All

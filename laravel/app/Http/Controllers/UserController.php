@@ -17,6 +17,10 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends  Controller
 {
+    /**
+     * get new user interface
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function getNewUserView(){
         $user_type=Auth::user()->user_type;
         if($user_type==1){
@@ -26,6 +30,12 @@ class UserController extends  Controller
             return redirect()->back();
         }
     }
+
+    /**
+     * post a new user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postNewUser(Request $request){
         $this->validate($request,[
             'full_name'=>'required',
@@ -42,6 +52,11 @@ class UserController extends  Controller
         return redirect()->route('dashboard');
     }
 
+    /**
+     * log a user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postUserLogin(Request $request){
 
         $remember=false;
@@ -59,6 +74,10 @@ class UserController extends  Controller
         }
     }
 
+    /**
+     * log out a user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function getLogout(){
         Auth::logout();
         return redirect()->route('home');

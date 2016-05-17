@@ -14,6 +14,8 @@ $('.table-add').click(function() {
         $clone.children('.name').attr('id','name'+markup);//repeat this for
         $clone.children('.serial').attr('id','serial'+markup);//repeat this for
         $clone.children('.cost').attr('id','cost'+markup);//repeat this for
+        $clone.children('.warranty').attr('id','warranty'+markup);//repeat this for
+        $clone.children('.supplier_id').attr('id','supplier_id'+markup);//repeat this for
         $ITEM_TABLE.find('table').append($clone);
     });
 
@@ -32,10 +34,15 @@ $('.table-remove').click(function(event) {
 $('.change').click(function(event) {
     event.preventDefault();
     console.log('Change');
+    console.log('changing the ');
     var itemID=event.target.parentNode.parentNode.dataset['id'];
     var itemName=document.getElementById("name"+itemID).textContent;
     var serialNumber=document.getElementById("serial"+itemID).textContent;
     var unitCost=document.getElementById("cost"+itemID).textContent;
+    var warranty=document.getElementById("warranty"+itemID).textContent;
+    var supplier_id=document.getElementById("supplier_id"+itemID).textContent;
+
+
     var error=false;
 
     if(serialNumber.replace(/\s+/, "")==''){
@@ -58,6 +65,16 @@ $('.change').click(function(event) {
         var element=document.getElementById("cost"+itemID);
         element.style.border='none';
     }
+    if(supplier_id.replace(/\s+/, "")=='' || isNaN(supplier_id)){
+        error=true;
+        var element=document.getElementById("supplier_id"+itemID);
+        element.style.borderBottom='solid';
+        element.style.borderColor='#ff6666';
+    }
+    else{
+        var element=document.getElementById("supplier_id"+itemID);
+        element.style.border='none';
+    }
     if(itemName.replace(/\s+/, "")==''){
         error=true;
         var element=document.getElementById("name"+itemID);
@@ -73,7 +90,7 @@ $('.change').click(function(event) {
     }
     else{
          Materialize.toast("Saved!", 1500 );
-        $.post(url_update_item, {item_id:itemID,itemName:itemName,serialNumber:serialNumber,unitCost:unitCost,_token:token });
+        $.post(url_update_item, {item_id:itemID,itemName:itemName,serialNumber:serialNumber,unitCost:unitCost,supplier_id:supplier_id,warranty:warranty,_token:token });
     }
 
 });
@@ -112,5 +129,6 @@ $ITEM_SAVE.click(function() {
 
     console.log(project_id);
     console.log('done');
+
     $.post(url_allocation, {new_data:JSON.stringify(data) ,project_id:project_id,_token:token });
 });

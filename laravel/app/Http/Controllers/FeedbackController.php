@@ -16,6 +16,12 @@ use Mockery\CountValidator\Exception;
 
 class FeedbackController extends Controller
 {
+    /**
+     * save a feedback
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     */
     public function postSaveFeedback(Request $request){
         $project_id= $request['project_id'];
         $comments=$request['comments'];
@@ -41,10 +47,21 @@ class FeedbackController extends Controller
         $project->feedback()->save($feedback);
         return redirect()->route('project.info',['project_id'=>$project_id]);
     }
+
+    /**
+     * get feedback view
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getFeedbackView(Request $request){
         return view('project_management/feedback',['project_id'=>$request['project_id']]);
     }
 
+    /**
+     * get the feedback review
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getFeedBackReview(Request $request){
         $feedback=Project::where('id',$request['project_id'])->first()->feedback;
 

@@ -7,9 +7,6 @@
 @section('content')
     <style>
         .inquiry{
-            /*border-radius: 25px;*/
-            /*border: 2px solid #5361ad;*/
-            /*padding: 20px;*/
             margin-bottom: 30px;
         }
         .inquiry h4{
@@ -25,7 +22,7 @@
 
             <div class="row">
                 <div class="col-md-8 col-md-offset-2" >
-
+                    {{--sections for various parts in feedback form--}}
                     <form action="{{route('savefeedback',['project_id'=>$project_id])}}" method="post">
 
                         <div  class="inquiry">
@@ -56,7 +53,7 @@
 
                             </div>
 
-
+                            {{--for timeliness--}}
                             <div class="input-group" style="margin-bottom: 20px" >
                                 <label>With the timeliness of installation?</label>
                                 <p>
@@ -81,7 +78,7 @@
                                 </p>
                             </div>
 
-
+                            {{--for installation--}}
                             <div class="input-group" style="margin-bottom: 20px" >
                                 <label>With the quality of our installation?</label>
                                 <p>
@@ -106,7 +103,7 @@
                                 </p>
                             </div>
 
-
+                            {{--knwoledge and profession--}}
                             <div class="input-group" style="margin-bottom: 20px" >
                                 <label>that installation personnel are sufficiently knowledgeable and professional?</label>
                                 <p>
@@ -131,6 +128,7 @@
                                 </p>
                             </div>
 
+                            {{--service overall--}}
                             <div class="input-group" style="margin-bottom: 20px" >
                                 <label>With installation service overall?</label>
                                 <p>
@@ -157,7 +155,7 @@
 
                         </div>
 
-
+                        {{--requirements--}}
                         <div  class="inquiry">
 
                             <h4>Digital Engineering Solutions understands the service needs of my organization</h4>

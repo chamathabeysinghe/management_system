@@ -15,7 +15,11 @@ use Mockery\CountValidator\Exception;
 
 class BillController extends Controller
 {
-
+    /**
+     * add new biill
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postAddBill(Request $request){
         $project=Project::where('id',$request['project_id'])->first();
         echo $request['type'];
@@ -27,10 +31,19 @@ class BillController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * get view for new bill
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getAddBillView(Request $request){
         return view('project_management/add_bill',['project_id'=>$request['project_id']]);
     }
 
+    /**
+     * remove a bill
+     * @param Request $request
+     */
     public function postRemoveBill(Request $request){
         $bill=Bill::where('id',$request['bill_id'])->first();
         if($bill!=null){

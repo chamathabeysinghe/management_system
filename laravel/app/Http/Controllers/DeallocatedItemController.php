@@ -21,12 +21,20 @@ use Illuminate\Support\Facades\View;
 
 class DeallocatedItemController extends Controller
 {
+    /**
+     * get view for deallocated items
+     * @return View
+     */
     public function getDealloctedView(){
         $items=DeallocatedItem::all();
         return view('/project_management/deallocated_items',['items'=>$items]);
 
     }
 
+    /**
+     * write off deallocated items
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postSendToStore(){
         $items=DeallocatedItem::all();
         foreach($items as $item){

@@ -19,6 +19,10 @@ use Mockery\CountValidator\Exception;
 
 class FinancialReportController extends Controller
 {
+    /**
+     * create the financial report
+     * @param Request $request
+     */
     public function postCreateFinancialReport(Request $request){
         $project_id=$request['project_id'];
         $items=Item::where('owner_id',$project_id)->get();
@@ -67,6 +71,11 @@ class FinancialReportController extends Controller
         $project->financialReport()->save($financialReport);
     }
 
+    /**
+     * get the financial report view
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getFinancialReportView(Request $request){
         $financialReport=FinancialReport::where('project_id',$request['project_id'])->first(); //here i read one of array i write to database
         if($financialReport==null){
@@ -84,6 +93,10 @@ class FinancialReportController extends Controller
         return view('project_management/financial_report',['recordList'=>$recordsList,'freport'=>$financialReport,'project_id'=>$request['project_id']]);
     }
 
+    /**
+     * update the financial report
+     * @param Request $request
+     */
     public function postUpdateFinancialReport(Request $request){
         $project_id=$request['project_id'];
         $created_by=$request['created_by'];

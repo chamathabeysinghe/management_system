@@ -19,7 +19,9 @@ Route::group(['middleware'=>['web']],function(){
 
     Route::get('/logout',[
         'uses'=>'UserController@getLogout',
-        'as'=>'logout'
+        'as'=>'logout',
+        'middleware'=>'auth'
+
     ]);
     //log a user in
     Route::post('/login',[
@@ -52,11 +54,6 @@ Route::group(['middleware'=>['web']],function(){
         'middleware'=>'auth'
     ]);
 
-    //get the project initiate view
-//    Route::get('/projectinit', function () {
-//        return view('/project_management/project_init');
-//    });
-
     //get project initiate window
     Route::get('/initiate-post/{project_id}',[
         'uses'=>'ProjectController@getProjectInitiatePage',
@@ -76,6 +73,197 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'project',
         'middleware'=>'auth'
     ]);
+
+
+    //get project information form
+    Route::get('/projectinfo/{project_id}',[
+        'uses'=>'ProjectController@getProjectInfo',
+        'as'=>'project.info',
+    ]);
+
+    //search projects
+    Route::post('/search',[
+        'uses'=>'ProjectController@postProjectSearch',
+        'as'=>'project_search'
+    ]);
+
+    //get new technician page
+    Route::get('/newtechnician',function(){
+        return view('project_management/newtechnician');
+    });
+
+    //add a new technician
+    Route::post('/newtechnician',[
+        'uses'=>'TechnicianController@postAddTechnician',
+        'as'=>'addtechnician'
+    ]);
+
+    //get technician profile view
+    Route::get('/technicians',[
+        'uses'=>'TechnicianController@postTechnicianView',
+        'as'=>'technicians',
+        'middleware'=>'auth'
+    ]);
+
+
+    //get table of gross profit forecast for example only
+    Route::get('/gp_forecast',[
+        'uses'=>'GPForecastController@getGPView',
+        'as'=>'gp_forecast',
+        'middleware'=>'auth'
+    ]);
+
+    //create the gross profir forecast
+    Route::get('/creategp',[
+        'uses'=>'GPForecastController@postCreateGPForecast',
+        'as'=>'creategp'
+    ]);
+
+    //direct to Projects gross profit forecast
+    Route::get('/gp',[
+        'uses'=>'GPForecastController@getGPForecast',
+        'as'=>'gpforecast'
+    ]);
+    //update the gross profit forecast
+
+    Route::post('/updategp',[
+        'uses'=>'GPForecastController@postUpdateGPForecast',
+        'as'=>'updategp'
+    ]);
+
+
+    //add new bill
+    Route::post('/addBill',[
+        'uses'=>'BillController@postAddBill' ,
+        'as'=>'addBill'
+    ]);
+
+    //get financial report view
+    Route::get('/financialreport',[
+        'uses'=>'FinancialReportController@getFinancialReportView',
+        'as'=>'financialreport',
+        'middleware'=>'auth'
+    ]);
+
+    //create new financial report
+    Route::get('/createfinancialreport',[
+        'uses'=>'FinancialReportController@postCreateFinancialReport',
+        'as'=>'createfinancialreport'
+    ]);
+
+    //update the financial report data
+    Route::post('/updatefinancialreport',[
+        'uses'=>'FinancialReportController@postUpdateFinancialReport',
+        'as'=>'updatefinancialreport'
+    ]);
+
+    //search for technician using date
+    Route::post('/searchtechnician',[
+        'uses'=>'TechnicianController@postTechnicianSearch',
+        'as'=>'searchtechnician'
+    ]);
+
+    //allocate items to project at initiating
+    Route::post('/allocateitems',[
+        'uses'=>'ProjectController@postItemAllocation',
+        'as'=>'allocateitems'
+    ]);
+
+    //remove item form a project
+    Route::post('/deallocateitem',[
+        'uses'=>'ItemController@postDeallocateItem',
+        'as'=>'deallocateitem'
+    ]);
+
+    //change the record of added item
+    Route::post('/changeallocateitem',[
+        'uses'=>'ItemController@postChangeItem',
+        'as'=>'changeallocateitem'
+    ]);
+
+    //add a single item to allocated items
+    Route::post('/addsingleitem',[
+        'uses'=>'ItemController@postAllocateSingleItem',
+        'as'=>'addsingleitem'
+    ]);
+
+    //remove technician allocation
+    Route::post('/removeallocation',[
+        'uses'=>'ProjectController@postRemoveAllocation',
+        'as'=>'removeallocation'
+    ]);
+
+    //calculate technician commission
+    Route::post('calculatecommission',[
+        'uses'=>'TechnicianController@postCalculateCommission',
+        'as'=>'calculatecommission'
+    ]);
+
+    //mark a project as complete
+    Route::get('/completeproject',[
+        'uses'=>'ProjectController@postCompleteProject',
+        'as'=>'completeproject'
+    ]);
+
+    //remove a bill from a project
+    Route::post('/removebill',[
+        'uses'=>'BillController@postRemoveBill',
+        'as'=>'removebill'
+    ]);
+
+    //review a feedback for project
+    Route::get('/reviewfeedback',[
+        'uses'=>'FeedbackController@getFeedBackReview',
+        'as'=>'reviewfeedback'
+    ]);
+
+    //search for projects
+//    Route::post('/search',[
+//        'uses'=>'ProjectController@postProjectSearch',
+//        'as'=>'projectfinder'
+//    ]);
+
+    //search for projects
+//    Route::post('/search',[
+//        'uses'=>'ProjectController@postProjectSearch',
+//        'as'=>'findproject'
+//    ]);
+
+    Route::post('/searchprojects',[
+       'uses'=>'ProjectController@postProjectSearch',
+        'as'=>'runsearch'
+    ]);
+
+
+    //get deallocated item view
+    Route::get('/deallocateditems',[
+        'uses'=>'DeallocatedItemController@getDealloctedView',
+        'as'=>'deallocateditems'
+    ]);
+    //send deallocated items back to store
+    Route::post('/sendtostore',[
+        'uses'=>'DeallocatedItemController@postSendToStore',
+        'as'=>'sendtostore'
+    ]);
+
+    //create a project by estimation
+    Route::get('/projectbyestimation',[
+        'uses'=>'ProjectController@createProjectFromEstimation',
+        'as'=>'projectbyestimation'
+    ]);
+
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 
 
@@ -101,45 +289,6 @@ Route::group(['middleware'=>['web']],function(){
 
 
 
-    //get project information form
-    Route::get('/projectinfo/{project_id}',[
-        'uses'=>'ProjectController@getProjectInfo',
-        'as'=>'project.info',
-        'middleware'=>'auth'
-    ]);
-
-    //search projects
-    Route::post('/search',[
-        'uses'=>'ProjectController@postProjectSearch',
-        'as'=>'project_search'
-    ]);
-
-    //get new technician page
-    Route::get('/newtechnician',function(){
-        return view('project_management/newtechnician');
-    });
-
-    //add a new technician
-    Route::post('/newtechnician',[
-        'uses'=>'TechnicianController@postAddTechnician',
-        'as'=>'addtechnician'
-    ]);
-
-    //get table of gross profit forecast for example only
-    Route::get('/gp_forecast',function(){
-        return view("project_management/gp_forecast");
-    });
-
-    //create the gross profir forecast
-    Route::get('/creategp',[
-        'uses'=>'GPForecastController@postCreateGPForecast',
-        'as'=>'creategp'
-    ]);
-    //direct to Projects gross profit forecast
-    Route::get('/gp',[
-        'uses'=>'GPForecastController@getGPForecast',
-        'as'=>'gpforecast'
-    ]);
 
     // submitnew customer
     Route::post('/newcustomer',[
@@ -173,12 +322,7 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
 
-    //update the gross profit forecast
 
-    Route::post('/updategp',[
-        'uses'=>'GPForecastController@postUpdateGPForecast',
-        'as'=>'updategp'
-    ]);
 
 
 
@@ -193,85 +337,6 @@ Route::group(['middleware'=>['web']],function(){
         'as'=>'new_stock'
     ]);
 
-
-    //get technician profile view
-    Route::get('/technicians',[
-        'uses'=>'TechnicianController@postTechnicianView',
-        'as'=>'technicians',
-        'middleware'=>'auth'
-    ]);
-
-
-
-    //add new bill
-    Route::post('/addBill',[
-       'uses'=>'BillController@postAddBill' ,
-        'as'=>'addBill'
-    ]);
-
-    //get financial report view
-    Route::get('/financialreport',[
-        'uses'=>'FinancialReportController@getFinancialReportView',
-        'as'=>'financialreport'
-    ]);
-
-    //create new financial report
-    Route::get('/createfinancialreport',[
-        'uses'=>'FinancialReportController@postCreateFinancialReport',
-        'as'=>'createfinancialreport'
-    ]);
-
-    //update the financial report data
-    Route::post('/updatefinancialreport',[
-        'uses'=>'FinancialReportController@postUpdateFinancialReport',
-        'as'=>'updatefinancialreport'
-    ]);
-
-    //search for technician using date
-    Route::post('/searchtechnician',[
-       'uses'=>'TechnicianController@postTechnicianSearch',
-        'as'=>'searchtechnician'
-    ]);
-    //allocate items to project at initiating
-    Route::post('/allocateitems',[
-       'uses'=>'ProjectController@postItemAllocation',
-        'as'=>'allocateitems'
-    ]);
-
-    Route::post('/deallocateitem',[
-        'uses'=>'ItemController@postDeallocateItem',
-        'as'=>'deallocateitem'
-    ]);
-    Route::post('/changeallocateitem',[
-        'uses'=>'ItemController@postChangeItem',
-        'as'=>'changeallocateitem'
-    ]);
-    Route::post('/addsingleitem',[
-        'uses'=>'ItemController@postAllocateSingleItem',
-        'as'=>'addsingleitem'
-    ]);
-    Route::post('/removeallocation',[
-       'uses'=>'ProjectController@postRemoveAllocation',
-        'as'=>'removeallocation'
-    ]);
-    Route::post('calculatecommission',[
-        'uses'=>'TechnicianController@postCalculateCommission',
-        'as'=>'calculatecommission'
-    ]);
-    Route::post('/completeproject',[
-        'uses'=>'ProjectController@postCompleteProject',
-        'as'=>'completeproject'
-    ]);
-    Route::post('/removebill',[
-       'uses'=>'BillController@postRemoveBill',
-        'as'=>'removebill'
-    ]);
-
-
-    Route::get('/reviewfeedback',[
-        'uses'=>'FeedbackController@getFeedBackReview',
-        'as'=>'reviewfeedback'
-    ]);
 
     Route::post('/registerdealer',[
        'uses'=>'DealerController@registerDealer',
@@ -334,24 +399,6 @@ Route::group(['middleware'=>['web']],function(){
     ]);
 
 
-    Route::post('/search',[
-        'uses'=>'ProjectController@postProjectSearch',
-        'as'=>'projectfinder'
-    ]);
 
-    Route::get('/deallocateditems',[
-       'uses'=>'DeallocatedItemController@getDealloctedView',
-        'as'=>'deallocateditems'
-    ]);
-
-    Route::post('/sendtostore',[
-        'uses'=>'DeallocatedItemController@postSendToStore',
-        'as'=>'sendtostore'
-    ]);
-
-    Route::get('/projectbyestimation',[
-        'uses'=>'ProjectController@createProjectFromEstimation',
-        'as'=>'projectbyestimation'
-    ]);
 
 });

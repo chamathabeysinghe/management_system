@@ -25,15 +25,28 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+    /**
+     * create the project
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function createProjectFromEstimation(Request $request){
         $project=new Project();
-        echo $request['estimation_number'];
+
 
         $project->estimation_id=$request['estimation_number'];
-
+        $project->client_name=$request['client_name'];
+        $project->client_email=$request['client_email'];
         $project->save();
+
+        return redirect()->back();
     }
 
+    /**
+     * get the initiating page
+     * @param $project_id
+     * @return \Illuminate\Http\RedirectResponse|View
+     */
     public function getProjectInitiatePage($project_id){
 
         if(!$this->checkEligibility(2)){
@@ -54,6 +67,11 @@ class ProjectController extends Controller
         return view('/project_management/project_init',['project'=>$project,'technicians'=>$technicians,'sellingitems'=>$selling_items,'estimation_records'=>$estimation_records]);
     }
 
+    /**
+     * check the user elligibility
+     * @param $status
+     * @return bool
+     */
     public function checkEligibility($status){
         $user_type=Auth::user()->user_type;
         if($status==1){
@@ -69,14 +87,33 @@ class ProjectController extends Controller
         return false;
     }
 
+    /**
+     * get the dashboard view
+     * @return View
+     */
     public function getDashboard(){
         $projects=Project::orderBy('project_status','asc')->get();
         return view('project_management\project_dashboard',['projects'=>$projects]);
     }
 
+    /**
+     * delete a unused item from project -- temopraryily added files
+     */
+    protected function deleteUnusedItems(){
+        $items=Item::where('serial_number','')->get();
+        foreach($items as $item){
+            $item->delete();
+        }
+    }
 
+    /**
+     * get the project information page
+     * @param $project_id
+     * @return View
+     */
     public function getProjectInfo($project_id){
 
+        $this->deleteUnusedItems();
         $project=Project::where('id',$project_id)->first();
         $feedback=$project->feedback;
 
@@ -97,6 +134,7 @@ class ProjectController extends Controller
 
         $billList=Bill::where('project_id',$project_id)->get();
         $selling_items=SellingItem::get();
+       // return view('/project_management/projectinfo')->with('project',$project);
         return view('/project_management/projectinfo',['project'=>$project,'technicians'=>$technicianList,'itemList'=>$itemList,'billList'=>$billList,'sellingitems'=>$selling_items,'feedback'=>$feedback]);
     }
 
@@ -128,11 +166,11 @@ class ProjectController extends Controller
         return redirect()->route('project');
     }
 
-
-
-
-
-
+    /**
+     * post a project search
+     * @param Request $request
+     * @return mixed
+     */
     public function postProjectSearch(Request $request){
 
         $keyword=$request['keyWords'];
@@ -162,6 +200,10 @@ class ProjectController extends Controller
         return View::make('/project_management/search_results')->with('resultProjects',$resultProjects);
     }
 
+    /**
+     * allocate items
+     * @param Request $request
+     */
     public function postItemAllocation(Request $request){
 
         $project_id=$request['project_id'];
@@ -169,17 +211,22 @@ class ProjectController extends Controller
 
         $jfo = json_decode($request['new_data']);
         foreach($jfo as $newData){
-
             $item=new Item();
             $item->item_name=$newData->item;
             $item->unit_cost=$newData->unitcost;
             $item->serial_number=$newData->serialnumber;
+            $item->warranty=$newData->warranty;
+            $item->supplier_id=$newData->supplierid;
             $item->sale_type=1;
             $item->owner_id=$project_id;
             $item->save();
         }
     }
 
+    /**
+     * remove technician allocation
+     * @param Request $request
+     */
     public function postRemoveAllocation(Request $request){
         $project_id=$request['project_id'];
         $technician_id=$request['technician_id'];
@@ -189,10 +236,16 @@ class ProjectController extends Controller
         }
     }
 
+    /**
+     * mark project as completed
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postCompleteProject(Request $request){
         $project=Project::where('id',$request['project_id'])->first();
         $project->project_status=2;
         $project->update();
+        return redirect()->back();
     }
 
 }

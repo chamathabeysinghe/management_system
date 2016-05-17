@@ -5,21 +5,28 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-
-
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{URL::to('css/materialize.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{{URL::to('css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link href="{{URL::to('css/style.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{{URL::to('css/materialize.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">--}}
     <link href="{{URL::to('css/editabletable.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <style>
+
+    </style>
 
 
 </head>
-<body>
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<body style="display: flex;min-height: 100vh;flex-direction: column;">
+
+<script src="{{URL::to('js/jquery-2.1.1.min.js')}}"></script>
+<script src="{{URL::to('js/materialize.min.js')}}"></script>
+<script src="{{URL::to('js/jquery-migrate-1.2.1.min.js')}}"></script>
+{{--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>--}}
+{{--<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>--}}
 {{--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>--}}
 {{--<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>--}}
@@ -36,31 +43,34 @@
 {{--<script src="{{URL::to('src/js/app.js')}}"></script>--}}
 {{--<script src="{{URL::to('src/js/jquery-2.2.3.min.js')}}"></script>--}}
 
-<footer class="page-footer teal lighten-2">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Information Management System</h5>
-                <p class="grey-text text-lighten-4">Digital Engineering Solutions</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            © 2016 CreativityLK - A CSE Startup
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-    </div>
-</footer>
+        <main style="margin-top: 10%">
+            <footer class="page-footer teal lighten-2" style="flex: 1 0 auto;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col l6 s12">
+                            <h5 class="white-text">Information Management System</h5>
+                            <p class="grey-text text-lighten-4">Digital Engineering Solutions</p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                            <h5 class="white-text">Links</h5>
+                            <ul>
+                                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        © 2016 CreativityLK - A CSE Startup
+                        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
 
 
 <script src="{{URL::to('js/search.js')}}"></script>
