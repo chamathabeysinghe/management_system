@@ -66,7 +66,7 @@
                         <td class="right-align" contenteditable="true">{{$record->quantity}}</td>
                         <td class="right-align total-cost"  contenteditable="true">{{$record->totalCost}}</td>
                         <td class="right-align" contenteditable="true">{{$record->estimation}}</td>
-                        <td class="right-align" contenteditable="true">$$$$</td>
+                        <td class="right-align total-profit" contenteditable="true">{{$record->unitmargin}}</td>
 
                         <td>
                             <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -84,7 +84,7 @@
                     <td class="right-align" contenteditable="true"></td>
                     <td class="right-align total-cost" contenteditable="true">0</td>
                     <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align total-profit" contenteditable="true">0</td>
 
                     <td>
                         <span class="table-remove glyphicon glyphicon-remove"></span>
@@ -94,7 +94,7 @@
                         <span class="table-down glyphicon glyphicon-arrow-down"></span>
                     </td>
                 </tr>
-
+                {{--total column which wiill be not written to database--}}
                 <tr class="not-write">
 
                     <td contenteditable="true">Total</td>
@@ -102,7 +102,7 @@
                     <td class="right-align" contenteditable="true"></td>
                     <td class="right-align" id="final-value" contenteditable="true">#####</td>
                     <td class="right-align" contenteditable="true"></td>
-                    <td class="right-align" contenteditable="true"></td>
+                    <td class="right-align" id="final-profit" contenteditable="true"></td>
                     <td>
 
                     </td>
@@ -156,17 +156,44 @@
         var url='{{route('updategp')}}';
         var project_id='{{$project_id}}}';
         calTotal();
+        calProfit();
         $('td').keyup(function() {
             console.log('hello world');
             var total=0;
+
             $('.total-cost').each(function(){
                 console.log($(this).text());
                 total+=parseFloat($(this).text());
             })
             console.log(total);
             $('#final-value').text(total);
-        });
 
+            var profit=0;
+            $('.total-profit').each(function(){
+                console.log($(this).text());
+                profit+=parseFloat($(this).text());
+            })
+
+            $('#final-profit').text(profit);
+
+
+        });
+        /**
+         * calculate the final profit
+         */
+        function calProfit(){
+            var profit=0;
+            $('.total-profit').each(function(){
+                console.log($(this).text());
+                profit+=parseFloat($(this).text());
+            })
+
+            $('#final-profit').text(profit);
+        }
+
+        /**
+         * calculate final cost
+         */
         function calTotal(){
             var total=0;
             $('.total-cost').each(function(){

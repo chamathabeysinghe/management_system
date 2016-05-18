@@ -9,8 +9,8 @@
                 <li class="tab col s3"><a class="active"href="#details" style="text-decoration : none">Details</a></li>
                 <li class="tab col s3"><a style="text-decoration : none" href="#technicinas">Technicians</a></li>
                 <li class="tab col s3"><a style="text-decoration : none" href="#items">Items</a></li>
-                <li class="tab col s3"><a style="text-decoration : none" href="#reports">Reports</a></li>
                 <li class="tab col s3"><a style="text-decoration : none"href="#bills">Bills</a></li>
+                <li class="tab col s3"><a style="text-decoration : none" href="#reports">Reports</a></li>
                 <li class="tab col s3"><a style="text-decoration : none"href="#feedback">Feedback</a></li>
 
             </ul>
@@ -21,40 +21,40 @@
             <div class="divider" style="margin-bottom: 10px"></div>
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <input id="title" name="title" type="text" class="validate" value="{{$project->title}}">
+                    <input id="title" name="title" type="text" readonly value="{{$project->title}}">
 
                     <label class="active" for="title">Project Title</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input id="incharge" name="incharge" type="text" class="validate" value="{{$project->incharge}}">
+                    <input id="incharge" name="incharge" readonly type="text"  value="{{$project->incharge}}">
                     <label class="active" for="incharge">Project Incharge</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <input id="date" name="date" type="text" class="datepicker validate" onchange="changeTime()" value="{{$project->date}}">
+                    <input id="date" name="date" readonly type="text" class="datepicker" onchange="changeTime()" value="{{$project->date}}">
                     <label class="active" for="date">Project date</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input id="duration" name="duration" type="number" class="validate" onchange="changeTime()" value="{{$project->duration}}">
+                    <input id="duration" readonly name="duration" type="number"  onchange="changeTime()" value="{{$project->duration}}">
                     <label class="active" for="duration">Project Duration</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 m6">
-                    <input id="client" name="client" type="text" class="validate" value="{{$project->client_name}}">
+                    <input id="client" readonly name="client" type="text" c value="{{$project->client_name}}">
                     <label class="active" for="client">Client Name</label>
                 </div>
 
                 <div class="input-field col s12 m6">
-                    <input id="email" name="email" type="email" class="validate" value="{{$project->client_email}}">
+                    <input id="email" readonly name="email" type="email"  value="{{$project->client_email}}">
                     <label class="active" for="email">Client Email</label>
                 </div>
 
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="description" name="description" class="materialize-textarea">{{$project->description}}</textarea>
+                    <textarea id="description" readonly name="description" class="materialize-textarea">{{$project->description}}</textarea>
                     <label class="active" for="description">Project Description</label>
                 </div>
             </div>
@@ -74,13 +74,12 @@
                             ?>
                             <li class="collection-item avatar technician-list-item" data-id="{{$technician->id}}" >
                                 {{--<img src="images/yuna.jpg" alt="" class="circle">--}}
+
                                 <span class="title">{{$technician->name}}</span>
                                 <p class="para">{{$value}}
 
                                 </p>
-                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
-                                <a href="#" class="secondary-content remove-technician" data-id="{{$technician->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
-                                @endif
+
                             </li>
                         @endforeach
 
@@ -103,7 +102,7 @@
             <div class="row">
                 <div class="col s12 m612">
                     <div id="item_table" class="table-editable">
-                        @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+                        @if((Auth::user()->user_type==1 or Auth::user()->user_type==2) and $project->project_status!=2)
                         <span class="table-add glyphicon glyphicon-plus"></span>
                         @endif
                         <table class="table highlight bordered">
@@ -131,7 +130,7 @@
                                     <td id="warranty{{$item->id}}"class="right-align" contenteditable="true">{{$item->warranty}}</td>
                                     <td id="supplier_id{{$item->id}}"class="right-align" contenteditable="true">{{$item->supplier_id}}</td>
 
-                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+                                @if((Auth::user()->user_type==1 or Auth::user()->user_type==2) and $project->project_status!=2)
                                     <td>
                                         <span class="change table-down glyphicon glyphicon-floppy-save"></span>
 
@@ -152,7 +151,7 @@
                                 <td class="cost right-align" contenteditable="true"></td>
                                 <td class="warranty right-align" contenteditable="true"></td>
                                 <td class="supplier_id right-align" contenteditable="true"></td>
-                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+                                @if((Auth::user()->user_type==1 or Auth::user()->user_type==2) and $project->project_status!=2)
                                 <td>
                                     <span class="change table-down glyphicon glyphicon-pencil"></span>
 
@@ -167,7 +166,7 @@
 
                 </div>
             </div>
-            @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+            @if((Auth::user()->user_type==1 or Auth::user()->user_type==2) and $project->project_status!=2)
             <div>
                 <label for="item-list">Select Item</label>
                 <div class="row">
@@ -215,7 +214,7 @@
                                 <p><span class="title"> Bill: {{$bill->description}} </span></p>
                                 <p><span class="title"> Value: {{$bill->value}} </span></p>
 
-                                @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+                                @if((Auth::user()->user_type==1 or Auth::user()->user_type==2) and $project->project_status!=2)
 
                                 <a href="#" class="secondary-content remove-bill" data-id="{{$bill->id}}" ><i class="material-icons" style="color: #ff1744;">close</i></a>
                                 {{--<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>--}}
@@ -226,7 +225,7 @@
                     </ul>
                 </div>
             </div>
-            @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
+            @if((Auth::user()->user_type==1 or Auth::user()->user_type==2) and $project->project_status!=2)
 
             <div class="row" style="margin-top: 5%">
                 <div class="col s12 m6 offset-s3">
@@ -622,9 +621,9 @@
                 $(this).remove();
                 $(this).closest('.li').remove();//this thing is not working currently
                 console.log('done');
-                window.location.href = document.URL +  ' #technicians';
+//                window.location.href = document.URL +  ' #technicians';
                 //$('#technicinas').load(document.URL +  ' #technicians');
-                //location.reload();
+                location.reload();
             })
 
         });
@@ -639,8 +638,8 @@
                 data:{bill_id:bill_id,_token:token}
             }).done(function(){
                 console.log('Removed the fucker');
-                window.location.href = document.URL +  ' #bills';
-                //location.reload();
+                //window.location.href = document.URL +  ' #bills';
+                location.reload();
             });
         });
 
@@ -660,12 +659,6 @@
 
 
             location.reload();
-//            $( ".technician-list-item" ).each(function( index ) {
-//
-//                console.log( index+"   "+$(this).find('.para').text('sdfadf'));
-//
-//
-//            });
         });
 
         $('#add-bill').click(function(event){

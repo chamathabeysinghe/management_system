@@ -41,7 +41,6 @@ $GP_SAVE.click(function() {
     $($rows.shift()).find('th:not(:empty)').each(function() {
         headers.push($(this).text().toLowerCase().replace(/\s/g, ''));
 
-        console.log($(this).text().toLowerCase())
     });
 
     // Turn all existing rows into a loopable array
@@ -139,14 +138,29 @@ $GP_SAVE.click(function() {
     });
 
     // Output the result
-    var total=$('#final-value').text();
+    var total=$('#final-profit').text();
     var date=$('#gp_date').val();
     var created_by=$('#prepare').val();
     var checked_by=$('#check').val();
+    if(date==''){
+        error=true;
+        $('#gp_date').addClass('invalid');
+    }
+    else{
+        $('#gp_date').removeClass('invalid');
+    }
+    if(created_by==''){
+        error=true;
+        $('#prepare').addClass('invalid');
+    }
+    else{
+        $('#prepare').removeClass('invalid');
+    }
     if(error){
         Materialize.toast('Gross profit not saved.', 2000, 'rounded')
     }
     else{
+        Materialize.toast('Gross profit saved.', 2000, 'rounded')
         $.post(url, {new_data:JSON.stringify(data) ,date:date,created_by:created_by,checked_by:checked_by,total_val:total,project_id:project_id,_token:token });
     }
 

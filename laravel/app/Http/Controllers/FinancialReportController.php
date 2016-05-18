@@ -52,7 +52,7 @@ class FinancialReportController extends Controller
             $name=$bill->bill_type;
             if(!array_key_exists($name,$fieldsList)){
                 $reportField=new ReportField();
-                $reportField->name=$bill->bill_type;
+                $reportField->name=$bill->description;
                 $reportField->totalCost=$bill->value;
                 $fieldsList[$name]=$reportField;
             }

@@ -116,8 +116,22 @@ $F_SAVE.click(function() {
     var date=$('#f_date').val();
     var created_by=$('#prepare').val();
     var checked_by=$('#check').val();
-    console.log(created_by);
-    console.log('created by');
+    if(date==''){
+        error=true;
+        $('#f_date').addClass('invalid');
+    }
+    else{
+        $('#f_date').removeClass('invalid');
+    }
+
+    if(created_by==''){
+        error=true;
+        $('#prepare').addClass('invalid');
+    }
+    else{
+        $('#prepare').removeClass('invalid');
+    }
+
     if(error){
         Materialize.toast('Financial report not saved.', 2000, 'rounded')
     }

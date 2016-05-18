@@ -49,6 +49,8 @@
             {{--search bar output--}}
             <div id="search-results">
             </div>
+
+            {{--all results--}}
             <div id="all-results">
                 @foreach($projects as $project)
                     <div class="row">

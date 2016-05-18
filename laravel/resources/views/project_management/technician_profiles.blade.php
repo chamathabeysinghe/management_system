@@ -82,8 +82,9 @@
 
 
         </ul>
+        {{--button for adding new technicians--}}
         @if(Auth::user()->user_type==1 or Auth::user()->user_type==2)
-        <div class="fixed-action-btn"  style="bottom: 200px; right: 24px;">
+        <div class="fixed-action-btn"  style="bottom: 400px; right: 24px;">
             <a class="btn-floating btn-large red modal-trigger"  href="#modal1"id="add-technician">
                 <i class="large material-icons">add</i>
             </a>
@@ -91,7 +92,7 @@
         </div>
         @endif
     </div>
-
+{{--modal for add new technicians--}}
     <div id="modal1" class="modal modal-fixed-footer" style="height: 50%;">
         <form action="{{route('addtechnician')}}" method="post">
         <div class="modal-content">
@@ -114,7 +115,7 @@
         </form>
     </div>
 
-
+    {{--on add button clicked modal displayed--}}
     <script>
         $('#add-tech-name').click(function (event) {
             var error=false;

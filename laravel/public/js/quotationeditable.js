@@ -54,7 +54,7 @@ $Q_SAVE.click(function() {
                 h[header] = $td.eq(i).text();
 
                 if(i==0){
-                    if( $td.eq(i).text().replace(/\s+/, "")=='' || isNaN($td.eq(i).text())){
+                    if( $td.eq(i).text().replace(/\s+/, "")==''){
                         error=true;
                         var element=$td[0];
                         element.style.borderBottom='solid';

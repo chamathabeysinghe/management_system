@@ -37,7 +37,7 @@ class QuotationController extends Controller
         foreach($jfo as $newData){
 
             $reportField=new QuotationRecord();
-            $reportField->itemcode='sdfddfda';
+            $reportField->itemcode=$newData->itemcode;
             $reportField->itemname=$newData->item;
             $reportField->description=$newData->description;
             $reportField->unitprice=$newData->unitprice;

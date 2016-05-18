@@ -236,6 +236,8 @@ Route::group(['middleware'=>['web']],function(){
     })->name('view_dealer');
 
     //save stock
+
+
     Route::post('/savestock',[
         'uses'=>'DealerStockController@saveStock',
         'as'=>'savestock'
@@ -432,7 +434,10 @@ Route::group(['middleware'=>['web']],function(){
         'uses'=>'ReturnController@addNewReturn',
         'as'=>'newreturn',
     ]);
-
+    Route::post('/newreturn',[
+        'uses'=>'ReturnController@addNewReturn',
+        'as'=>'newreturn1',
+    ]);
 
     Route::post('/searchReturn',[
         'uses'=>'ReturnController@getReturnInfo',

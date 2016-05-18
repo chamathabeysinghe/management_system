@@ -24,7 +24,7 @@
                     <div class="input-field col s3 offset-s1">
                         <i class="material-icons prefix">today</i>
                         <input id="f_date" type="date" class="datepicker" value="{{$freport->date}}">
-                        <label class="active" for="quotation_date">Quotation Date</label>
+                        <label class="active" for="f_date">Date</label>
                     </div>
                 </div>
                 <div class="row">
@@ -150,6 +150,8 @@
         var url='{{route('updatefinancialreport')}}';
         var project_id='{{$project_id}}}';
         calTotal();
+
+        //on key up on table run this code to cal total
         $('td').keyup(function() {
             console.log('hello world');
             var total=0;
@@ -160,7 +162,7 @@
             console.log(total);
             $('#final-value').text(total);
         });
-
+//        calculate the total
         function calTotal(){
             var total=0;
             $('.total-cost').each(function(){

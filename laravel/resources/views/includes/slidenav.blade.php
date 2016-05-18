@@ -63,31 +63,29 @@
                         </ul>
                     </div>
                 </li>
-<<<<<<< HEAD
-                @if(Auth::user()->user_type==1 or Auth::user()->user_type==4 )
-=======
                 @endif
->>>>>>> ashan
+                @if(Auth::user()->user_type==1 or Auth::user()->user_type==4 )
+
                 <li>
-                    <a class="collapsible-header waves-effect waves-teal">Return Management<i class="mdi-navigation-arrow-drop-down"></i></a>
+                    <a style="text-decoration: none;" class="collapsible-header waves-effect waves-teal">Return Management<i class="mdi-navigation-arrow-drop-down"></i></a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="{{route('returndashboard')}}">Return Dashboard</a></li>
-                            <li><a href="{{route('newreturnitem')}}">New Return</a></li>
-                            <li><a href="{{route('managereturnitem')}}">Manage Return</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('returndashboard')}}">Return Dashboard</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('newreturnitem')}}">New Return</a></li>
+                            <li><a style="text-decoration: none;" href="{{route('managereturnitem')}}">Manage Return</a></li>
                         </ul>
                     </div>
                 </li>
                 @endif
                 @if(Auth::user()->user_type==1)
                     <li>
-                        <a class="waves-effect waves-teal" href="{{route('newuser')}}">New User</a>
+                        <a style="text-decoration: none;" class="waves-effect waves-teal" href="{{route('newuser')}}">New User</a>
 
                     </li>
                 @endif
                 @if(Auth::user()->user_type==1)
                     <li>
-                        <a class="waves-effect waves-teal" href="{{route('edituser')}}">Edit User</a>
+                        <a style="text-decoration: none;" class="waves-effect waves-teal" href="{{route('edituser')}}">Edit User</a>
 
                     </li>
                 @endif

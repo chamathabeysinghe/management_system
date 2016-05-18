@@ -1,5 +1,8 @@
 var timer;
 
+
+//on key down start a timer and run a query to search
+//after it wiill add serach result div
 function down(){
     console.log('down');
     var fiterString='';
@@ -7,7 +10,6 @@ function down(){
 
         fiterString+=this.value+' ';
     });
-    console.log(fiterString);
     timer=setTimeout(function(){
 
         var keywords=$('#search-input').val();
@@ -22,7 +24,6 @@ function down(){
                 $('#search-results').html(markup);
                 $('#all-results').hide();
                 $('#search-results').show();
-               // console.log(msg);
 
             })
         }
@@ -30,11 +31,11 @@ function down(){
 
             $('#search-results').hide();
             $('#all-results').show();
-            //$('#search-results').hide();
         }
     },10);
 }
 
+//clear the timer
 function up(){
     clearTimeout(timer);
 }

@@ -215,7 +215,7 @@
     </div>
     <script>
         var token = '{{Session::token()}}';
-        var url2 = '{{route('newreturn')}}';
+        var url2 = '{{route('newreturn1')}}';
         $(document).ready(function () {
             $('.collapsible').collapsible({
                 accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style

@@ -15,7 +15,7 @@
     </div>
     <script>
         var token = '{{Session::token()}}';
-        var url = '{{route('search_item')}}';
+        var url = '{{route('item_search')}}';
     </script>
 
 @endsection

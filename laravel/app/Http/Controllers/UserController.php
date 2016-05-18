@@ -68,7 +68,7 @@ class UserController extends  Controller
         echo $request['email'];
         $pass=Auth::attempt(['email'=>$request['email'],'password'=>$request['password']],$remember);
         if($pass){
-           return redirect()->route('project');
+           return redirect()->route('startpage');
         }
         else{
             return redirect()->back()->with(['message'=>'User name or password is incorrect']);
