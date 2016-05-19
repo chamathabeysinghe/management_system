@@ -68,13 +68,11 @@
 
             </div>
             <div class="row">
-                <div class="col s12 m3"><a href="#" id="download-button"
-                                           class="btn-large waves-effect waves-light orange">Start</a></div>
-                <div class="col s12 m3"><a href="{{route('project')}}" id="download-button"
+
+                <div class="col s12 m3 offset-m3"><a href="{{route('project')}}" id="download-button"
                                            class="btn-large waves-effect waves-light orange">Project</a></div>
-                <div class="col s12 m3"><a href="#" id="download-button"
-                                           class="btn-large waves-effect waves-light orange">Dealer</a></div>
-                <div class="col s12 m3"><a href="{{route('returndashboard')}}" id="download-button"
+
+                <div class="col s12 m3 offset-m3"><a href="{{route('returndashboard')}}" id="download-button"
                                            class="btn-large waves-effect waves-light orange">Return</a></div>
 
             </div>

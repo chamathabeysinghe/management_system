@@ -39,10 +39,12 @@ class RouteTest extends TestCase
     public function testProjectDashboard(){
         $user = User::find(1);
         $this->be($user);
+
         $response=$this->call('GET','/project');
         $this->assertEquals(200,$response->status());
         $content =($response->getOriginalContent());
         $content = $content->getData();
+
         $projects=$content['projects'];
         $project=$projects[0];
         $this->assertEquals(true,$project->id!=null);

@@ -133,7 +133,7 @@ $EST_SAVE.click(function() {
     var client_email=$('#client_email').val();
     var client_tel=$('#client_tel').val();
     if(error){
-        Materialize.toast('Estimation Not Saved', 2000, 'rounded red')
+        Materialize.toast('Estimation Not Saved', 2000, 'rounded red');
     }
     else {
         Materialize.toast('Estimation Saved Successfully', 2000, 'rounded blue')

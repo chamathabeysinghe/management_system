@@ -106,8 +106,57 @@ $ITEM_SAVE.click(function() {
 
     // Output the result
 
-    console.log(project_id);
-    console.log('done item-save check here goies it   '+error);
+    var date=$('#date').val();
+    var title=$('#title').val();
+    var incharge=$('#incharge').val();
+    var client=$('#client').val();
+    var duration1=$('#duration').val();
+    var duration=parseInt($('#duration').val());
+
+    if(title==''){
+        $('#title').addClass('invalid');
+        error=true;
+    }
+    else{
+        $('#title').removeClass('invalid');
+    }
+    if(incharge==''){
+        $('#incharge').addClass('invalid');
+        error=true;
+    }
+    else{
+        $('#incharge').removeClass('invalid');
+    }
+    if(client==''){
+        $('#client').addClass('invalid');
+        error=true;
+    }
+    else{
+        $('#client').removeClass('invalid');
+    }
+
+    if(!isValidDate(date)){
+        console.log('not valid');
+        $('#date').addClass('invalid');
+        error=true;
+    }
+    else{
+        $('#date').removeClass('invalid');
+    }
+
+    if(duration<=0){
+        $('#duration').addClass('invalid');
+        error=true;
+    }
+    else{
+        $('#duration').removeClass('invalid');
+    }
+
+
+    if(error){
+        Materialize.toast('Not Saved', 2000, 'rounded')
+        event.preventDefault();
+    }
 
     if(error){
         console.log('error occured')

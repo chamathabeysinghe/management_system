@@ -60,7 +60,7 @@
                 <thead>
                 <tr>
 
-                    <th data-field="item_code">Item Code</th>
+                    <th class="hide" data-field="item_code">Item Code</th>
                     <th data-field="item">Item</th>
                     <th data-field="description">Description</th>
                     <th class="right-align" data-field="unit_price">Unit Price</th>
@@ -76,7 +76,7 @@
                 @foreach($record_list as $record)
                     <tr >
 
-                        <td contenteditable="false">{{$record->itemcode}}</td>
+                        <td class="hide" contenteditable="false">{{$record->itemcode}}</td>
                         <td contenteditable="false">{{$record->itemname}}</td>
                         <td contenteditable="true">{{$record->description}}</td>
                         <td class="right-align" contenteditable="false">{{$record->unitprice}}</td>
@@ -94,7 +94,7 @@
 
                 {{--Adding new item entries on table--}}
                 <tr class="hide">
-                    <td contenteditable="true">0000</td>
+                    <td class="hide" contenteditable="true">0000</td>
                     <td contenteditable="true">item</td>
                     <td contenteditable="true">unknown</td>
                     <td class="right-align" contenteditable="true"></td>
@@ -112,7 +112,7 @@
                 {{--Showing total--}}
                 <tr class="not-write">
 
-                    <td contenteditable="false"></td>
+                    <td class="hide" contenteditable="false"></td>
                     <td contenteditable="false">Total</td>
                     <td class="right-align" contenteditable="false"></td>
                     <td class="right-align" contenteditable="false"></td>

@@ -61,7 +61,7 @@
                     <div class="input-field col s6">
                         <i class="material-icons prefix">shopping_basket</i>
                         <input  id="job" type="text" class="validate" value="{{$item->item_name}}" >
-                        <label class="active" for="project">Customer address </label>
+                        <label class="active" for="project">Item description </label>
                     </div>
                 </div>
 

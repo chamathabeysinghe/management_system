@@ -14,13 +14,13 @@
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <i class="material-icons prefix">title</i>
-                        <input id="title" name="title" type="text" class="validate" required >
+                        <input id="title" name="title" type="text" class="validate"  >
 
                         <label class="active" for="title">Project Title</label>
                     </div>
                     <div class="input-field col s12 m6">
                         <i class="material-icons prefix">person</i>
-                        <input id="incharge" name="incharge" type="text" class="validate" required >
+                        <input id="incharge" name="incharge" type="text" class="validate"  >
                         <label class="active" for="incharge">Project Incharge</label>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <i class="material-icons prefix">timelapse</i>
-                        <input id="duration" name="duration" type="number" required  onchange="changeTime()" >
+                        <input id="duration" name="duration" type="number"  onchange="changeTime()" >
                         <label class="active" for="duration">Project Duration</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
                         <i class="material-icons prefix">person</i>
-                        <input id="client" name="client" type="text"required class="validate" value="{{$project->client_name}}">
+                        <input id="client" name="client" type="text" class="validate" value="{{$project->client_name}}">
                         <label class="active" for="client">Client Name</label>
                     </div>
 
@@ -69,24 +69,24 @@
                 </div>
 
 
-                <div id="all-results">
-                    <div class="row">
-                        <div class="col s12 m6">
+                {{--<div id="all-results">--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col s12 m6">--}}
 
-                            @foreach($technicians as $technician)
+                            {{--@foreach($technicians as $technician)--}}
 
-                                <p>
-                                    <input type="checkbox" name="selection[]" value="{{$technician->id}}" id="{{$technician->id}}" />
-                                    <label for="{{$technician->id}}">{{$technician->name}}</label>
+                                {{--<p>--}}
+                                    {{--<input type="checkbox" name="selection[]" value="{{$technician->id}}" id="{{$technician->id}}" />--}}
+                                    {{--<label for="{{$technician->id}}">{{$technician->name}}</label>--}}
 
-                                </p>
+                                {{--</p>--}}
 
-                            @endforeach
-                        </div>
-                    </div>
+                            {{--@endforeach--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
 
-                </div>
+                {{--</div>--}}
 
             </div>
             {{--item allocating section--}}
@@ -208,7 +208,6 @@
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
-
             format: 'mm/dd/yyyy'
 
         });
@@ -230,35 +229,7 @@
             $('#item_table').find('table').append($clone);
         });
 
-        $('#item_save').click(function(event){
 
-            var date=$('#date').val();
-            var duration=parseInt($('#duration').val());
-            var error=false;
-            if(!isValidDate(date)){
-               console.log('not valid');
-                $('#date').addClass('invalid');
-                error=true;
-            }
-            else{
-                $('#date').removeClass('invalid');
-            }
-
-            if(duration<=0){
-                $('#duration').addClass('invalid');
-                error=true;
-            }
-            else{
-                $('#duration').removeClass('invalid');
-            }
-
-
-            if(error){
-                event.preventDefault();
-            }
-
-
-        });
         function changeTime(){
             var date=$('#date').val();
             var duration=parseInt($('#duration').val());
